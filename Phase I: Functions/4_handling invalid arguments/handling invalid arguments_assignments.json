@@ -1,0 +1,80 @@
+{
+  "topic": "handling invalid arguments",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_positive_integer_checker.py",
+      "content": "# Task: Implement a function that validates whether n is a positive integer.\n# Requirements:\n# - If n is not an int, raise TypeError with message: \"n must be an int\"\n# - If n <= 0, raise ValueError with message: \"n must be positive\"\n# - Otherwise return True\n# Expected outcome:\n# - validate_positive_int(3) returns True\n# - validate_positive_int(0) raises ValueError(\"n must be positive\")\n# - validate_positive_int(\"3\") raises TypeError(\"n must be an int\")\n\n\ndef validate_positive_int(n):\n    # TODO: implement argument validation and return True for valid inputs\n    pass\n\n\n# Quick checks (do not change):\nif __name__ == \"__main__\":\n    print(validate_positive_int(3))"
+    },
+    {
+      "index": 2,
+      "fileName": "02_non_empty_string.py",
+      "content": "# Task: Implement require_non_empty_string(s).\n# Requirements:\n# - If s is not a str, raise TypeError(\"s must be a str\")\n# - If s is empty or only whitespace, raise ValueError(\"s must be a non-empty string\")\n# - Otherwise return s stripped of leading/trailing whitespace\n# Expected outcome:\n# - require_non_empty_string(\"  hi \") returns \"hi\"\n# - require_non_empty_string(\"   \") raises ValueError(\"s must be a non-empty string\")\n# - require_non_empty_string(None) raises TypeError(\"s must be a str\")\n\n\ndef require_non_empty_string(s):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(require_non_empty_string(\"  hi \"))"
+    },
+    {
+      "index": 3,
+      "fileName": "03_divide_safely.py",
+      "content": "# Task: Implement divide(a, b) with strict argument handling.\n# Requirements:\n# - a and b must be int or float (bool is NOT allowed)\n#   If invalid, raise TypeError(\"a and b must be numbers\")\n# - If b == 0, raise ValueError(\"b must not be zero\")\n# - Otherwise return a / b\n# Expected outcome:\n# - divide(10, 2) returns 5.0\n# - divide(10, 0) raises ValueError(\"b must not be zero\")\n# - divide(True, 2) raises TypeError(\"a and b must be numbers\")\n\n\ndef divide(a, b):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(divide(10, 2))"
+    },
+    {
+      "index": 4,
+      "fileName": "04_percentage_range.py",
+      "content": "# Task: Implement clamp_percentage(p) with invalid argument checks.\n# Requirements:\n# - p must be int or float (bool not allowed) else TypeError(\"p must be a number\")\n# - p must be between 0 and 100 inclusive else ValueError(\"p must be between 0 and 100\")\n# - Return p as float\n# Expected outcome:\n# - clamp_percentage(0) returns 0.0\n# - clamp_percentage(100) returns 100.0\n# - clamp_percentage(-1) raises ValueError(\"p must be between 0 and 100\")\n\n\ndef clamp_percentage(p):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(clamp_percentage(75))"
+    },
+    {
+      "index": 5,
+      "fileName": "05_list_index_getter.py",
+      "content": "# Task: Implement get_item_at(seq, index).\n# Requirements:\n# - seq must be a list or tuple else TypeError(\"seq must be a list or tuple\")\n# - index must be int (bool not allowed) else TypeError(\"index must be an int\")\n# - If index out of range, raise IndexError(\"index out of range\")\n# - Otherwise return seq[index]\n# Expected outcome:\n# - get_item_at([\"a\",\"b\"], 1) returns \"b\"\n# - get_item_at([1], 2) raises IndexError(\"index out of range\")\n# - get_item_at(\"abc\", 0) raises TypeError(\"seq must be a list or tuple\")\n\n\ndef get_item_at(seq, index):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(get_item_at([\"a\", \"b\"], 1))"
+    },
+    {
+      "index": 6,
+      "fileName": "06_repeat_string.py",
+      "content": "# Task: Implement repeat(s, times).\n# Requirements:\n# - s must be str else TypeError(\"s must be a str\")\n# - times must be int (bool not allowed) else TypeError(\"times must be an int\")\n# - times must be >= 0 else ValueError(\"times must be non-negative\")\n# - Return s repeated times times\n# Expected outcome:\n# - repeat(\"ab\", 3) returns \"ababab\"\n# - repeat(\"ab\", -1) raises ValueError(\"times must be non-negative\")\n\n\ndef repeat(s, times):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(repeat(\"ab\", 3))"
+    },
+    {
+      "index": 7,
+      "fileName": "07_parse_int_strict.py",
+      "content": "# Task: Implement parse_int_strict(s).\n# Requirements:\n# - s must be str else TypeError(\"s must be a str\")\n# - s may have leading/trailing whitespace; strip it\n# - After stripping, s must match optional leading sign followed by digits only\n#   If not, raise ValueError(\"invalid integer literal\")\n# - Return the parsed int\n# Expected outcome:\n# - parse_int_strict(\"  -42 \") returns -42\n# - parse_int_strict(\"3.14\") raises ValueError(\"invalid integer literal\")\n# - parse_int_strict(10) raises TypeError(\"s must be a str\")\n\n\ndef parse_int_strict(s):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(parse_int_strict(\"  -42 \"))"
+    },
+    {
+      "index": 8,
+      "fileName": "08_sum_n_numbers.py",
+      "content": "# Task: Implement sum_n(numbers, n).\n# Requirements:\n# - numbers must be a list of ints/floats (bool not allowed) else TypeError(\"numbers must be a list of numbers\")\n# - n must be int (bool not allowed) else TypeError(\"n must be an int\")\n# - n must be between 0 and len(numbers) inclusive else ValueError(\"n out of allowed range\")\n# - Return sum of the first n elements\n# Expected outcome:\n# - sum_n([1,2,3,4], 2) returns 3\n# - sum_n([1,2,3], 5) raises ValueError(\"n out of allowed range\")\n# - sum_n([1,\"2\",3], 2) raises TypeError(\"numbers must be a list of numbers\")\n\n\ndef sum_n(numbers, n):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(sum_n([1, 2, 3, 4], 2))"
+    },
+    {
+      "index": 9,
+      "fileName": "09_kwargs_allowed_keys.py",
+      "content": "# Task: Implement build_query(**params).\n# Requirements:\n# - Only these keys are allowed: \"q\", \"page\", \"limit\"\n# - If any other key is present, raise TypeError(\"unexpected parameter: <key>\")\n# - page and limit must be positive ints (bool not allowed); otherwise raise ValueError:\n#   - \"page must be a positive int\"\n#   - \"limit must be a positive int\"\n# - q must be a non-empty string after stripping; else ValueError(\"q must be a non-empty string\")\n# - Return a dict containing only provided keys with validated values\n# Expected outcome:\n# - build_query(q=\"cats\", page=1) returns {\"q\":\"cats\",\"page\":1}\n# - build_query(sort=\"asc\") raises TypeError(\"unexpected parameter: sort\")\n# - build_query(q=\"   \") raises ValueError(\"q must be a non-empty string\")\n\n\ndef build_query(**params):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(build_query(q=\"cats\", page=1))"
+    },
+    {
+      "index": 10,
+      "fileName": "10_matrix_dimensions.py",
+      "content": "# Task: Implement validate_matrix(matrix).\n# Requirements:\n# - matrix must be a non-empty list of non-empty lists\n#   If invalid type/emptiness, raise TypeError(\"matrix must be a non-empty list of non-empty lists\")\n# - All rows must have the same length; else ValueError(\"matrix rows must have the same length\")\n# - All elements must be numbers (int/float, bool not allowed); else TypeError(\"matrix elements must be numbers\")\n# - Return (rows, cols)\n# Expected outcome:\n# - validate_matrix([[1,2],[3,4]]) returns (2,2)\n# - validate_matrix([[1,2],[3]]) raises ValueError(\"matrix rows must have the same length\")\n\n\ndef validate_matrix(matrix):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(validate_matrix([[1, 2], [3, 4]]))"
+    },
+    {
+      "index": 11,
+      "fileName": "11_open_mode_validator.py",
+      "content": "# Task: Implement validate_open_args(path, mode).\n# Requirements:\n# - path must be a non-empty str else TypeError(\"path must be a non-empty string\")\n# - mode must be one of: \"r\", \"w\", \"a\" else ValueError(\"invalid mode\")\n# - If mode is \"r\", path must end with \".txt\" else ValueError(\"read mode requires .txt file\")\n# - Return a tuple (path, mode)\n# Expected outcome:\n# - validate_open_args(\"notes.txt\", \"r\") returns (\"notes.txt\",\"r\")\n# - validate_open_args(\"notes.md\", \"r\") raises ValueError(\"read mode requires .txt file\")\n# - validate_open_args(\"\", \"w\") raises TypeError(\"path must be a non-empty string\")\n\n\ndef validate_open_args(path, mode):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(validate_open_args(\"notes.txt\", \"r\"))"
+    },
+    {
+      "index": 12,
+      "fileName": "12_normalize_slice.py",
+      "content": "# Task: Implement normalize_slice(seq_len, start=None, stop=None, step=1).\n# Requirements:\n# - seq_len must be int (bool not allowed) and >= 0 else ValueError(\"seq_len must be a non-negative int\")\n# - start/stop may be None or int (bool not allowed); else TypeError(\"start/stop must be int or None\")\n# - step must be int (bool not allowed) and not 0; else ValueError(\"step must be a non-zero int\")\n# - Return a tuple (start_i, stop_i, step) equivalent to Python slicing bounds for a sequence of length seq_len\n#   (Use slice(start, stop, step).indices(seq_len) once inputs are validated.)\n# Expected outcome:\n# - normalize_slice(10, 2, None, 2) returns (2,10,2)\n# - normalize_slice(5, 0, 5, 0) raises ValueError(\"step must be a non-zero int\")\n\n\ndef normalize_slice(seq_len, start=None, stop=None, step=1):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(normalize_slice(10, 2, None, 2))"
+    },
+    {
+      "index": 13,
+      "fileName": "13_command_dispatcher.py",
+      "content": "# Task: Implement dispatch(command, *args).\n# Supported commands and rules:\n# - \"add\": requires exactly 2 numeric args -> return sum\n# - \"pow\": requires exactly 2 numeric args, exponent must be int >= 0 -> return base ** exp\n# - \"echo\": requires exactly 1 str arg -> return it\n# Invalid handling:\n# - If command not a str: TypeError(\"command must be a str\")\n# - If command unknown: ValueError(\"unknown command\")\n# - If wrong number of args: TypeError(\"wrong number of arguments\")\n# - If argument types invalid for a command: TypeError(\"invalid argument type\")\n# - If pow exponent invalid: ValueError(\"exponent must be a non-negative int\")\n# Expected outcome:\n# - dispatch(\"add\", 2, 3) returns 5\n# - dispatch(\"pow\", 2, -1) raises ValueError(\"exponent must be a non-negative int\")\n# - dispatch(\"echo\", 1) raises TypeError(\"invalid argument type\")\n\n\ndef dispatch(command, *args):\n    # TODO\n    pass\n\n\nif __name__ == \"__main__\":\n    print(dispatch(\"add\", 2, 3))"
+    },
+    {
+      "index": 14,
+      "fileName": "14_dataclass_argument_validation.py",
+      "content": "# Task: Create a dataclass UserInput and validate fields in __post_init__.\n# Fields:\n# - username: str, must be 3-20 chars, alnum or underscore only\n# - age: int, must be between 13 and 120 inclusive (bool not allowed)\n# - email: str, must contain exactly one \"@\" and at least one \".\" after the \"@\"\n# Invalid handling:\n# - Raise TypeError(\"username must be a str\"), TypeError(\"age must be an int\"), TypeError(\"email must be a str\")\n# - Raise ValueError(\"invalid username\"), ValueError(\"invalid age\"), ValueError(\"invalid email\")\n# Expected outcome:\n# - UserInput(\"alice_1\", 30, \"a@b.com\") constructs successfully\n# - UserInput(\"a!\", 30, \"a@b.com\") raises ValueError(\"invalid username\")\n# - UserInput(\"alice\", True, \"a@b.com\") raises TypeError(\"age must be an int\")\n\nfrom dataclasses import dataclass\n\n\n@dataclass\nclass UserInput:\n    username: str\n    age: int\n    email: str\n\n    def __post_init__(self):\n        # TODO: validate types and values; raise with exact messages above\n        pass\n\n\nif __name__ == \"__main__\":\n    u = UserInput(\"alice_1\", 30, \"a@b.com\")\n    print(u)"
+    },
+    {
+      "index": 15,
+      "fileName": "15_api_style_validator.py",
+      "content": "# Task: Implement validate_payload(payload) for an API-like request body.\n# Payload rules:\n# - payload must be a dict else TypeError(\"payload must be a dict\")\n# - Required keys: \"action\", \"data\"\n#   If missing, raise KeyError(\"missing key: <key>\")\n# - No extra keys allowed besides \"action\", \"data\", \"meta\"\n#   If extra, raise TypeError(\"unexpected key: <key>\")\n# - action must be one of: \"create\", \"update\", \"delete\" else ValueError(\"invalid action\")\n# - data must be a dict else TypeError(\"data must be a dict\")\n# - For action \"create\": data must include non-empty str \"name\" and numeric \"price\" > 0\n# - For action \"update\": data must include int \"id\" > 0 and may include \"name\" and/or \"price\" (if present, must meet same constraints)\n# - For action \"delete\": data must include int \"id\" > 0 and must not include any other keys\n# - meta (optional) must be a dict if provided else TypeError(\"meta must be a dict\")\n# Invalid handling messages:\n# - For missing/invalid fields in data, raise ValueError with one of:\n#   \"invalid name\", \"invalid price\", \"invalid id\", \"invalid data keys\"\n# Expected outcome:\n# - validate_payload({\"action\":\"create\",\"data\":{\"name\":\"Pen\",\"price\":1.5}}) returns True\n# - validate_payload({\"action\":\"delete\",\"data\":{\"id\":2,\"name\":\"x\"}}) raises ValueError(\"invalid data keys\")\n# - validate_payload({\"action\":\"update\",\"data\":{\"id\":0}}) raises ValueError(\"invalid id\")\n\n\ndef validate_payload(payload):\n    # TODO: validate payload and return True when valid\n    pass\n\n\nif __name__ == \"__main__\":\n    print(validate_payload({\"action\": \"create\", \"data\": {\"name\": \"Pen\", \"price\": 1.5}}))"
+    }
+  ]
+}

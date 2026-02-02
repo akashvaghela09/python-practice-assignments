@@ -1,0 +1,55 @@
+{
+  "topic": "tuples",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_tupleCreationAndIndexing.py",
+      "content": "# Create a tuple named coords with exactly two integers: 10 and 20.\n# Then print the first element on one line and the second element on the next line.\n\ncoords = \n\nprint(coords[0])\nprint(coords[1])\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_singletonTupleAndLen.py",
+      "content": "# Create a tuple named singleton that contains exactly one string: \"only\".\n# Print the length of the tuple.\n# Expected output: 1\n\nsingleton = \n\nprint(len(singleton))\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_tupleUnpacking.py",
+      "content": "# Given a tuple of RGB values, unpack it into r, g, b and print them separated by commas.\n# Expected output: 255,128,64\n\nrgb = (255, 128, 64)\n\nr, g, b = \n\nprint(f\"{r},{g},{b}\")\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_swapWithTuples.py",
+      "content": "# Swap the values of a and b using tuple unpacking (no temp variable).\n# Then print a and b on separate lines.\n# Expected output:\n# 9\n# 3\n\na = 3\nb = 9\n\n# TODO: swap a and b\n\nprint(a)\nprint(b)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_slicingAndNegativeIndex.py",
+      "content": "# Given the tuple items, create two variables:\n# 1) last_item: the last element using negative indexing\n# 2) middle: a tuple containing the 2nd through 4th elements (indexes 1 to 3)\n# Print last_item, then print middle.\n# Expected output:\n# e\n# ('b', 'c', 'd')\n\nitems = ('a', 'b', 'c', 'd', 'e')\n\nlast_item = \nmiddle = \n\nprint(last_item)\nprint(middle)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_membershipAndCount.py",
+      "content": "# Given the tuple data, do the following:\n# 1) Print True if 7 is in data else False\n# 2) Print how many times 2 appears in data\n# Expected output:\n# True\n# 3\n\ndata = (2, 7, 2, 9, 2)\n\n# TODO: membership test\n\n# TODO: count occurrences\n\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_iterateAndBuildResultTuple.py",
+      "content": "# Create a new tuple named squared that contains the squares of each number in nums.\n# Do not modify nums.\n# Print squared.\n# Expected output: (1, 4, 9, 16)\n\nnums = (1, 2, 3, 4)\n\nsquared = \n\nprint(squared)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_nestedTuplesAndAccess.py",
+      "content": "# You have a tuple of (name, (age, city)). Extract and print:\n# 1) the person's name\n# 2) the city\n# Each on its own line.\n# Expected output:\n# Ada\n# London\n\nperson = ('Ada', (36, 'London'))\n\nname = \ncity = \n\nprint(name)\nprint(city)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_tupleReturnFromFunction.py",
+      "content": "# Complete the function so it returns a tuple (minimum, maximum) from the input tuple of integers.\n# Then call the function with values and print the returned tuple.\n# Expected output: (2, 9)\n\ndef min_max(values):\n    # TODO: return (min_value, max_value)\n    return \n\nvalues = (5, 2, 9, 3)\nresult = min_max(values)\nprint(result)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_immutabilityAndRebuildTuple.py",
+      "content": "# Tuples are immutable. You cannot assign to an index directly.\n# Create a new tuple named updated based on original, where the element at index 1 is replaced with 99.\n# Print updated.\n# Expected output: (1, 99, 3, 4)\n\noriginal = (1, 2, 3, 4)\n\n# TODO: rebuild the tuple without modifying original\nupdated = \n\nprint(updated)\n"
+    }
+  ]
+}

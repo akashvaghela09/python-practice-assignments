@@ -1,0 +1,55 @@
+{
+  "topic": "list operations",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_listCreateAndIndex.py",
+      "content": "# Goal: create a list and access elements by index.\n# Expected outcome (print output):\n# first=10\n# last=50\n\nnumbers = [10, 20, 30, 40, 50]\n\n# TODO: assign the first element to first\nfirst =\n\n# TODO: assign the last element to last (use indexing)\nlast =\n\nprint(f\"first={first}\")\nprint(f\"last={last}\")\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_listSlicing.py",
+      "content": "# Goal: practice slicing.\n# Expected outcome (print output):\n# middle=[\"b\", \"c\", \"d\"]\n# last_two=[\"e\", \"f\"]\n\nletters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"]\n\n# TODO: slice out [\"b\", \"c\", \"d\"]\nmiddle =\n\n# TODO: slice out the last two items\nlast_two =\n\nprint(f\"middle={middle}\")\nprint(f\"last_two={last_two}\")\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_appendExtendInsert.py",
+      "content": "# Goal: use append, extend, and insert correctly.\n# Expected outcome (print output):\n# [\"start\", \"a\", \"b\", \"c\", \"end\"]\n\nitems = [\"a\", \"b\"]\n\n# TODO: insert \"start\" at the beginning\n\n\n# TODO: append \"end\" to the end\n\n\n# TODO: extend with [\"c\"] so the final list matches the expected output\n\n\nprint(items)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_removePopDel.py",
+      "content": "# Goal: remove items using remove, pop, and del.\n# Expected outcome (print output):\n# removed=3\n# remaining=[1, 2, 4]\n\nnums = [1, 2, 3, 4, 3]\n\n# TODO: remove the first occurrence of 3 (do NOT assign)\n\n\n# TODO: pop the last element and store it in removed\nremoved =\n\n# TODO: delete the element at index 2 (after the prior operations)\n\n\nprint(f\"removed={removed}\")\nprint(f\"remaining={nums}\")\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_countIndexMembership.py",
+      "content": "# Goal: use count, index, and membership (in).\n# Expected outcome (print output):\n# count_a=3\n# first_a_index=0\n# has_z=False\n\nchars = [\"a\", \"b\", \"a\", \"c\", \"a\"]\n\n# TODO: count how many \"a\" are in chars\ncount_a =\n\n# TODO: find the index of the first \"a\"\nfirst_a_index =\n\n# TODO: check whether \"z\" is in chars\nhas_z =\n\nprint(f\"count_a={count_a}\")\nprint(f\"first_a_index={first_a_index}\")\nprint(f\"has_z={has_z}\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_sortVsSorted.py",
+      "content": "# Goal: understand sort() vs sorted().\n# Expected outcome (print output):\n# original=[3, 1, 2]\n# sorted_copy=[1, 2, 3]\n# after_sort=[1, 2, 3]\n\nvalues = [3, 1, 2]\n\n# TODO: create a new sorted list WITHOUT modifying values\nsorted_copy =\n\nprint(f\"original={values}\")\nprint(f\"sorted_copy={sorted_copy}\")\n\n# TODO: sort values in place\n\n\nprint(f\"after_sort={values}\")\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_reverseAndJoin.py",
+      "content": "# Goal: reverse a list and build a string from list items.\n# Expected outcome (print output):\n# reversed=[\"c\", \"b\", \"a\"]\n# joined=c-b-a\n\nparts = [\"a\", \"b\", \"c\"]\n\n# TODO: create reversed_parts as a NEW list in reverse order (do not mutate parts)\nreversed_parts =\n\n# TODO: join reversed_parts with '-' into joined\njoined =\n\nprint(f\"reversed={reversed_parts}\")\nprint(f\"joined={joined}\")\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_listComprehensionFilter.py",
+      "content": "# Goal: use a list comprehension to filter and transform.\n# Expected outcome (print output):\n# result=[4, 16]\n\nnums = [1, 2, 3, 4]\n\n# TODO: create a list of squares of even numbers only\nresult =\n\nprint(f\"result={result}\")\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_nestedListsFlatten.py",
+      "content": "# Goal: flatten a nested list (one level deep).\n# Expected outcome (print output):\n# flat=[1, 2, 3, 4, 5, 6]\n\nmatrix = [[1, 2], [3], [4, 5, 6]]\n\n# TODO: flatten matrix into flat using a loop (not using external libraries)\nflat = []\n\n\nprint(f\"flat={flat}\")\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_inPlaceDeduplicatePreserveOrder.py",
+      "content": "# Goal: remove duplicates while preserving the original order.\n# Constraints: build a new list named unique; do not use set() to produce the final answer directly.\n# Expected outcome (print output):\n# unique=[\"a\", \"b\", \"c\", \"d\"]\n\nitems = [\"a\", \"b\", \"a\", \"c\", \"b\", \"d\", \"d\"]\n\n# TODO: build unique preserving first occurrences only\nunique = []\n\n\nprint(f\"unique={unique}\")\n"
+    }
+  ]
+}

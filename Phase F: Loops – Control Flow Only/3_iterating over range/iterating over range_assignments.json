@@ -1,0 +1,55 @@
+{
+  "topic": "iterating over range",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_printZeroToFour.py",
+      "content": "# Print the numbers 0 through 4, each on its own line.\n# Use a for-loop with range.\n\nfor i in range(____):\n    print(____)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_printOneToFive.py",
+      "content": "# Print the numbers 1 through 5, each on its own line.\n# Use range with a start and stop.\n\nfor n in range(____, ____):\n    print(____)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_evenNumbersUpTo10.py",
+      "content": "# Print the even numbers from 0 to 10 inclusive, each on its own line.\n# Use range with a step.\n\nfor n in range(____, ____, ____):\n    print(____)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_countdownFrom5.py",
+      "content": "# Print a countdown from 5 down to 1, each on its own line.\n# Use range with a negative step.\n\nfor n in range(____, ____, ____):\n    print(____)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_sumOneToN.py",
+      "content": "# Read an integer n, then print the sum 1+2+...+n.\n# Example: input: 4 -> output: 10\n\nn = int(input())\n\ntotal = ____\nfor k in range(____, ____):\n    total = total + ____\n\nprint(total)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_multiplicationTableRow.py",
+      "content": "# Read an integer x. Print x multiplied by 1 through 10.\n# Output must be exactly 10 lines in the format: \"x * i = result\"\n# Example for x=3: \"3 * 1 = 3\" ... \"3 * 10 = 30\"\n\nx = int(input())\n\nfor i in range(____, ____):\n    result = ____\n    print(str(x) + \" * \" + str(i) + \" = \" + str(result))\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_countMultiplesInRange.py",
+      "content": "# Read integers a, b, and m (in that order).\n# Count how many integers in the inclusive range [a, b] are divisible by m.\n# Print only the count.\n# Example: a=3, b=10, m=2 -> output: 4 (4,6,8,10)\n\na = int(input())\nb = int(input())\nm = int(input())\n\ncount = ____\nfor n in range(____, ____):\n    if ____:\n        count += ____\n\nprint(count)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_sumOfSquares.py",
+      "content": "# Read an integer n. Print the sum of squares from 1^2 to n^2.\n# Example: n=3 -> output: 14\n\nn = int(input())\n\ntotal = ____\nfor k in range(____, ____):\n    total += ____\n\nprint(total)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_drawRightTriangle.py",
+      "content": "# Read an integer h. Print a right triangle of height h using '#'.\n# Each line i (1-based) contains exactly i '#' characters.\n# Example for h=4:\n# #\n# ##\n# ###\n# ####\n\nh = int(input())\n\nfor i in range(____, ____):\n    line = \"\"\n    for j in range(____):\n        line += ____\n    print(line)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_fizzBuzzRange.py",
+      "content": "# Read two integers start and end (in that order).\n# For each integer n in the inclusive range [start, end], print:\n# - \"FizzBuzz\" if n is divisible by 3 and 5\n# - \"Fizz\" if n is divisible by 3\n# - \"Buzz\" if n is divisible by 5\n# - otherwise print n\n# Print one result per line.\n# Example: start=14, end=16 outputs:\n# 14\n# FizzBuzz\n# 16\n\nstart = int(input())\nend = int(input())\n\nfor n in range(____, ____):\n    if ____:\n        print(\"FizzBuzz\")\n    elif ____:\n        print(\"Fizz\")\n    elif ____:\n        print(\"Buzz\")\n    else:\n        print(____)\n"
+    }
+  ]
+}

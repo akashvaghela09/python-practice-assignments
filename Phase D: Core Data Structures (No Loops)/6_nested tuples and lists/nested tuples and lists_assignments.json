@@ -1,0 +1,105 @@
+{
+  "topic": "nested tuples and lists",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_accessNestedList.py",
+      "content": "# Goal: Access a value inside a nested list\n# Expected outcome: running this file prints exactly: 42\n\nnested = [[1, 2, 3], [10, 20, 42], [7, 8, 9]]\n\n# TODO: set value to 42 by indexing into nested\nvalue = None\n\nprint(value)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_accessNestedTuple.py",
+      "content": "# Goal: Access a value inside a nested tuple\n# Expected outcome: running this file prints exactly: alice\n\nusers = (\"root\", (\"bob\", \"carol\"), (\"dave\", \"alice\"))\n\n# TODO: set name to \"alice\" by indexing into users\nname = None\n\nprint(name)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_updateNestedList.py",
+      "content": "# Goal: Mutate a nested list element\n# Expected outcome: running this file prints exactly: [[0, 1], [2, 99]]\n\ngrid = [[0, 1], [2, 3]]\n\n# TODO: change the bottom-right value to 99\n# grid[?][?] = ?\n\nprint(grid)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_appendToInnerList.py",
+      "content": "# Goal: Append to an inner list inside a nested structure\n# Expected outcome: running this file prints exactly: [['a', 'b', 'c'], ['x']]\n\nletters = [[\"a\", \"b\"], [\"x\"]]\n\n# TODO: append \"c\" to the first inner list\n\nprint(letters)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_nestedLenCounts.py",
+      "content": "# Goal: Compute counts from a nested list\n# Expected outcome: running this file prints exactly: 3 6\n# (3 inner lists, 6 total items)\n\nitems = [[1, 2], [], [3, 4, 5, 6]]\n\n# TODO: compute inner_count and total_count\ninner_count = None\ntotal_count = None\n\nprint(inner_count, total_count)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_flattenOneLevel.py",
+      "content": "# Goal: Flatten a one-level nested list (list of lists)\n# Expected outcome: running this file prints exactly: [1, 2, 3, 4, 5]\n\nnested = [[1, 2], [3], [4, 5]]\n\n# TODO: build flat as a new list with all numbers in order\nflat = None\n\nprint(flat)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_extractColumn.py",
+      "content": "# Goal: Extract a column from a 2D list\n# Expected outcome: running this file prints exactly: [2, 5, 8]\n\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\ncol_index = 1\n\n# TODO: build column as values from matrix[*][col_index]\ncolumn = None\n\nprint(column)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_sumRows.py",
+      "content": "# Goal: Compute row sums from a nested list\n# Expected outcome: running this file prints exactly: [6, 15, 24]\n\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\n# TODO: build row_sums as a list of sums for each row\nrow_sums = None\n\nprint(row_sums)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_findInNested.py",
+      "content": "# Goal: Find coordinates of a target in a 2D list\n# Expected outcome: running this file prints exactly: (2, 0)\n\ngrid = [\n    [\".\", \".\", \".\"],\n    [\".\", \"X\", \".\"],\n    [\"T\", \".\", \".\"]\n]\n\ntarget = \"T\"\n\n# TODO: set pos to a tuple (row_index, col_index) where target is found\npos = None\n\nprint(pos)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_unpackNestedTuples.py",
+      "content": "# Goal: Unpack a nested tuple into named variables\n# Expected outcome: running this file prints exactly: Jane 34 NY\n\nrecord = (\"Jane\", (34, \"NY\"))\n\n# TODO: unpack record into name, age, state\nname = None\nage = None\nstate = None\n\nprint(name, age, state)\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_convertListOfTuplesToLists.py",
+      "content": "# Goal: Convert each inner tuple to a list\n# Expected outcome: running this file prints exactly: [[1, 2], [3, 4], [5, 6]]\n\npairs = [(1, 2), (3, 4), (5, 6)]\n\n# TODO: build converted so each element is a list, not a tuple\nconverted = None\n\nprint(converted)\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_replaceInNestedImmutable.py",
+      "content": "# Goal: Replace a value inside a nested tuple by creating a new tuple\n# Expected outcome: running this file prints exactly: ('a', ('b', 'Z'), 'c')\n\ndata = (\"a\", (\"b\", \"x\"), \"c\")\n\n# TODO: create new_data where the inner \"x\" becomes \"Z\"\nnew_data = None\n\nprint(new_data)\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_buildGridWithComprehension.py",
+      "content": "# Goal: Build a 3x4 grid (nested list) filled with zeros\n# Expected outcome: running this file prints exactly: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]\n\nrows = 3\ncols = 4\n\n# TODO: build grid using a list comprehension (not multiplication like [[0]*cols]*rows)\ngrid = None\n\nprint(grid)\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_transposeMatrix.py",
+      "content": "# Goal: Transpose a 2D list (matrix)\n# Expected outcome: running this file prints exactly: [[1, 4], [2, 5], [3, 6]]\n\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6]\n]\n\n# TODO: build transposed (3x2) so transposed[i][j] == matrix[j][i]\ntransposed = None\n\nprint(transposed)\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_deepFlattenTwoLevels.py",
+      "content": "# Goal: Flatten a nested structure up to two levels deep\n# Expected outcome: running this file prints exactly: [1, 2, 3, 4, 5, 6]\n\nnested = [[1, [2, 3]], [4, [5, 6]]]\n\n# TODO: build flat so all ints appear in left-to-right order\n# Hint: you may use loops and type checks; no recursion needed for exactly this shape.\nflat = None\n\nprint(flat)\n"
+    },
+    {
+      "index": 16,
+      "fileName": "16_validateRectangularMatrix.py",
+      "content": "# Goal: Check if a nested list is a rectangular matrix (all rows same length)\n# Expected outcome: running this file prints exactly: True False\n\nm1 = [[1, 2], [3, 4], [5, 6]]\nm2 = [[1, 2, 3], [4, 5]]\n\n# TODO: set is_rect1 and is_rect2 to booleans\nis_rect1 = None\nis_rect2 = None\n\nprint(is_rect1, is_rect2)\n"
+    },
+    {
+      "index": 17,
+      "fileName": "17_groupIntoPairs.py",
+      "content": "# Goal: Group a flat list into a list of 2-tuples\n# Expected outcome: running this file prints exactly: [(10, 20), (30, 40), (50, 60)]\n\nnums = [10, 20, 30, 40, 50, 60]\n\n# TODO: build pairs as list of tuples, each tuple has two consecutive numbers\npairs = None\n\nprint(pairs)\n"
+    },
+    {
+      "index": 18,
+      "fileName": "18_sortByNestedField.py",
+      "content": "# Goal: Sort a list of (name, (age, score)) by score descending\n# Expected outcome: running this file prints exactly: [('Bea', (19, 92)), ('Cal', (21, 88)), ('Ada', (20, 75))]\n\nrecords = [\n    (\"Ada\", (20, 75)),\n    (\"Bea\", (19, 92)),\n    (\"Cal\", (21, 88))\n]\n\n# TODO: produce sorted_records sorted by inner score (second item of inner tuple), highest first\nsorted_records = None\n\nprint(sorted_records)\n"
+    },
+    {
+      "index": 19,
+      "fileName": "19_pathWalkNestedList.py",
+      "content": "# Goal: Follow a path of indices into a nested structure\n# Expected outcome: running this file prints exactly: 99\n\n# The structure can contain lists and tuples mixed.\ndata = [\n    (\"ignore\", [0, 1, 2]),\n    [\"x\", (\"y\", [10, 99])]\n]\n\npath = [1, 1, 1, 1]  # data[1][1][1][1] -> 99\n\n# TODO: walk the path iteratively (no hardcoded indexing) to get the final value\ncurrent = data\n\n# for idx in path:\n#     ...\n\nvalue = None\n\nprint(value)\n"
+    },
+    {
+      "index": 20,
+      "fileName": "20_nestedReportAggregation.py",
+      "content": "# Goal: Aggregate a nested list of daily sales into per-store totals\n# Expected outcome: running this file prints exactly: [('A', 19), ('B', 22), ('C', 0)]\n\n# Each entry is (store_id, [list_of_daily_sales]).\n# Some stores may have an empty list.\nstores = [\n    (\"A\", [5, 7, 7]),\n    (\"B\", [10, 12]),\n    (\"C\", [])\n]\n\n# TODO: build report as a list of (store_id, total_sales) in the same order as stores\nreport = None\n\nprint(report)\n"
+    }
+  ]
+}

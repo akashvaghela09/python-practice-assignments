@@ -1,0 +1,55 @@
+{
+  "topic": "continue (for loop)",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_skipOddNumbers.py",
+      "content": "# Print only the even numbers from 1 to 10 (inclusive) using a for loop and continue.\n# Expected outcome (exact lines):\n# 2\n# 4\n# 6\n# 8\n# 10\n\nfor n in range(1, 11):\n    # TODO: if n is odd, skip it\n    \n    print(n)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_skipVowels.py",
+      "content": "# Print all characters of the string below except vowels (a, e, i, o, u), preserving order.\n# Use a for loop and continue.\n# Expected outcome (exact):\n# Pythn\n\ntext = \"Python\"\nvowels = \"aeiouAEIOU\"\n\nfor ch in text:\n    # TODO: if ch is a vowel, continue\n    \n    print(ch, end=\"\")\n\nprint()\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_ignoreNegatives_sumPositives.py",
+      "content": "# Sum only the non-negative numbers in the list using continue to skip negatives.\n# Print the final sum as an integer.\n# Expected outcome (exact):\n# 11\n\nnumbers = [3, -1, 4, -2, 0, 6, -9]\n\ntotal = 0\nfor x in numbers:\n    # TODO: if x is negative, skip it\n    \n    total += x\n\nprint(total)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_skipDivisibleBy3.py",
+      "content": "# Build a list containing numbers from 1 to 15 that are NOT divisible by 3.\n# Use a for loop and continue. Print the resulting list.\n# Expected outcome (exact):\n# [1, 2, 4, 5, 7, 8, 10, 11, 13, 14]\n\nresult = []\nfor n in range(1, 16):\n    # TODO: if n is divisible by 3, continue\n    \n    result.append(n)\n\nprint(result)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_skipEmptyTokens.py",
+      "content": "# Split the string by commas, then print only non-empty trimmed tokens, one per line.\n# Use continue to skip tokens that become empty after stripping.\n# Expected outcome (exact lines):\n# apple\n# banana\n# pear\n\nraw = \" apple, ,banana,  , pear,\"\nparts = raw.split(\",\")\n\nfor token in parts:\n    cleaned = token.strip()\n    # TODO: if cleaned is empty, continue\n    \n    print(cleaned)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_sumValidIntegersFromStrings.py",
+      "content": "# Sum only the items that can be converted to int from the list below.\n# Use a for loop and continue to skip invalid items (non-integer strings).\n# Print the final sum.\n# Expected outcome (exact):\n# 15\n\nitems = [\"10\", \"-3\", \"x\", \" 5 \", \"7.2\", \"3\"]\n\ntotal = 0\nfor s in items:\n    s = s.strip()\n    # TODO: attempt int conversion; if it fails, continue\n    # Hint: use try/except\n    \n    # TODO: add the integer to total\n    \nprint(total)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_skipOutOfRangeScores.py",
+      "content": "# Compute the average of only valid scores in the inclusive range 0..100.\n# Use continue to skip invalid scores.\n# Print the average as a float with exactly 2 decimal places.\n# Expected outcome (exact):\n# 76.67\n\nscores = [90, 105, 70, -5, 80, 60, 200]\n\nvalid_sum = 0\nvalid_count = 0\nfor score in scores:\n    # TODO: if score is outside 0..100, continue\n    \n    valid_sum += score\n    valid_count += 1\n\navg = valid_sum / valid_count\nprint(f\"{avg:.2f}\")\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_filterWordsByMinLength.py",
+      "content": "# From the list of words, collect only those with length >= min_len.\n# Use continue to skip shorter words. Print the filtered words joined by a single space.\n# Expected outcome (exact):\n# elephant giraffe\n\nwords = [\"cat\", \"elephant\", \"dog\", \"giraffe\", \"ant\"]\nmin_len = 5\n\nkept = []\nfor w in words:\n    # TODO: if len(w) < min_len, continue\n    \n    kept.append(w)\n\nprint(\" \".join(kept))\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_nestedLoops_skipMarkedSeats.py",
+      "content": "# You are generating seat labels for a 3x4 grid: rows A-C and columns 1-4.\n# Skip any seat that appears in blocked using continue.\n# Print each allowed seat on its own line, in row-major order.\n# Expected outcome (exact lines):\n# A1\n# A2\n# A4\n# B1\n# B2\n# B3\n# B4\n# C1\n# C3\n# C4\n\nrows = [\"A\", \"B\", \"C\"]\ncols = [1, 2, 3, 4]\nblocked = {\"A3\", \"C2\"}\n\nfor r in rows:\n    for c in cols:\n        seat = f\"{r}{c}\"\n        # TODO: if seat is blocked, continue\n        \n        print(seat)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_primeFinder_skipNonPrimes.py",
+      "content": "# Print all prime numbers from 2 to 30 inclusive.\n# Use a for loop over candidates, and an inner loop to test divisibility.\n# Use continue in the outer loop to skip non-prime candidates.\n# Expected outcome (exact):\n# 2 3 5 7 11 13 17 19 23 29\n\nprimes = []\n\nfor n in range(2, 31):\n    is_prime = True\n    for d in range(2, n):\n        # TODO: if n is divisible by d, set is_prime False and stop checking\n        \n        pass\n\n    # TODO: if not prime, continue\n    \n    primes.append(n)\n\nprint(\" \".join(str(p) for p in primes))\n"
+    }
+  ]
+}

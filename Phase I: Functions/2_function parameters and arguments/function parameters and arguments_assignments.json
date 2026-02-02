@@ -1,0 +1,55 @@
+{
+  "topic": "function parameters and arguments",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_greetWithName.py",
+      "content": "# Goal: Practice a single required parameter.\n# Expected outcome: Running the file prints exactly:\n# Hello, Ada!\n\n# TODO: Define a function greet(name) that returns \"Hello, <name>!\"\n\ndef greet(name):\n    \n\nprint(greet(\"Ada\"))\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_fullNameFormatter.py",
+      "content": "# Goal: Practice multiple required parameters.\n# Expected outcome: Running the file prints exactly:\n# Lovelace, Ada\n\n# TODO: Define format_name(first, last) that returns \"<last>, <first>\"\n\ndef format_name(first, last):\n    \n\nprint(format_name(\"Ada\", \"Lovelace\"))\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_defaultParameter.py",
+      "content": "# Goal: Practice default parameter values.\n# Expected outcome: Running the file prints exactly:\n# 7\n# 15\n\n# TODO: Define add(a, b=5) that returns the sum of a and b\n\ndef add(a, b=5):\n    \n\nprint(add(2))\nprint(add(10))\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_keywordArguments.py",
+      "content": "# Goal: Practice keyword arguments and ordering.\n# Expected outcome: Running the file prints exactly:\n# 2, 5, 9\n\n# TODO: Define pack(a, b, c) that returns a string \"a, b, c\" using the provided values\n\ndef pack(a, b, c):\n    \n\nprint(pack(c=9, a=2, b=5))\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_mixedArgsDefaults.py",
+      "content": "# Goal: Practice mixing positional args, keyword args, and defaults.\n# Expected outcome: Running the file prints exactly:\n# Hi, Sam.\n# Hello, Sam!\n\n# TODO: Define welcome(name, greeting=\"Hi\", punctuation=\".\") returning \"<greeting>, <name><punctuation>\"\n\ndef welcome(name, greeting=\"Hi\", punctuation=\".\"):\n    \n\nprint(welcome(\"Sam\"))\nprint(welcome(\"Sam\", greeting=\"Hello\", punctuation=\"!\"))\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_variablePositionalArgsSum.py",
+      "content": "# Goal: Practice *args.\n# Expected outcome: Running the file prints exactly:\n# 0\n# 6\n# 10\n\n# TODO: Define total(*nums) that returns the sum of all given numbers.\n# If no numbers are provided, return 0.\n\ndef total(*nums):\n    \n\nprint(total())\nprint(total(1, 2, 3))\nprint(total(10))\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_variableKeywordArgsReport.py",
+      "content": "# Goal: Practice **kwargs.\n# Expected outcome: Running the file prints exactly:\n# age=12; name=Ria\n\n# TODO: Define report(**fields) that returns key=value pairs sorted by key\n# joined by \"; \".\n# Example: report(name=\"Ria\", age=12) -> \"age=12; name=Ria\"\n\ndef report(**fields):\n    \n\nprint(report(name=\"Ria\", age=12))\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_positionalOnly_and_keywordOnly.py",
+      "content": "# Goal: Practice positional-only and keyword-only parameters.\n# Expected outcome: Running the file prints exactly:\n# 7\n# 15\n\n# TODO: Define clamp(x, /, *, low=0, high=10)\n# - x must be positional-only\n# - low and high must be keyword-only\n# Return:\n# - low if x < low\n# - high if x > high\n# - otherwise x\n\ndef clamp(x, /, *, low=0, high=10):\n    \n\nprint(clamp(7, low=0, high=10))\nprint(clamp(20, low=0, high=15))\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_forwardingArgs.py",
+      "content": "# Goal: Practice forwarding arguments with *args and **kwargs.\n# Expected outcome: Running the file prints exactly:\n# 6\n# 5\n\n# TODO:\n# 1) Define multiply(a, b, c=1) returning a*b*c\n# 2) Define call_multiply(*args, **kwargs) that forwards to multiply and returns the result\n\ndef multiply(a, b, c=1):\n    \n\n\ndef call_multiply(*args, **kwargs):\n    \n\nprint(call_multiply(2, 3))\nprint(call_multiply(1, 1, c=5))\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_signatureValidation.py",
+      "content": "# Goal: Combine parameter types and validate inputs.\n# Expected outcome: Running the file prints exactly:\n# user=ana; role=admin; active=True\n# user=bob; role=member; active=False\n\n# TODO: Define format_user(user, /, role=\"member\", *, active=True, **extra)\n# Rules:\n# - user is positional-only\n# - role can be positional-or-keyword\n# - active is keyword-only\n# - extra keyword arguments must be ignored (but accepted)\n# Return exactly: \"user=<user>; role=<role>; active=<active>\"\n\ndef format_user(user, /, role=\"member\", *, active=True, **extra):\n    \n\nprint(format_user(\"ana\", \"admin\", active=True, theme=\"dark\"))\nprint(format_user(\"bob\", active=False))\n"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "topic": "conditional (ternary) operator",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_basicTernary_maxOfTwo.py",
+      "content": "# Goal: Use a conditional (ternary) expression to set result to the larger of a and b.\n# Expected outcome: Prints exactly: max=10\n\na = 7\nb = 10\n\nresult = ________________________________\n\nprint(f\"max={result}\")\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_basicTernary_evenOddLabel.py",
+      "content": "# Goal: Use a conditional (ternary) expression to label n as \"even\" or \"odd\".\n# Expected outcome: Prints exactly: odd\n\nn = 9\n\nlabel = ________________________________\n\nprint(label)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_basicTernary_absValue.py",
+      "content": "# Goal: Use a conditional (ternary) expression to compute the absolute value of x.\n# Expected outcome: Prints exactly: abs=12\n\nx = -12\n\nabs_x = ________________________________\n\nprint(f\"abs={abs_x}\")\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_basicTernary_temperatureAdvice.py",
+      "content": "# Goal: Use a conditional (ternary) expression to choose a message based on temperature.\n# If temp_c is below 0, message should be \"freeze\" otherwise \"ok\".\n# Expected outcome: Prints exactly: freeze\n\ntemp_c = -3\n\nmessage = ________________________________\n\nprint(message)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_basicTernary_discountedOrRegular.py",
+      "content": "# Goal: Use a conditional (ternary) expression to choose the final price.\n# If is_member is True, final_price is price * 0.9 else price.\n# Expected outcome: Prints exactly: final=45.0\n\nprice = 50\nis_member = True\n\nfinal_price = ________________________________\n\nprint(f\"final={final_price}\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_ternary_with_string_formatting.py",
+      "content": "# Goal: Use a conditional (ternary) expression inside an f-string.\n# If score >= 60 show \"PASS\", else \"FAIL\".\n# Expected outcome: Prints exactly: Result: PASS\n\nscore = 60\n\nprint(f\"Result: {________________}\")\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_ternary_with_multiple_conditions.py",
+      "content": "# Goal: Use a conditional (ternary) expression with and/or in the condition.\n# If age is between 13 and 19 inclusive, label is \"teen\" else \"not teen\".\n# Expected outcome: Prints exactly: teen\n\nage = 19\n\nlabel = ________________________________\n\nprint(label)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_ternary_choose_from_two_expressions.py",
+      "content": "# Goal: Use a conditional (ternary) expression where each branch performs a calculation.\n# If minutes > 60, compute hours=minutes/60 else hours=0.\n# Expected outcome: Prints exactly: hours=1.5\n\nminutes = 90\n\nhours = ________________________________\n\nprint(f\"hours={hours}\")\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_ternary_nested_grade_band.py",
+      "content": "# Goal: Use a nested conditional (ternary) expression to compute a letter grade.\n# Rules: score>=90 -> \"A\", score>=80 -> \"B\", else -> \"C\".\n# Expected outcome: Prints exactly: B\n\nscore = 84\n\ngrade = ________________________________\n\nprint(grade)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_ternary_for_default_value_with_none.py",
+      "content": "# Goal: Use a conditional (ternary) expression to provide a default when name is None.\n# If name is None use \"Anonymous\" else use name.\n# Expected outcome: Prints exactly: Hello, Anonymous\n\nname = None\n\ndisplay_name = ________________________________\n\nprint(f\"Hello, {display_name}\")\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_ternary_in_list_comprehension.py",
+      "content": "# Goal: Use a conditional (ternary) expression inside a list comprehension.\n# For each number, produce \"E\" if even else \"O\".\n# Expected outcome: Prints exactly: ['O', 'E', 'O', 'E']\n\nnums = [1, 2, 3, 4]\n\nlabels = [______________________________ for n in nums]\n\nprint(labels)\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_ternary_select_key_in_dict.py",
+      "content": "# Goal: Use a conditional (ternary) expression to select which dictionary key to read.\n# If use_primary is True, pick \"primary\" else pick \"backup\".\n# Expected outcome: Prints exactly: token=BK-999\n\nconfig = {\n    \"primary\": \"PR-123\",\n    \"backup\": \"BK-999\"\n}\n\nuse_primary = False\n\nkey = ________________________________\n\ntoken = config[key]\n\nprint(f\"token={token}\")\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_ternary_function_return_value.py",
+      "content": "# Goal: Complete the function using a conditional (ternary) expression in the return statement.\n# If x is divisible by 3, return \"fizz\" else return the string form of x.\n# Expected outcome: Prints exactly: fizz\n\ndef fizz_or_number(x: int) -> str:\n    return ________________________________\n\nprint(fizz_or_number(9))\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_ternary_avoid_zero_division.py",
+      "content": "# Goal: Use a conditional (ternary) expression to avoid dividing by zero.\n# If denominator == 0, result should be \"undefined\" else compute numerator/denominator.\n# Expected outcome: Prints exactly: undefined\n\nnumerator = 10\ndenominator = 0\n\nresult = ________________________________\n\nprint(result)\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_nested_ternary_with_three_way_choice.py",
+      "content": "# Goal: Use a nested conditional (ternary) expression to categorize a number.\n# Rules:\n# - If x < 0 -> \"negative\"\n# - Else if x == 0 -> \"zero\"\n# - Else -> \"positive\"\n# Expected outcome: Prints exactly: zero\n\nx = 0\n\ncategory = ________________________________\n\nprint(category)\n"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "topic": "function defining",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_defineHelloFunction.py",
+      "content": "# Define a function named say_hello that returns the string \"Hello!\".\n# Then call it and print the returned value.\n\n# TODO: define say_hello()\n\nresult = say_hello()\nprint(result)\n\n# Expected outcome (exact):\n# Hello!\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_greetByName.py",
+      "content": "# Define a function named greet that takes one parameter: name (a string).\n# It must return: \"Hello, <name>!\" (including comma and exclamation).\n# Then call it with \"Ava\" and print the result.\n\n# TODO: define greet(name)\n\nprint(greet(\"Ava\"))\n\n# Expected outcome (exact):\n# Hello, Ava!\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_addTwoNumbers.py",
+      "content": "# Define a function named add that takes two integers a and b and returns their sum.\n# Then call add(7, 5) and print the returned value.\n\n# TODO: define add(a, b)\n\ntotal = add(7, 5)\nprint(total)\n\n# Expected outcome (exact):\n# 12\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_defaultParameter.py",
+      "content": "# Define a function named repeat_word that takes:\n# - word (string)\n# - times (int, default value 2)\n# It returns the word repeated 'times' with a single space between repetitions.\n# Example: repeat_word(\"go\", 3) -> \"go go go\"\n# Print repeat_word(\"go\") and repeat_word(\"go\", 3) on separate lines.\n\n# TODO: define repeat_word(word, times=...)\n\nprint(repeat_word(\"go\"))\nprint(repeat_word(\"go\", 3))\n\n# Expected outcome (exact):\n# go go\n# go go go\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_multipleReturns_absolute.py",
+      "content": "# Define a function named absolute_value that takes an integer n.\n# If n is negative, return -n. Otherwise return n.\n# Then print absolute_value(-8) and absolute_value(5) on separate lines.\n\n# TODO: define absolute_value(n)\n\nprint(absolute_value(-8))\nprint(absolute_value(5))\n\n# Expected outcome (exact):\n# 8\n# 5\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_keywordArguments_formatName.py",
+      "content": "# Define a function named format_name with parameters:\n# - first\n# - last\n# - middle (default \"\")\n# It returns:\n# - If middle is empty: \"<last>, <first>\"\n# - Otherwise: \"<last>, <first> <middle>\"\n# Then call it using keyword arguments exactly as shown and print results.\n\n# TODO: define format_name(first, last, middle=\"\")\n\nprint(format_name(first=\"Ada\", last=\"Lovelace\"))\nprint(format_name(last=\"Turing\", first=\"Alan\", middle=\"Mathison\"))\n\n# Expected outcome (exact):\n# Lovelace, Ada\n# Turing, Alan Mathison\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_docstring_and_type_behavior.py",
+      "content": "# Define a function named clamp that takes three integers: x, low, high.\n# It returns:\n# - low if x < low\n# - high if x > high\n# - otherwise x\n# Add a docstring that describes parameters and return behavior.\n# Then print clamp(5, 0, 10), clamp(-3, 0, 10), clamp(99, 0, 10) each on its own line.\n\n# TODO: define clamp(x, low, high) with a docstring\n\nprint(clamp(5, 0, 10))\nprint(clamp(-3, 0, 10))\nprint(clamp(99, 0, 10))\n\n# Expected outcome (exact):\n# 5\n# 0\n# 10\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_variable_length_args_sumAll.py",
+      "content": "# Define a function named sum_all that accepts any number of integer arguments using *args.\n# It returns the sum of all provided numbers.\n# If no numbers are provided, it must return 0.\n# Then print sum_all(1, 2, 3, 4) and sum_all() on separate lines.\n\n# TODO: define sum_all(*args)\n\nprint(sum_all(1, 2, 3, 4))\nprint(sum_all())\n\n# Expected outcome (exact):\n# 10\n# 0\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_dictionary_kwargs_buildQuery.py",
+      "content": "# Define a function named build_query that accepts keyword arguments using **kwargs.\n# It returns a query string with keys sorted alphabetically.\n# Format: key=value pairs joined by \"&\".\n# Values must be converted to strings with str().\n# Example: build_query(b=2, a=1) -> \"a=1&b=2\"\n# Then print the results of the two calls below on separate lines.\n\n# TODO: define build_query(**kwargs)\n\nprint(build_query(page=2, q=\"python\"))\nprint(build_query(z=0, a=10, m=5))\n\n# Expected outcome (exact):\n# page=2&q=python\n# a=10&m=5&z=0\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_higher_order_function_applyTwice.py",
+      "content": "# Define a function named apply_twice that takes:\n# - func: a function that takes one argument and returns a value\n# - value: any value\n# It returns func(func(value)).\n# Also define a function named increment that takes an integer n and returns n + 1.\n# Then print apply_twice(increment, 3).\n\n# TODO: define apply_twice(func, value)\n\n# TODO: define increment(n)\n\nprint(apply_twice(increment, 3))\n\n# Expected outcome (exact):\n# 5\n"
+    }
+  ]
+}

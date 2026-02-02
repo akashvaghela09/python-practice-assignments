@@ -1,0 +1,80 @@
+{
+  "topic": "variables",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_variableBasics.py",
+      "content": "# Goal: Create two variables and print them exactly as shown.\n# Expected output (exactly 2 lines):\n# name=Alex\n# age=12\n\nname =  # TODO: set to the string Alex\nage =   # TODO: set to the integer 12\n\nprint(\"name=\" + name)\nprint(\"age=\" + str(age))\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_reassignVariable.py",
+      "content": "# Goal: Practice reassigning a variable.\n# Expected output (exactly 3 lines):\n# score=10\n# score=15\n# score=0\n\nscore =  # TODO: start at 10\nprint(\"score=\" + str(score))\n\n# TODO: increase score by 5\nprint(\"score=\" + str(score))\n\n# TODO: reset score to 0\nprint(\"score=\" + str(score))\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_swapTwoVariables.py",
+      "content": "# Goal: Swap values of two variables.\n# Expected output (exactly 2 lines):\n# a=2\n# b=1\n\na = 1\nb = 2\n\n# TODO: swap a and b (do not hardcode final values)\n\nprint(\"a=\" + str(a))\nprint(\"b=\" + str(b))\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_buildFullName.py",
+      "content": "# Goal: Use variables to build a full name.\n# Expected output (exactly 1 line):\n# Full name: Ada Lovelace\n\nfirst = \"Ada\"\nlast = \"Lovelace\"\n\n# TODO: create a variable full that combines first and last with a space\n\nprint(\"Full name: \" + full)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_temperatureConversion.py",
+      "content": "# Goal: Store a Celsius value and compute Fahrenheit.\n# Use formula: F = C * 9/5 + 32\n# Expected output (exactly 1 line):\n# 25C is 77.0F\n\ncelsius = 25\n\n# TODO: compute fahrenheit using celsius\n\nprint(str(celsius) + \"C is \" + str(fahrenheit) + \"F\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_priceWithTax.py",
+      "content": "# Goal: Use numeric variables to compute a total price.\n# Expected output (exactly 1 line):\n# total=21.40\n# Notes:\n# - price is 20.00\n# - tax_rate is 0.07\n# - total = price + price*tax_rate\n# - Print with exactly 2 digits after the decimal.\n\nprice = 20.00\ntax_rate = 0.07\n\n# TODO: compute total\n\nprint(\"total=\" + format(total, \".2f\"))\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_userInputVariables.py",
+      "content": "# Goal: Read user input into variables and print a formatted message.\n# Expected output (exactly 1 line, for input 'Mia' and '8'):\n# Mia will be 9 next year.\n\nname = input()            # user types a name\nage_text = input()        # user types an age\n\n# TODO: convert age_text to an integer variable age\n# TODO: create next_age as age + 1\n\nprint(name + \" will be \" + str(next_age) + \" next year.\")\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_compoundAssignment.py",
+      "content": "# Goal: Use compound assignment operators to update a variable.\n# Expected output (exactly 1 line):\n# result=18\n\nvalue = 5\n\n# TODO: add 10 to value using a compound operator\n# TODO: multiply value by 2 using a compound operator\n# TODO: subtract 2 from value using a compound operator\n\nprint(\"result=\" + str(value))\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_countCharacters.py",
+      "content": "# Goal: Use variables to store and compute lengths.\n# Expected output (exactly 1 line):\n# length=6\n\nword = \"python\"\n\n# TODO: store the length of word in a variable called length\n\nprint(\"length=\" + str(length))\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_extractDigits.py",
+      "content": "# Goal: Use variables to extract digits from a number.\n# Expected output (exactly 2 lines):\n# tens=4\n# ones=7\n\nnumber = 47\n\n# TODO: compute tens digit (4) and store in tens\n# TODO: compute ones digit (7) and store in ones\n\nprint(\"tens=\" + str(tens))\nprint(\"ones=\" + str(ones))\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_runningTotalThreeInputs.py",
+      "content": "# Goal: Use variables to keep a running total.\n# Program reads 3 integers (each on its own line).\n# Expected output (exactly 1 line, for inputs 4, 1, 9):\n# total=14\n\nn1 = int(input())\nn2 = int(input())\nn3 = int(input())\n\n# TODO: compute total using a running total variable\n\nprint(\"total=\" + str(total))\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_minMaxTwoNumbers.py",
+      "content": "# Goal: Use variables to compute min and max of two numbers.\n# Program reads two integers.\n# Expected output (exactly 2 lines, for inputs 9 and 2):\n# min=2\n# max=9\n\na = int(input())\nb = int(input())\n\n# TODO: create variables min_val and max_val without using min() or max()\n\nprint(\"min=\" + str(min_val))\nprint(\"max=\" + str(max_val))\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_variableTypeTracking.py",
+      "content": "# Goal: Use variables to store converted types.\n# Program reads one line of input representing a number.\n# Expected output (exactly 3 lines, for input '3.5'):\n# text=3.5\n# as_float=3.5\n# as_int=3\n\ntext = input()\n\n# TODO: convert text to float in a variable called as_float\n# TODO: convert as_float to int in a variable called as_int\n\nprint(\"text=\" + text)\nprint(\"as_float=\" + str(as_float))\nprint(\"as_int=\" + str(as_int))\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_updateInventory.py",
+      "content": "# Goal: Track inventory with multiple variable updates.\n# Start with stock=30.\n# Then apply these events in order:\n# - sold 7\n# - received 12\n# - sold 5\n# Expected output (exactly 4 lines):\n# start=30\n# after_sold1=23\n# after_received=35\n# after_sold2=30\n\nstock = 30\nprint(\"start=\" + str(stock))\n\n# TODO: update stock after selling 7; store in after_sold1\nprint(\"after_sold1=\" + str(after_sold1))\n\n# TODO: update stock after receiving 12; store in after_received\nprint(\"after_received=\" + str(after_received))\n\n# TODO: update stock after selling 5; store in after_sold2\nprint(\"after_sold2=\" + str(after_sold2))\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_summaryReport.py",
+      "content": "# Goal: Build a small report using multiple variables.\n# Program reads:\n# - product name (string)\n# - unit price (float)\n# - quantity (int)\n# Compute subtotal = unit_price * quantity\n# Compute discount = 10% of subtotal if quantity >= 10, otherwise 0\n# Compute total = subtotal - discount\n# Expected output (exactly 4 lines, for inputs 'Pens', '1.50', '12'):\n# product=Pens\n# subtotal=18.00\n# discount=1.80\n# total=16.20\n# Print money values with exactly 2 digits after the decimal.\n\nproduct = input()\nunit_price_text = input()\nquantity_text = input()\n\n# TODO: convert unit_price_text to float unit_price\n# TODO: convert quantity_text to int quantity\n\n# TODO: compute subtotal\n# TODO: compute discount based on quantity\n# TODO: compute total\n\nprint(\"product=\" + product)\nprint(\"subtotal=\" + format(subtotal, \".2f\"))\nprint(\"discount=\" + format(discount, \".2f\"))\nprint(\"total=\" + format(total, \".2f\"))\n"
+    }
+  ]
+}

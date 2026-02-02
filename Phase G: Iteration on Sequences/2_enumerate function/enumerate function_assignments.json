@@ -1,0 +1,80 @@
+{
+  "topic": "enumerate function",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_enumerateBasics_printIndexAndItem.py",
+      "content": "# Goal: Practice using enumerate to print index and item.\n# Expected outcome:\n# 0 apple\n# 1 banana\n# 2 cherry\n\nfruits = [\"apple\", \"banana\", \"cherry\"]\n\n# TODO: Use enumerate to print each index and fruit on one line in the format: <index> <fruit>\nfor ___ in ___:\n    print(___)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_enumerateStartAtOne_numberedMenu.py",
+      "content": "# Goal: Use enumerate with a start value.\n# Expected outcome:\n# 1 - Home\n# 2 - Settings\n# 3 - Logout\n\nitems = [\"Home\", \"Settings\", \"Logout\"]\n\n# TODO: Use enumerate(..., start=1) and print in the format: <number> - <item>\nfor ___, ___ in ___:\n    print(___)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_enumerateBuildListOfTuples.py",
+      "content": "# Goal: Build a list of (index, value) tuples using enumerate.\n# Expected outcome:\n# [(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]\n\nletters = [\"A\", \"B\", \"C\", \"D\"]\nindexed = []\n\n# TODO: Append (i, letter) for each element using enumerate.\nfor ___ in ___:\n    indexed.append(___)\n\nprint(indexed)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_enumerateReplaceEveryOther.py",
+      "content": "# Goal: Replace every other word (odd index) with \"_\" using enumerate.\n# Expected outcome:\n# ['keep', '_', 'keep', '_', 'keep']\n\nwords = [\"keep\", \"remove\", \"keep\", \"remove\", \"keep\"]\n\n# TODO: Modify the list in-place: if index is odd, set words[index] = \"_\".\nfor ___, ___ in ___:\n    if ___:\n        words[___] = ___\n\nprint(words)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_enumerateFindFirstMatchIndex.py",
+      "content": "# Goal: Find the index of the first occurrence of a target using enumerate.\n# Expected outcome:\n# 3\n\nnums = [5, 8, 2, 8, 9]\ntarget = 8\nfound_index = None\n\n# TODO: Use enumerate to set found_index to the first index where value == target, then stop looping.\nfor ___, ___ in ___:\n    if ___:\n        found_index = ___\n        ___\n\nprint(found_index)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_enumerateCountMatchesAtEvenIndices.py",
+      "content": "# Goal: Count how many vowels appear at even indices (0,2,4,...) using enumerate.\n# Expected outcome:\n# 3\n\ns = \"a_b_e_i_o\"\nvowels = set(\"aeiou\")\ncount = 0\n\n# TODO: Use enumerate to count characters that are vowels and whose index is even.\nfor ___, ___ in ___:\n    if ___:\n        count += 1\n\nprint(count)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_enumerateBuildDictIndexToValue.py",
+      "content": "# Goal: Build a dict mapping index -> value using enumerate.\n# Expected outcome:\n# {0: 'red', 1: 'green', 2: 'blue'}\n\ncolors = [\"red\", \"green\", \"blue\"]\nindex_map = {}\n\n# TODO: Fill index_map using enumerate.\nfor ___, ___ in ___:\n    index_map[___] = ___\n\nprint(index_map)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_enumerateSkipHeaderInCSVRows.py",
+      "content": "# Goal: Process rows while skipping header; enumerate should reflect data row index starting at 1.\n# Expected outcome:\n# 1: Alice\n# 2: Bob\n\nrows = [\n    \"name,age\",\n    \"Alice,30\",\n    \"Bob,25\"\n]\n\n# TODO:\n# - Skip the header row\n# - Use enumerate(..., start=1) over the remaining rows\n# - Print \"<n>: <name>\" for each data row\nfor ___, ___ in ___:\n    name = ___.split(\",\")[0]\n    print(___)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_enumerateValidateLengths_reportMismatches.py",
+      "content": "# Goal: Compare each word to expected length and report mismatches with index.\n# Expected outcome:\n# Index 1 expected 4 got 5\n# Index 3 expected 3 got 2\n\nwords = [\"tree\", \"house\", \"code\", \"py\"]\nexpected_lengths = [4, 4, 4, 3]\n\n# TODO:\n# Use enumerate to iterate over words with indices.\n# Compare len(word) to expected_lengths[index].\n# Print only mismatches in the format:\n# \"Index <i> expected <expected> got <actual>\"\nfor ___, ___ in ___:\n    expected = expected_lengths[___]\n    actual = len(___)\n    if ___:\n        print(___)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_enumerateInListComprehension_labelEvenOdd.py",
+      "content": "# Goal: Use enumerate in a list comprehension to label positions.\n# Expected outcome:\n# ['0: even', '1: odd', '2: even', '3: odd']\n\nnums = [10, 11, 12, 13]\n\n# TODO: Create labels using enumerate; label based on the index parity (not the value).\nlabels = [___ for ___ in ___]\n\nprint(labels)\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_enumerateReverseListWithIndices.py",
+      "content": "# Goal: Print original indices while iterating values in reverse.\n# Expected outcome:\n# 3 d\n# 2 c\n# 1 b\n# 0 a\n\nletters = [\"a\", \"b\", \"c\", \"d\"]\n\n# TODO:\n# Iterate over the list in reverse but show the original index.\n# Hint: use enumerate(reversed(letters)) and compute original index.\nfor ___, ___ in ___:\n    original_index = ___\n    print(f\"{original_index} {___}\")\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_enumerateModifyNestedList_rowNumbers.py",
+      "content": "# Goal: Prefix each row with its row number (starting at 1) using enumerate.\n# Expected outcome:\n# [[1, 'Ann'], [2, 'Ben'], [3, 'Cy']]\n\ntable = [[\"Ann\"], [\"Ben\"], [\"Cy\"]]\n\n# TODO: Modify each inner list in-place to insert row number at position 0.\nfor ___, ___ in ___:\n    ___.insert(___, ___)\n\nprint(table)\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_enumerateFindAllIndicesOfTarget.py",
+      "content": "# Goal: Collect all indices where target occurs.\n# Expected outcome:\n# [1, 3, 4]\n\ndata = [\"x\", \"y\", \"x\", \"y\", \"y\", \"z\"]\ntarget = \"y\"\nindices = []\n\n# TODO: Use enumerate to append every index where value == target.\nfor ___, ___ in ___:\n    if ___:\n        indices.append(___)\n\nprint(indices)\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_enumerateTrackBestScoreWithTies.py",
+      "content": "# Goal: Find the index of the highest score; if there is a tie, keep the earliest index.\n# Expected outcome:\n# Best index: 1\n# Best score: 99\n\nscores = [88, 99, 99, 70]\n\nbest_index = None\nbest_score = None\n\n# TODO:\n# Use enumerate to update best_score and best_index.\n# On ties (score == best_score), do NOT update best_index.\nfor ___, ___ in ___:\n    if best_score is None or ___:\n        best_score = ___\n        best_index = ___\n\nprint(f\"Best index: {best_index}\")\nprint(f\"Best score: {best_score}\")\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_enumerateRunLengthEncoding.py",
+      "content": "# Goal: Implement run-length encoding (RLE) for a string using enumerate.\n# For consecutive repeated characters, output \"<char><count>\".\n# Expected outcome:\n# a3b1c4a2\n\ns = \"aaabccccaa\"\nparts = []\n\n# TODO:\n# Use enumerate to detect when a run ends.\n# Build parts like [\"a3\", \"b1\", ...] and then print the joined string.\nrun_char = None\nrun_start = 0\n\nfor i, ch in enumerate(s):\n    if run_char is None:\n        run_char = ch\n        run_start = i\n        continue\n\n    # TODO: If ch differs from run_char, close the previous run and start a new one.\n    if ___:\n        run_len = i - run_start\n        parts.append(f\"{run_char}{run_len}\")\n        run_char = ch\n        run_start = i\n\n# TODO: Close the final run after the loop.\n___\n\nprint(\"\".join(parts))\n"
+    }
+  ]
+}

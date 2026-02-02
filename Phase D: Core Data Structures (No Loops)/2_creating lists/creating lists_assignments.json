@@ -1,0 +1,55 @@
+{
+  "topic": "creating lists",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_createEmptyAndPrint.py",
+      "content": "# Create an empty list named items.\n# Then print the list.\n\nitems = \nprint(items)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_createListOfNumbers.py",
+      "content": "# Create a list named numbers that contains: 10, 20, 30, 40.\n# Print the list.\n\nnumbers = \nprint(numbers)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_createMixedList.py",
+      "content": "# Create a list named profile with these elements in order:\n# \"Ava\", 12, 4.5, True\n# Print profile.\n\nprofile = \nprint(profile)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_listFromVariables.py",
+      "content": "# Use the variables below to create a list called coords in the order: x, y, z\n# Print coords.\n\nx = 3\ny = 7\nz = -1\n\ncoords = \nprint(coords)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_listFromUserInputSplit.py",
+      "content": "# Ask the user for three comma-separated colors (example: red,blue,green).\n# Create a list named colors containing the three values with whitespace removed.\n# Print colors.\n# Expected outcome example for input \"red, blue, green\": ['red', 'blue', 'green']\n\nraw = input(\"Enter three colors separated by commas: \")\ncolors = \nprint(colors)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_createListWithRepeat.py",
+      "content": "# Create a list named zeros that contains exactly 5 zeros using repetition.\n# Print zeros.\n# Expected outcome: [0, 0, 0, 0, 0]\n\nzeros = \nprint(zeros)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_createListWithRange.py",
+      "content": "# Create a list named evens containing the even numbers from 2 to 12 inclusive.\n# Use range.\n# Print evens.\n# Expected outcome: [2, 4, 6, 8, 10, 12]\n\nevens = \nprint(evens)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_listComprehensionSquares.py",
+      "content": "# Create a list named squares containing the squares of 1 through 7.\n# Use a list comprehension.\n# Print squares.\n# Expected outcome: [1, 4, 9, 16, 25, 36, 49]\n\nsquares = \nprint(squares)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_filterWithComprehension.py",
+      "content": "# Given the list below, create a new list named long_words containing only words with length >= 5.\n# Use a list comprehension.\n# Print long_words.\n# Expected outcome: ['tiger', 'zebra', 'giraffe']\n\nwords = [\"ant\", \"tiger\", \"cat\", \"zebra\", \"ox\", \"giraffe\"]\n\nlong_words = \nprint(long_words)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_nestedListsGrid.py",
+      "content": "# Create a 3x4 grid (3 rows, 4 columns) filled with \"_\".\n# Name it grid. It must be a list of 3 lists, each inner list length 4.\n# Print grid.\n# Expected outcome: [['_', '_', '_', '_'], ['_', '_', '_', '_'], ['_', '_', '_', '_']]\n\nrows = 3\ncols = 4\n\ngrid = \nprint(grid)\n"
+    }
+  ]
+}

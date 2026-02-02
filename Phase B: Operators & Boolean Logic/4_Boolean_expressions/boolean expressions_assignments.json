@@ -1,0 +1,55 @@
+{
+  "topic": "boolean expressions",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_booleanLiterals.py",
+      "content": "# Goal: Practice True/False and basic comparisons.\n# Expected outcome when you run this file:\n# It prints:\n# True\n# False\n# True\n\n# TODO: Replace ??? with expressions that make the printed output match.\nprint(???)\nprint(???)\nprint(???)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_comparisonsWithVariables.py",
+      "content": "# Goal: Compare numbers using variables.\n# Expected outcome:\n# It prints exactly:\n# is_adult: True\n# is_senior: False\n# is_teen: False\n\nage = 20\n\n# TODO: Fill in the boolean expressions.\nis_adult = ???\nis_senior = ???\nis_teen = ???\n\nprint(\"is_adult:\", is_adult)\nprint(\"is_senior:\", is_senior)\nprint(\"is_teen:\", is_teen)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_stringComparisons.py",
+      "content": "# Goal: Use boolean expressions with strings.\n# Expected outcome:\n# It prints exactly:\n# True\n# False\n# True\n\nusername = \"Ada\"\npassword = \"opensesame\"\n\n# TODO: Use == and != to match the expected output.\nprint(???)  # username is \"Ada\"\nprint(???)  # password is NOT \"letmein\"\nprint(???)  # username is not \"Bob\"\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_notOperator.py",
+      "content": "# Goal: Use 'not' correctly.\n# Expected outcome:\n# It prints exactly:\n# True\n# False\n# True\n\nis_raining = False\nhas_umbrella = False\n\n# TODO: Replace ??? to match expected output.\nprint(???)  # should be True when it's NOT raining\nprint(???)  # should be False when NOT having an umbrella\nprint(???)  # should be True when NOT (raining OR has_umbrella) given current values\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_andOrPrecedence.py",
+      "content": "# Goal: Combine comparisons with 'and'/'or' and parentheses.\n# Expected outcome:\n# It prints exactly:\n# can_enter: True\n# needs_parent: False\n\nage = 17\nhas_ticket = True\nwith_parent = True\n\n# Rules:\n# - can_enter is True if has_ticket AND (age >= 18 OR with_parent)\n# - needs_parent is True if has_ticket AND age < 18 AND NOT with_parent\n\n# TODO: Write boolean expressions that follow the rules.\ncan_enter = ???\nneeds_parent = ???\n\nprint(\"can_enter:\", can_enter)\nprint(\"needs_parent:\", needs_parent)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_rangeChecks.py",
+      "content": "# Goal: Write range checks using boolean expressions.\n# Expected outcome:\n# It prints exactly:\n# in_range_1_to_10: True\n# is_weekend_day: False\n# valid_percentage: True\n\nx = 7\nweekday = \"Wed\"  # valid values: Mon Tue Wed Thu Fri Sat Sun\npct = 100\n\n# TODO: Fill in expressions.\n# - in_range_1_to_10: True when x is between 1 and 10 inclusive\n# - is_weekend_day: True when weekday is Sat or Sun\n# - valid_percentage: True when pct is between 0 and 100 inclusive\nin_range_1_to_10 = ???\nis_weekend_day = ???\nvalid_percentage = ???\n\nprint(\"in_range_1_to_10:\", in_range_1_to_10)\nprint(\"is_weekend_day:\", is_weekend_day)\nprint(\"valid_percentage:\", valid_percentage)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_xorLikeLogic.py",
+      "content": "# Goal: Build an XOR-like condition using boolean expressions.\n# Expected outcome:\n# It prints exactly:\n# exactly_one_discount: True\n\nhas_coupon = True\nis_member = False\n\n# exactly_one_discount should be True only when exactly one of the two is True.\n# TODO: Write a boolean expression using and/or/not (no ^ operator).\nexactly_one_discount = ???\n\nprint(\"exactly_one_discount:\", exactly_one_discount)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_truthTableRows.py",
+      "content": "# Goal: Compute specific rows of a truth table.\n# Expected outcome:\n# It prints exactly:\n# row1: True\n# row2: False\n# row3: True\n\n# Define A, B values for each row and compute expr = (A and not B) or (not A and B)\n# TODO: Fill in A/B and expr for each row.\n\n# Row 1: A=True, B=False\nA1 = ???\nB1 = ???\nrow1 = ???\n\n# Row 2: A=True, B=True\nA2 = ???\nB2 = ???\nrow2 = ???\n\n# Row 3: A=False, B=True\nA3 = ???\nB3 = ???\nrow3 = ???\n\nprint(\"row1:\", row1)\nprint(\"row2:\", row2)\nprint(\"row3:\", row3)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_deMorganPractice.py",
+      "content": "# Goal: Use De Morgan's laws to create equivalent boolean expressions.\n# Expected outcome:\n# It prints exactly:\n# original: False\n# equivalent: False\n# match: True\n\nis_hungry = True\nhas_food = True\nhas_time = False\n\n# original means: NOT (has_food AND has_time)\noriginal = ???\n\n# equivalent should be written WITHOUT a leading NOT applied to parentheses.\n# Use only 'not' directly on variables and 'and'/'or'.\nequivalent = ???\n\nmatch = (original == equivalent)\n\nprint(\"original:\", original)\nprint(\"equivalent:\", equivalent)\nprint(\"match:\", match)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_booleanExpressionValidator.py",
+      "content": "# Goal: Implement a boolean decision function using multiple conditions.\n# Expected outcome:\n# Running this file prints exactly:\n# True\n# False\n# False\n# True\n\ndef is_password_acceptable(pw: str) -> bool:\n    \"\"\"Return True only if all rules pass:\n    - length is at least 8\n    - contains at least one digit\n    - does NOT contain any spaces\n    - is not exactly \"password\" (case-sensitive)\n    \"\"\"\n    # TODO: Implement using boolean expressions.\n    has_min_len = ???\n    has_digit = ???\n    has_space = ???\n    is_banned = ???\n\n    acceptable = ???\n    return acceptable\n\nprint(is_password_acceptable(\"tiger123\"))     # True\nprint(is_password_acceptable(\"password\"))     # False\nprint(is_password_acceptable(\"no digits\"))    # False\nprint(is_password_acceptable(\"abc123 45\"))    # True\n"
+    }
+  ]
+}

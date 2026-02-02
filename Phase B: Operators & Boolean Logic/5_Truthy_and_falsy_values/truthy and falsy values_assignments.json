@@ -1,0 +1,55 @@
+{
+  "topic": "truthy and falsy values",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_falsyNumbers.py",
+      "content": "# Task: Determine whether each value is truthy or falsy.\n# Complete the code so it prints exactly one line: \"FALSY\"\n\nvalue = 0\n\nif __:\n    print(\"TRUTHY\")\nelse:\n    print(\"FALSY\")\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_emptyStringCheck.py",
+      "content": "# Task: Treat empty strings as falsy.\n# Complete the condition so it prints exactly: \"EMPTY\"\n\ntext = \"\"\n\nif __:\n    print(\"NONEMPTY\")\nelse:\n    print(\"EMPTY\")\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_noneCheck.py",
+      "content": "# Task: Differentiate None from other values.\n# Complete the code so it prints exactly: \"NO VALUE\"\n\nresult = None\n\nif __:\n    print(\"HAS VALUE\")\nelse:\n    print(\"NO VALUE\")\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_emptyContainers.py",
+      "content": "# Task: Empty containers are falsy.\n# Complete the condition so it prints exactly: \"NO ITEMS\"\n\nitems = []\n\nif __:\n    print(\"HAS ITEMS\")\nelse:\n    print(\"NO ITEMS\")\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_lenVsTruthiness.py",
+      "content": "# Task: Use truthiness (not len(...) == 0) to decide.\n# Fill in the blanks so the program prints exactly:\n# \"READY\"\n\nqueue = [\"job1\"]\n\n# Do not change the print statements.\nif __:\n    print(\"READY\")\nelse:\n    print(\"IDLE\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_defaultWithOr.py",
+      "content": "# Task: Use 'or' to supply a default when a value is falsy.\n# Complete the code so it prints exactly:\n# \"Hello, stranger\"\n\nname = \"\"\n\nfinal_name = __\nprint(\"Hello, \" + final_name)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_andOrPrecedence.py",
+      "content": "# Task: Use parentheses to get the intended result.\n# Fill in the expression so it prints exactly:\n# \"ACCESS GRANTED\"\n\nis_admin = False\nhas_ticket = True\nis_banned = False\n\n# Rule: grant access if (is_admin OR has_ticket) AND NOT is_banned\nif __:\n    print(\"ACCESS GRANTED\")\nelse:\n    print(\"ACCESS DENIED\")\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_allAnyValidation.py",
+      "content": "# Task: Validate required fields using truthiness with all().\n# Complete the code so it prints exactly:\n# \"VALID\"\n\nusername = \"alice\"\nemail = \"alice@example.com\"\npassword = \"secret\"\n\nrequired = [username, email, password]\n\nif __:\n    print(\"VALID\")\nelse:\n    print(\"INVALID\")\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_customTruthiness.py",
+      "content": "# Task: Implement custom truthiness.\n# Complete __bool__ so that:\n# - A Cart is truthy when it has at least 1 item.\n# - A Cart is falsy when it has 0 items.\n# Expected output (2 lines) must be exactly:\n# \"EMPTY\"\n# \"NOT EMPTY\"\n\nclass Cart:\n    def __init__(self, items):\n        self.items = items\n\n    def __bool__(self):\n        __\n\nc1 = Cart([])\nc2 = Cart([\"apple\"])\n\nprint(\"NOT EMPTY\" if c1 else \"EMPTY\")\nprint(\"NOT EMPTY\" if c2 else \"EMPTY\")\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_filterTruthyValues.py",
+      "content": "# Task: Filter out falsy values while keeping truthy ones, preserving order.\n# Falsy values in Python include: 0, 0.0, \"\", [], {}, set(), None, False\n# Complete the function so that the program prints exactly:\n# \"[1, 'hi', [0], True, {'x': 1}]\"\n\ndef keep_truthy(values):\n    kept = []\n    for v in values:\n        if __:\n            __\n    return kept\n\ndata = [0, 1, \"\", \"hi\", [], [0], None, False, True, {}, {\"x\": 1}]\nprint(keep_truthy(data))\n"
+    }
+  ]
+}

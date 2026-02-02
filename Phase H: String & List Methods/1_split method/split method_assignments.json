@@ -1,0 +1,55 @@
+{
+  "topic": "split method",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_splitWordsBasics.py",
+      "content": "# Split a sentence into words and print the resulting list.\n# Expected outcome: prints ['Python', 'is', 'fun']\n\nsentence = \"Python is fun\"\nwords = sentence.___()\nprint(words)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_splitCsvToInts.py",
+      "content": "# Split a comma-separated string into integers and print the sum.\n# Expected outcome: prints 60\n\nnums = \"10,20,30\"\nparts = nums.split(___)\n# Convert parts to integers and sum them\ntotal = ___\nprint(total)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_splitWithExtraSpaces.py",
+      "content": "# Split a string with irregular spacing into words (ignore extra spaces).\n# Expected outcome: prints ['Too', 'many', 'spaces']\n\ntext = \"  Too   many   spaces  \"\nwords = text.___()\nprint(words)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_splitLinesCount.py",
+      "content": "# Split a multi-line string into lines and print the number of lines.\n# Expected outcome: prints 3\n\ndata = \"first line\\nsecond line\\nthird line\"\nlines = data.split(___)\nprint(len(lines))\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_splitKeyValuePairs.py",
+      "content": "# Parse a key=value pair and print \"key -> value\".\n# Expected outcome: prints mode -> debug\n\npair = \"mode=debug\"\nkey, value = pair.split(___)\nprint(f\"{key} -> {value}\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_splitOnceMaxsplit.py",
+      "content": "# Split only on the first colon and keep the rest intact.\n# Expected outcome: prints header | a:b:c\n\ns = \"header:a:b:c\"\nleft, right = s.split(___, ___)\nprint(left, \"|\", right)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_splitPathAndGetFilename.py",
+      "content": "# Split a file path by '/' and print only the filename.\n# Expected outcome: prints notes.txt\n\npath = \"/home/alex/docs/notes.txt\"\nparts = path.split(___)\nfilename = ___\nprint(filename)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_splitAndFilterEmpty.py",
+      "content": "# Split a string by ',' and remove empty fields.\n# Expected outcome: prints ['a', 'b', 'c']\n\ns = \"a,,b,,,c,\"\nraw = s.split(___)\nfiltered = [item for item in raw if ___]\nprint(filtered)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_splitLogLineExtractFields.py",
+      "content": "# Parse a log line and extract date, level, and message.\n# Expected outcome: prints 2026-02-02 WARNING Disk almost full\n\nlog = \"2026-02-02|WARNING|Disk almost full\"\nparts = log.split(___)\n# Assign date, level, message from parts\ndate = ___\nlevel = ___\nmessage = ___\nprint(date, level, message)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_splitSemicolonRecordsBuildDict.py",
+      "content": "# Parse multiple records separated by ';' where each record is key:value.\n# Build a dictionary and print it.\n# Expected outcome: prints {'name': 'Ada', 'lang': 'Python', 'year': '2026'}\n\ntext = \"name:Ada;lang:Python;year:2026\"\nrecords = text.split(___)\nresult = {}\nfor rec in records:\n    key, value = rec.split(___)\n    # store into result\n    ___\nprint(result)\n"
+    }
+  ]
+}

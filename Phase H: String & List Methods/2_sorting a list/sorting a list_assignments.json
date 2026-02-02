@@ -1,0 +1,55 @@
+{
+  "topic": "sorting a list",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_sortAscendingBasics.py",
+      "content": "# Goal: Sort a list of integers in ascending order using the built-in sort.\n# Expected outcome: After running, nums must become [1, 2, 3, 4, 5].\n\nnums = [5, 1, 4, 2, 3]\n\n# TODO: sort nums in-place in ascending order\n\nprint(nums)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_sortDescendingBasics.py",
+      "content": "# Goal: Sort a list of integers in descending order.\n# Expected outcome: After running, nums must become [9, 7, 5, 3, 1].\n\nnums = [1, 9, 3, 7, 5]\n\n# TODO: sort nums in descending order (in-place or by creating a new list)\n\nprint(nums)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_sortedDoesNotMutate.py",
+      "content": "# Goal: Use sorted() without mutating the original list.\n# Expected outcome:\n# - original must print as [3, 1, 2]\n# - new_list must print as [1, 2, 3]\n\noriginal = [3, 1, 2]\n\n# TODO: create new_list as a sorted version of original without changing original\n\nprint(original)\nprint(new_list)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_sortStringsCaseInsensitive.py",
+      "content": "# Goal: Sort strings alphabetically ignoring case.\n# Expected outcome: names must become ['alice', 'Bob', 'carol', 'Dave'].\n\nnames = ['Bob', 'alice', 'Dave', 'carol']\n\n# TODO: sort names in-place, case-insensitive\n# Hint: use key=...\n\nprint(names)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_sortByLengthThenAlpha.py",
+      "content": "# Goal: Sort words by length ascending, then alphabetically for ties.\n# Expected outcome: words must become ['an', 'to', 'bee', 'ant', 'zoo', 'apple'].\n\nwords = ['apple', 'bee', 'an', 'zoo', 'ant', 'to']\n\n# TODO: sort words with a key that sorts by (length, word)\n\nprint(words)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_sortListOfTuples.py",
+      "content": "# Goal: Sort a list of (name, score) tuples by score descending.\n# Expected outcome: results must become [('Cara', 99), ('Ava', 88), ('Ben', 75), ('Dan', 75)].\n# Note: For equal scores, preserve original order among ties (stable sort).\n\nresults = [('Ava', 88), ('Ben', 75), ('Cara', 99), ('Dan', 75)]\n\n# TODO: sort results in-place by score descending using a key\n\nprint(results)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_sortListOfDictsMultiKey.py",
+      "content": "# Goal: Sort a list of dictionaries by last name A-Z, then by age ascending.\n# Expected outcome: people must become:\n# [{'first': 'Ian', 'last': 'Chen', 'age': 20},\n#  {'first': 'Mia', 'last': 'Chen', 'age': 22},\n#  {'first': 'Ava', 'last': 'Ng', 'age': 19},\n#  {'first': 'Zoe', 'last': 'Ng', 'age': 25}]\n\npeople = [\n    {'first': 'Zoe', 'last': 'Ng', 'age': 25},\n    {'first': 'Mia', 'last': 'Chen', 'age': 22},\n    {'first': 'Ava', 'last': 'Ng', 'age': 19},\n    {'first': 'Ian', 'last': 'Chen', 'age': 20},\n]\n\n# TODO: sort people in-place by (last, age)\n\nprint(people)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_customComparatorWithCmpToKey.py",
+      "content": "# Goal: Sort version strings correctly (e.g., '1.10' > '1.2').\n# Expected outcome: versions_sorted must be ['1.2', '1.9', '1.10', '2.0'].\n# Constraint: Implement comparison via a comparator function and cmp_to_key.\n\nfrom functools import cmp_to_key\n\nversions = ['1.9', '1.10', '1.2', '2.0']\n\ndef compare_versions(a, b):\n    # TODO: return -1 if a<b, 0 if a==b, 1 if a>b using numeric comparison of dot parts\n    pass\n\n# TODO: create versions_sorted using sorted() + cmp_to_key(compare_versions)\n\nprint(versions_sorted)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_sortOnlySubsetInPlace.py",
+      "content": "# Goal: Sort only the middle slice of a list, leaving ends untouched.\n# Task: Sort indices 2 through 6 inclusive in ascending order.\n# Expected outcome: nums must become [100, 50, 1, 2, 3, 4, 9, 8, 7].\n\nnums = [100, 50, 4, 3, 2, 1, 9, 8, 7]\n\nstart = 2\nend_inclusive = 6\n\n# TODO:\n# 1) extract the sublist nums[start:end_inclusive+1]\n# 2) sort it ascending\n# 3) put it back into nums in the same positions\n\nprint(nums)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_implementStableSortByKey.py",
+      "content": "# Goal: Implement a stable sort (do not use list.sort() or sorted()).\n# Task: Write stable_sort_by_key(items, key_func) that returns a NEW list.\n# Constraint: Must be stable (original order preserved for equal keys).\n# Hint: Implement merge sort.\n# Expected outcome:\n# When sorting by score ascending, the returned list must be:\n# [('Ben', 2), ('Dan', 2), ('Ava', 3), ('Cara', 3)]\n# (Ben must stay before Dan; Ava must stay before Cara).\n\ndef stable_sort_by_key(items, key_func):\n    # TODO: implement stable merge sort that uses key_func\n    # Do NOT mutate the input list.\n    pass\n\npairs = [('Ava', 3), ('Ben', 2), ('Cara', 3), ('Dan', 2)]\n\n# TODO: call stable_sort_by_key with key_func that extracts the score\nsorted_pairs = None\n\nprint(sorted_pairs)\n"
+    }
+  ]
+}

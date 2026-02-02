@@ -1,0 +1,55 @@
+{
+  "topic": "types",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_typeOfLiterals.py",
+      "content": "# Goal: Practice identifying basic Python types with type().\n# Expected outcome: Running this file prints four lines exactly:\n# <class 'int'>\n# <class 'float'>\n# <class 'str'>\n# <class 'bool'>\n\n# TODO: Create variables a, b, c, d assigned to an int, float, str, and bool literal.\n\na = \nb = \nc = \nd = \n\nprint(type(a))\nprint(type(b))\nprint(type(c))\nprint(type(d))\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_convertNumericStrings.py",
+      "content": "# Goal: Convert strings to numeric types using int() and float().\n# Expected outcome: Running this file prints two lines exactly:\n# 17\n# 17.5\n\ns1 = \"17\"\ns2 = \"17.5\"\n\n# TODO: Convert s1 to an int in n1 and s2 to a float in n2.\nn1 = \nn2 = \n\nprint(n1)\nprint(n2)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_boolFromValues.py",
+      "content": "# Goal: Understand truthiness by converting values to bool.\n# Expected outcome: Running this file prints three lines exactly:\n# False\n# False\n# True\n\n# TODO: Assign v1 to 0, v2 to an empty string, v3 to a non-empty list.\nv1 = \nv2 = \nv3 = \n\nprint(bool(v1))\nprint(bool(v2))\nprint(bool(v3))\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_typeCastingAndArithmetic.py",
+      "content": "# Goal: Combine casting and arithmetic.\n# Expected outcome: Running this file prints one line exactly:\n# 26\n\nx = \"10\"\ny = 3\nz = \"4\"\n\n# TODO: Convert x and z to integers and compute result = int(x) * y - int(z)\nresult = \n\nprint(result)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_listAndTupleBasics.py",
+      "content": "# Goal: Work with list and tuple types and index access.\n# Expected outcome: Running this file prints two lines exactly:\n# <class 'list'>\n# green\n\ncolors_list = [\"red\", \"green\", \"blue\"]\n\n# TODO: Create colors_tuple as a tuple with the same three items in the same order.\ncolors_tuple = \n\nprint(type(colors_list))\n# TODO: Print the second item from colors_tuple.\nprint(\n)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_dictAccessAndTypes.py",
+      "content": "# Goal: Use dictionaries and inspect value types.\n# Expected outcome: Running this file prints three lines exactly:\n# Ada\n# 36\n# <class 'int'>\n\nperson = {\n    \"name\": \"Ada\",\n    \"age\": 36,\n    \"is_engineer\": True\n}\n\n# TODO: Print the name.\nprint(\n)\n\n# TODO: Print the age.\nprint(\n)\n\n# TODO: Print the type of the age value.\nprint(\n)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_setUniqueness.py",
+      "content": "# Goal: Use a set to remove duplicates and check its length.\n# Expected outcome: Running this file prints one line exactly:\n# 4\n\nitems = [\"apple\", \"banana\", \"apple\", \"orange\", \"banana\", \"pear\"]\n\n# TODO: Convert items to a set named unique_items.\nunique_items = \n\n# TODO: Print the number of unique items.\nprint(\n)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_parseMixedInput.py",
+      "content": "# Goal: Parse a mixed string into different types.\n# Expected outcome: Running this file prints three lines exactly:\n# 42\n# 3.14\n# True\n\nraw = \"42,3.14,True\"\n\n# TODO: Split raw by ',' into three parts.\nparts = \n\n# TODO: Convert parts[0] to int, parts[1] to float, and parts[2] to a boolean.\n# Note: parts[2] will be the string \"True\" or \"False\".\na = \nb = \nc = \n\nprint(a)\nprint(b)\nprint(c)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_mutableVsImmutable.py",
+      "content": "# Goal: Observe mutability differences between list and tuple using id().\n# Expected outcome: Running this file prints two lines:\n# Line 1: True\n# Line 2: False\n# (Meaning: the list keeps the same id after mutation; the tuple gets a new id after \"modification\".)\n\nnums_list = [1, 2, 3]\nnums_tuple = (1, 2, 3)\n\nlist_id_before = id(nums_list)\n# TODO: Mutate the list in-place so it becomes [1, 2, 3, 4].\n\nlist_id_after = id(nums_list)\n\n# For tuple, you cannot mutate in-place; you must create a new tuple.\ntuple_id_before = id(nums_tuple)\n# TODO: Create a new tuple assigned back to nums_tuple so it becomes (1, 2, 3, 4).\n\ntuple_id_after = id(nums_tuple)\n\nprint(list_id_before == list_id_after)\nprint(tuple_id_before == tuple_id_after)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_typeValidationFunction.py",
+      "content": "# Goal: Write a function that validates types and returns specific strings.\n# Expected outcome: Running this file prints exactly:\n# ok:int\n# ok:float\n# error:expected number\n# ok:bool\n# error:expected number\n#\n# Rules for classify_number(value):\n# - If value is an int (but NOT a bool), return \"ok:int\"\n# - If value is a float, return \"ok:float\"\n# - If value is a bool, return \"ok:bool\"\n# - Otherwise return \"error:expected number\"\n\ndef classify_number(value):\n    # TODO: Implement using type checks.\n    return \n\nprint(classify_number(5))\nprint(classify_number(2.5))\nprint(classify_number(\"3\"))\nprint(classify_number(True))\nprint(classify_number(None))\n"
+    }
+  ]
+}

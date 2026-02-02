@@ -1,0 +1,55 @@
+{
+  "topic": "nested for loop",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_nestedLoops_rowStars.py",
+      "content": "# Goal: Use nested for loops to build a rectangle of stars.\n# Expected outcome when rows=3 and cols=5:\n# *****\n# *****\n# *****\n\nrows = 3\ncols = 5\n\noutput_lines = []\n\n# TODO: Use a nested for loop.\n# Outer loop: each row\n# Inner loop: each column\n# Build each line as a string of '*' and append to output_lines\n\n\nresult = \"\\n\".join(output_lines)\nprint(result)"
+    },
+    {
+      "index": 2,
+      "fileName": "02_nestedLoops_gridCoordinates.py",
+      "content": "# Goal: Print grid coordinates using nested loops.\n# Expected outcome when width=3 and height=2:\n# (0,0) (1,0) (2,0)\n# (0,1) (1,1) (2,1)\n\nwidth = 3\nheight = 2\n\nlines = []\n\n# TODO: Use nested loops over y then x.\n# For each row y, create a line with coordinates separated by a single space.\n# Append each completed line to lines.\n\n\nprint(\"\\n\".join(lines))"
+    },
+    {
+      "index": 3,
+      "fileName": "03_nestedLoops_multiplicationTable.py",
+      "content": "# Goal: Build a multiplication table (1..n) as aligned rows.\n# Expected outcome when n=4 (each number width=2):\n#  1  2  3  4\n#  2  4  6  8\n#  3  6  9 12\n#  4  8 12 16\n\nn = 4\ncell_width = 2\n\ntable_lines = []\n\n# TODO: Use nested loops for row and col from 1..n.\n# Compute row*col and format each cell right-aligned to cell_width.\n# Separate cells with a single space.\n\n\nprint(\"\\n\".join(table_lines))"
+    },
+    {
+      "index": 4,
+      "fileName": "04_nestedLoops_rightTriangleNumbers.py",
+      "content": "# Goal: Print a right triangle of increasing numbers per row.\n# Expected outcome when rows=5:\n# 1\n# 12\n# 123\n# 1234\n# 12345\n\nrows = 5\n\nlines = []\n\n# TODO: Use nested loops.\n# Outer loop for each row i (1..rows)\n# Inner loop to append numbers 1..i into a string.\n\n\nprint(\"\\n\".join(lines))"
+    },
+    {
+      "index": 5,
+      "fileName": "05_nestedLoops_checkerboard.py",
+      "content": "# Goal: Create a checkerboard pattern using nested loops.\n# Use 'X' and '.' alternating by (row+col) parity.\n# Expected outcome when size=5:\n# X.X.X\n# .X.X.\n# X.X.X\n# .X.X.\n# X.X.X\n\nsize = 5\n\nlines = []\n\n# TODO: Use nested loops over r and c from 0..size-1.\n# If (r + c) is even -> 'X' else '.'\n# Build each row string and append to lines.\n\n\nprint(\"\\n\".join(lines))"
+    },
+    {
+      "index": 6,
+      "fileName": "06_nestedLoops_countVowelsPerWord.py",
+      "content": "# Goal: Count vowels in each word using nested loops.\n# Expected outcome for the given sentence:\n# [('I', 1), ('love', 2), ('Python', 1)]\n\nsentence = \"I love Python\"\nvowels = \"aeiouAEIOU\"\n\nwords = sentence.split()\nresults = []\n\n# TODO: Use an outer loop over words and an inner loop over characters.\n# Count characters that are in vowels.\n# Append (word, count) tuples to results.\n\n\nprint(results)"
+    },
+    {
+      "index": 7,
+      "fileName": "07_nestedLoops_matrixTranspose.py",
+      "content": "# Goal: Compute the transpose of a matrix using nested loops.\n# Expected outcome for matrix below:\n# [[1, 4],\n#  [2, 5],\n#  [3, 6]]\n\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6]\n]\n\nrows = len(matrix)\ncols = len(matrix[0])\n\ntranspose = []\n\n# TODO: Use nested loops.\n# Outer loop should iterate over column index (0..cols-1).\n# Inner loop should iterate over row index (0..rows-1).\n# Build each transposed row and append to transpose.\n\n\nprint(transpose)"
+    },
+    {
+      "index": 8,
+      "fileName": "08_nestedLoops_findPairsWithSum.py",
+      "content": "# Goal: Find all unique index pairs (i, j) with i < j such that nums[i] + nums[j] == target.\n# Expected outcome for nums and target below (pairs of indices):\n# [(0, 3), (1, 2)]\n\nnums = [2, 7, 5, 0]\ntarget = 2\n\npairs = []\n\n# TODO: Use nested loops with i from 0..len(nums)-1 and j from i+1..len(nums)-1.\n# If nums[i] + nums[j] equals target, append (i, j) to pairs.\n\n\nprint(pairs)"
+    },
+    {
+      "index": 9,
+      "fileName": "09_nestedLoops_histogramFromMatrix.py",
+      "content": "# Goal: Build a frequency dictionary of numbers in a 2D grid using nested loops.\n# Expected outcome for grid below:\n# {1: 2, 2: 3, 3: 1}\n\ngrid = [\n    [1, 2, 2],\n    [3, 1, 2]\n]\n\nfreq = {}\n\n# TODO: Use nested loops over rows and values.\n# Update freq counts for each number.\n\n\nprint(freq)"
+    },
+    {
+      "index": 10,
+      "fileName": "10_nestedLoops_pascalsTriangle.py",
+      "content": "# Goal: Generate Pascal's triangle with nested loops.\n# Build a list of lists, where each row is computed from the previous row.\n# Expected outcome when n=6:\n# [[1],\n#  [1, 1],\n#  [1, 2, 1],\n#  [1, 3, 3, 1],\n#  [1, 4, 6, 4, 1],\n#  [1, 5, 10, 10, 5, 1]]\n\nn = 6\n\ntriangle = []\n\n# TODO: Use an outer loop to build each row index r from 0..n-1.\n# Each row starts and ends with 1.\n# For middle positions, use values from the previous row:\n# prev[c-1] + prev[c]\n# Use an inner loop to fill the middle values.\n\n\nprint(triangle)"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "topic": "iterating over list",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_printAllItems.py",
+      "content": "# Iterate over a list and print each item on its own line.\n# Expected outcome:\n# apple\n# banana\n# cherry\n\nfruits = [\"apple\", \"banana\", \"cherry\"]\n\n# TODO: write a for-loop that prints each fruit\nfor ____ in ____:\n    print(____)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_printWithIndexStart1.py",
+      "content": "# Print each item with a 1-based index prefix.\n# Expected outcome:\n# 1: red\n# 2: green\n# 3: blue\n\ncolors = [\"red\", \"green\", \"blue\"]\n\n# TODO: iterate using a counter starting at 1\nindex = ____\nfor color in ____:\n    print(str(index) + \": \" + ____)\n    index = ____\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_sumNumbers.py",
+      "content": "# Sum all numbers in the list and print the total.\n# Expected outcome:\n# 15\n\nnums = [1, 2, 3, 4, 5]\n\ntotal = ____\nfor n in ____:\n    total = ____\n\nprint(total)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_countLongWords.py",
+      "content": "# Count how many words have length >= 5 and print the count.\n# Expected outcome:\n# 3\n\nwords = [\"tree\", \"apple\", \"sun\", \"water\", \"stone\"]\n\ncount = ____\nfor w in ____:\n    if ____:\n        count = ____\n\nprint(count)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_collectSquares.py",
+      "content": "# Create a new list containing squares of the numbers and print it.\n# Expected outcome:\n# [1, 4, 9, 16]\n\nnums = [1, 2, 3, 4]\n\nsquares = ____\nfor n in ____:\n    squares.append(____)\n\nprint(squares)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_filterEvens.py",
+      "content": "# Build a list of only the even numbers from nums and print it.\n# Expected outcome:\n# [2, 4, 6]\n\nnums = [1, 2, 3, 4, 5, 6]\n\nevens = ____\nfor n in ____:\n    if ____:\n        evens.append(____)\n\nprint(evens)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_findFirstMatch.py",
+      "content": "# Find the first number greater than 10 and print it.\n# Expected outcome:\n# 12\n\nnums = [3, 7, 9, 12, 15]\n\nresult = None\nfor n in ____:\n    if ____:\n        result = ____\n        break\n\nprint(result)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_joinUppercase.py",
+      "content": "# Convert each word to uppercase, then join them with '-' and print.\n# Expected outcome:\n# CAT-DOG-FISH\n\nanimals = [\"cat\", \"dog\", \"fish\"]\n\nupper_animals = ____\nfor a in ____:\n    upper_animals.append(____)\n\nprint(\"-\".join(upper_animals))\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_runningTotal.py",
+      "content": "# Create a list of running totals and print it.\n# Expected outcome:\n# [2, 5, 9, 10]\n\nnums = [2, 3, 4, 1]\n\nrunning = ____\ntotal = ____\nfor n in ____:\n    total = ____\n    running.append(____)\n\nprint(running)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_iterateByIndex.py",
+      "content": "# Using indices (range and len), print items at even indices (0,2,4,...) each on a new line.\n# Expected outcome:\n# a\n# c\n# e\n\nletters = [\"a\", \"b\", \"c\", \"d\", \"e\"]\n\n# TODO: iterate by index\nfor i in range(____):\n    if ____:\n        print(letters[____])\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_swapPairsInPlace.py",
+      "content": "# Swap items in pairs in-place: (0 with 1), (2 with 3), ... then print the list.\n# Expected outcome:\n# [\"b\", \"a\", \"d\", \"c\", \"e\"]\n\nitems = [\"a\", \"b\", \"c\", \"d\", \"e\"]\n\n# TODO: swap adjacent pairs using indices\nfor i in range(____, ____, ____):\n    # swap items[i] and items[i+1]\n    items[i], items[i + 1] = ____, ____\n\nprint(items)\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_nestedListSumRows.py",
+      "content": "# For each row (sub-list), compute its sum and collect into a new list, then print.\n# Expected outcome:\n# [6, 9, 6]\n\nmatrix = [\n    [1, 2, 3],\n    [4, 5],\n    [6]\n]\n\nrow_sums = ____\nfor row in ____:\n    s = ____\n    for value in ____:\n        s = ____\n    row_sums.append(____)\n\nprint(row_sums)\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_flattenList.py",
+      "content": "# Flatten a list of lists into a single list in order and print it.\n# Expected outcome:\n# [1, 2, 3, 4, 5, 6]\n\nnested = [[1, 2], [3], [4, 5, 6]]\n\nflat = ____\nfor sub in ____:\n    for x in ____:\n        flat.append(____)\n\nprint(flat)\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_uniquePreserveOrder.py",
+      "content": "# Create a new list with duplicates removed, preserving the first occurrence order.\n# Print the resulting list.\n# Expected outcome:\n# [\"a\", \"b\", \"c\", \"d\"]\n\nitems = [\"a\", \"b\", \"a\", \"c\", \"b\", \"d\", \"d\"]\n\nunique = ____\nseen = ____\nfor item in ____:\n    if ____:\n        unique.append(____)\n        seen.add(____)\n\nprint(unique)\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_groupConsecutiveRuns.py",
+      "content": "# Group consecutive equal values into runs (a list of lists) and print it.\n# Example: [1,1,2,2,2,3,1,1] -> [[1,1],[2,2,2],[3],[1,1]]\n# Expected outcome:\n# [[1, 1], [2, 2, 2], [3], [1, 1]]\n\nnums = [1, 1, 2, 2, 2, 3, 1, 1]\n\nruns = ____\ncurrent_run = ____\n\nfor n in ____:\n    if current_run == [] or ____:\n        current_run.append(____)\n    else:\n        runs.append(____)\n        current_run = [____]\n\n# TODO: after the loop, append the last run if needed\nif ____:\n    runs.append(____)\n\nprint(runs)\n"
+    }
+  ]
+}

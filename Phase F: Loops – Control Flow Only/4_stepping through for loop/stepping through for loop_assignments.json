@@ -1,0 +1,55 @@
+{
+  "topic": "stepping through for loop",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_countUpBasics.py",
+      "content": "# Goal: Step through a simple for loop and print each value.\n# Expected outcome (exact lines):\n# 1\n# 2\n# 3\n# 4\n# 5\n\nfor i in range(____, ____):\n    print(____)"
+    },
+    {
+      "index": 2,
+      "fileName": "02_countDownBasics.py",
+      "content": "# Goal: Step through a for loop that counts down.\n# Expected outcome (exact lines):\n# 5\n# 4\n# 3\n# 2\n# 1\n\nfor i in range(____, ____, ____):\n    print(i)"
+    },
+    {
+      "index": 3,
+      "fileName": "03_sumRunningTotal.py",
+      "content": "# Goal: Step through the loop and track a running total.\n# Expected outcome (exact lines):\n# total: 15\n\ntotal = ____\nfor n in range(1, 6):\n    total = total + ____\nprint(\"total:\", total)"
+    },
+    {
+      "index": 4,
+      "fileName": "04_showIndexAndValue.py",
+      "content": "# Goal: Step through a list with indices and values.\n# Expected outcome (exact lines):\n# 0: red\n# 1: blue\n# 2: green\n\ncolors = [\"red\", \"blue\", \"green\"]\nfor idx in range(____):\n    print(str(idx) + \": \" + ____)"
+    },
+    {
+      "index": 5,
+      "fileName": "05_evenNumbersOnly.py",
+      "content": "# Goal: Step through numbers 1..10 and print only evens.\n# Expected outcome (exact lines):\n# 2\n# 4\n# 6\n# 8\n# 10\n\nfor n in range(____, ____):\n    if ____:\n        print(n)"
+    },
+    {
+      "index": 6,
+      "fileName": "06_breakOnTarget.py",
+      "content": "# Goal: Step through the list and stop when the first 0 is found.\n# Expected outcome (exact lines):\n# checking 3\n# checking 7\n# checking 0\n# found 0 at index 2\n\nnums = [3, 7, 0, 9, 0]\nfor i in range(len(nums)):\n    print(\"checking\", ____)\n    if nums[i] == ____:\n        print(\"found 0 at index\", ____)\n        break"
+    },
+    {
+      "index": 7,
+      "fileName": "07_skipWithContinue.py",
+      "content": "# Goal: Step through 1..7 and skip printing 4 using continue.\n# Expected outcome (exact lines):\n# 1\n# 2\n# 3\n# 5\n# 6\n# 7\n\nfor n in range(____, ____):\n    if n == ____:\n        ____\n    print(n)"
+    },
+    {
+      "index": 8,
+      "fileName": "08_nestedLoopsCoordinates.py",
+      "content": "# Goal: Step through nested loops to print grid coordinates.\n# Expected outcome (exact lines):\n# (0,0)\n# (0,1)\n# (0,2)\n# (1,0)\n# (1,1)\n# (1,2)\n\nfor row in range(____):\n    for col in range(____):\n        print(\"(\" + str(____) + \",\" + str(____) + \")\")"
+    },
+    {
+      "index": 9,
+      "fileName": "09_countVowels.py",
+      "content": "# Goal: Step through each character and count vowels.\n# Expected outcome (exact lines):\n# vowels: 5\n\ntext = \"education\"\nvowels = \"aeiou\"\ncount = ____\nfor ch in text:\n    if ch in ____:\n        count = ____\nprint(\"vowels:\", count)"
+    },
+    {
+      "index": 10,
+      "fileName": "10_traceLoopState.py",
+      "content": "# Goal: Produce a trace log showing step-by-step loop state.\n# Expected outcome (exact lines):\n# i=0 before=1 after=1\n# i=1 before=1 after=2\n# i=2 before=2 after=6\n# i=3 before=6 after=24\n# final: 24\n\n# Rule: On each iteration, multiply result by (i if i > 0 else 1)\n# and print the trace line using the exact format above.\n\nresult = ____\nfor i in range(____):\n    before = ____\n    if i > 0:\n        result = result * ____\n    else:\n        result = result * ____\n    print(\"i=\" + str(i) + \" before=\" + str(before) + \" after=\" + str(result))\nprint(\"final:\", result)"
+    }
+  ]
+}

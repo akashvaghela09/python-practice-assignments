@@ -1,0 +1,80 @@
+{
+  "topic": "function calling function",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_callGreetFromMain.py",
+      "content": "# Task: Create a function greet() that returns the string \"Hello\".\n# Then create a function main() that calls greet() and returns its result.\n# Expected outcome: print(main()) outputs exactly: Hello\n\ndef greet():\n    # TODO: return \"Hello\"\n    pass\n\n\ndef main():\n    # TODO: call greet() and return its value\n    pass\n\n\nprint(main())\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_callWithArgument.py",
+      "content": "# Task: Create a function exclaim(text) that returns text with \"!\" appended.\n# Create a function shout(name) that calls exclaim() with \"Hi, <name>\".\n# Expected outcome: print(shout(\"Ada\")) outputs exactly: Hi, Ada!\n\ndef exclaim(text):\n    # TODO: implement\n    pass\n\n\ndef shout(name):\n    # TODO: call exclaim() with the right base message\n    pass\n\n\nprint(shout(\"Ada\"))\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_chainTwoFunctions.py",
+      "content": "# Task: Implement strip_spaces(s) that removes leading/trailing spaces.\n# Implement normalize_name(s) that calls strip_spaces(s) and then uppercases the result.\n# Expected outcome: print(normalize_name(\"  grace  \")) outputs exactly: GRACE\n\ndef strip_spaces(s):\n    # TODO: return s without leading/trailing spaces\n    pass\n\n\ndef normalize_name(s):\n    # TODO: call strip_spaces(s) then uppercase\n    pass\n\n\nprint(normalize_name(\"  grace  \"))\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_helperForMath.py",
+      "content": "# Task: Create a function square(n) that returns n*n.\n# Create a function sum_of_squares(a, b) that calls square() for each and adds results.\n# Expected outcome: print(sum_of_squares(3, 4)) outputs exactly: 25\n\ndef square(n):\n    # TODO\n    pass\n\n\ndef sum_of_squares(a, b):\n    # TODO: use square(a) and square(b)\n    pass\n\n\nprint(sum_of_squares(3, 4))\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_validationHelper.py",
+      "content": "# Task: Implement is_even(n) to return True if n is even.\n# Implement describe_parity(n) that calls is_even(n) and returns \"even\" or \"odd\".\n# Expected outcome: print(describe_parity(7)) outputs exactly: odd\n\ndef is_even(n):\n    # TODO\n    pass\n\n\ndef describe_parity(n):\n    # TODO: call is_even(n)\n    pass\n\n\nprint(describe_parity(7))\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_nestedCallsInExpression.py",
+      "content": "# Task: Implement add(a, b) that returns a + b.\n# Implement double(n) that returns n * 2.\n# Implement compute(a, b, c) that returns double(add(a, b)) + c.\n# Expected outcome: print(compute(2, 3, 4)) outputs exactly: 14\n\ndef add(a, b):\n    # TODO\n    pass\n\n\ndef double(n):\n    # TODO\n    pass\n\n\ndef compute(a, b, c):\n    # TODO: return double(add(a, b)) + c\n    pass\n\n\nprint(compute(2, 3, 4))\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_functionCallsFunctionMultipleTimes.py",
+      "content": "# Task: Implement repeat_char(ch, times) to return ch repeated 'times' times.\n# Implement box_line(width) that calls repeat_char('-', width) and wraps with '+' at ends.\n# Example: width=4 -> \"+----+\"\n# Expected outcome: print(box_line(4)) outputs exactly: +----+\n\ndef repeat_char(ch, times):\n    # TODO\n    pass\n\n\ndef box_line(width):\n    # TODO: call repeat_char('-', width)\n    pass\n\n\nprint(box_line(4))\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_listProcessingWithHelpers.py",
+      "content": "# Task: Implement clamp(n, low, high) to keep n within [low, high].\n# Implement clamp_all(nums, low, high) that calls clamp() for each number and returns a new list.\n# Expected outcome: print(clamp_all([0, 5, 10, -3], 1, 8)) outputs exactly: [1, 5, 8, 1]\n\ndef clamp(n, low, high):\n    # TODO\n    pass\n\n\ndef clamp_all(nums, low, high):\n    # TODO: build and return a new list\n    pass\n\n\nprint(clamp_all([0, 5, 10, -3], 1, 8))\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_stringPipeline.py",
+      "content": "# Task: Implement remove_punctuation(s) that removes ',', '.', '!' characters.\n# Implement collapse_spaces(s) that turns runs of whitespace into a single space.\n# Implement clean_sentence(s) that calls remove_punctuation then collapse_spaces then strips ends.\n# Expected outcome: print(clean_sentence(\" Hi,,  world!!  \")) outputs exactly: Hi world\n\ndef remove_punctuation(s):\n    # TODO\n    pass\n\n\ndef collapse_spaces(s):\n    # TODO\n    pass\n\n\ndef clean_sentence(s):\n    # TODO: call helpers in the correct order\n    pass\n\n\nprint(clean_sentence(\" Hi,,  world!!  \"))\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_returningMultipleValuesToCaller.py",
+      "content": "# Task: Implement min_max(nums) that returns a tuple (min_value, max_value).\n# Implement range_width(nums) that calls min_max(nums) and returns max_value - min_value.\n# Expected outcome: print(range_width([10, 2, 8, 3])) outputs exactly: 8\n\ndef min_max(nums):\n    # TODO\n    pass\n\n\ndef range_width(nums):\n    # TODO: call min_max(nums), unpack result\n    pass\n\n\nprint(range_width([10, 2, 8, 3]))\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_composedBooleanChecks.py",
+      "content": "# Task: Implement has_length_between(s, low, high) inclusive.\n# Implement is_alpha_only(s) to return True if all characters are letters A-Z/a-z.\n# Implement is_valid_username(s) that calls both helpers and returns True only if both pass.\n# Expected outcome: print(is_valid_username(\"AdaLovelace\")) outputs exactly: True\n\ndef has_length_between(s, low, high):\n    # TODO\n    pass\n\n\ndef is_alpha_only(s):\n    # TODO\n    pass\n\n\ndef is_valid_username(s):\n    # TODO: call both helpers\n    pass\n\n\nprint(is_valid_username(\"AdaLovelace\"))\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_recursiveHelperUsedByWrapper.py",
+      "content": "# Task: Implement digit_sum(n) recursively using a helper function.\n# Requirements:\n# - digit_sum(n) must call digit_sum_helper(n) and return its result.\n# - digit_sum_helper(n) must be recursive (no loops).\n# Expected outcome: print(digit_sum(4096)) outputs exactly: 19\n\ndef digit_sum_helper(n):\n    # TODO: recursive implementation\n    pass\n\n\ndef digit_sum(n):\n    # TODO: call digit_sum_helper(n)\n    pass\n\n\nprint(digit_sum(4096))\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_callingFunctionsAcrossModules.py",
+      "content": "# Task: Complete two functions so one calls the other.\n# You will create a second file named \"utils_math.py\" (not provided here) with:\n#   def multiply(a, b):\n#       ...\n# In THIS file, import multiply and create area_rectangle(w, h) that calls multiply(w, h).\n# Expected outcome: After you also create utils_math.py, running this file prints exactly: 35\n\n# TODO: import multiply from utils_math\n\n\ndef area_rectangle(w, h):\n    # TODO: call multiply(w, h)\n    pass\n\n\nprint(area_rectangle(5, 7))\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_dispatcherFunction.py",
+      "content": "# Task: Implement operation functions and a dispatcher that calls the right one.\n# Implement add(a, b), sub(a, b), mul(a, b).\n# Implement calculate(op, a, b):\n# - if op is \"+\" call add\n# - if op is \"-\" call sub\n# - if op is \"*\" call mul\n# - otherwise return \"unsupported\"\n# Expected outcome: print(calculate(\"*\", 6, 7)) outputs exactly: 42\n\ndef add(a, b):\n    # TODO\n    pass\n\n\ndef sub(a, b):\n    # TODO\n    pass\n\n\ndef mul(a, b):\n    # TODO\n    pass\n\n\ndef calculate(op, a, b):\n    # TODO: dispatch to helper functions\n    pass\n\n\nprint(calculate(\"*\", 6, 7))\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_multiStepComputationWithReuse.py",
+      "content": "# Task: Build a small pricing engine using functions calling functions.\n# Implement:\n# - subtotal(prices): returns sum of list\n# - discount_amount(subtotal_value, percent): percent is like 10 for 10%\n# - tax_amount(amount, percent): same percent format\n# - final_total(prices, discount_percent, tax_percent):\n#     1) compute sub = subtotal(prices)\n#     2) compute disc = discount_amount(sub, discount_percent)\n#     3) compute after_discount = sub - disc\n#     4) compute tax = tax_amount(after_discount, tax_percent)\n#     5) return after_discount + tax\n# Expected outcome: print(final_total([20, 5], 10, 8)) outputs exactly: 24.3\n# Note: Use normal float arithmetic; do not round.\n\ndef subtotal(prices):\n    # TODO\n    pass\n\n\ndef discount_amount(subtotal_value, percent):\n    # TODO\n    pass\n\n\ndef tax_amount(amount, percent):\n    # TODO\n    pass\n\n\ndef final_total(prices, discount_percent, tax_percent):\n    # TODO: call the helpers in the specified order\n    pass\n\n\nprint(final_total([20, 5], 10, 8))\n"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "topic": "sequence operations",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_indexingAndSlicing.py",
+      "content": "# Task: Use indexing and slicing to extract specific parts of a sequence.\n# Expected outcome:\n# - first_char should be 'p'\n# - last_char should be 'n'\n# - middle should be 'ytho'\n\nword = \"python\"\n\nfirst_char = word[__]\nlast_char = word[__]\nmiddle = word[__]\n\nprint(first_char)\nprint(last_char)\nprint(middle)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_stepSlicing.py",
+      "content": "# Task: Use slicing with a step to build derived strings.\n# Expected outcome:\n# - evens should be '02468'\n# - odds should be '13579'\n# - reversed_digits should be '9876543210'\n\ndigits = \"0123456789\"\n\nevens = digits[__]\nodds = digits[__]\nreversed_digits = digits[__]\n\nprint(evens)\nprint(odds)\nprint(reversed_digits)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_concatenationAndRepetition.py",
+      "content": "# Task: Use concatenation (+) and repetition (*) to create a pattern.\n# Expected outcome:\n# - banner should be exactly: '---GO!---'\n\nleft = \"-\" * __\ncenter = \"GO!\" * __\nright = \"-\" * __\n\nbanner = left + center + right\nprint(banner)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_membershipAndCounting.py",
+      "content": "# Task: Use membership (in / not in) and sequence methods for counting.\n# Expected outcome:\n# - has_a should be True\n# - has_z should be False\n# - count_a should be 4\n\ntext = \"bananas and avocados\"\n\nhas_a = __\nhas_z = __\ncount_a = __\n\nprint(has_a)\nprint(has_z)\nprint(count_a)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_findAndReplaceSlices.py",
+      "content": "# Task: Replace a segment using slicing (do not use .replace()).\n# Expected outcome:\n# - fixed should be exactly: 'I like Python!'\n\ns = \"I like Java!\"\n\n# Replace 'Java' with 'Python' using slicing and concatenation.\nstart = __  # index where 'Java' starts\nend = __    # index right after 'Java'\nfixed = s[:start] + __ + s[end:]\n\nprint(fixed)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_listSliceAssignment.py",
+      "content": "# Task: Modify a list using slice assignment.\n# Expected outcome:\n# After modifications, nums should be: [0, 1, 99, 100, 4, 5]\n\nnums = [0, 1, 2, 3, 4, 5]\n\n# Replace the middle two elements (2, 3) with [99, 100]\nnums[__] = __\n\nprint(nums)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_unpackingAndStar.py",
+      "content": "# Task: Use sequence unpacking (including starred unpacking).\n# Expected outcome:\n# - first should be 'red'\n# - middle should be ['green', 'blue']\n# - last should be 'yellow'\n\ncolors = [\"red\", \"green\", \"blue\", \"yellow\"]\n\nfirst, *middle, last = __\n\nprint(first)\nprint(middle)\nprint(last)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_zipAndPairing.py",
+      "content": "# Task: Use zip to create formatted pairs.\n# Expected outcome:\n# pairs should be exactly: ['a:1', 'b:2', 'c:3']\n\nletters = [\"a\", \"b\", \"c\"]\nnums = [1, 2, 3]\n\npairs = []\nfor ltr, num in __:\n    pairs.append(__)\n\nprint(pairs)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_flattenWithExtend.py",
+      "content": "# Task: Flatten a list of lists into a single list (one level deep).\n# Constraints: Do not use sum(...), itertools, or list comprehensions.\n# Expected outcome:\n# flat should be exactly: [1, 2, 3, 4, 5, 6]\n\nmatrix = [[1, 2], [3], [4, 5, 6]]\nflat = []\n\nfor row in __:\n    flat.__\n\nprint(flat)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_sequenceWindowMaxSum.py",
+      "content": "# Task: Compute the maximum sum of any consecutive window of length k.\n# Constraints:\n# - Do not use external libraries.\n# - Use sequence slicing and/or incremental updates.\n# Expected outcome:\n# For the given data and k, max_sum should be 12 (from window [3, 4, 5]).\n\ndata = [1, -2, 3, 4, 5, -1]\nk = 3\n\n# Initialize max_sum appropriately.\nmax_sum = __\n\n# Iterate over all windows and update max_sum.\nfor i in range(__, __):\n    window_sum = __\n    if window_sum > max_sum:\n        max_sum = window_sum\n\nprint(max_sum)\n"
+    }
+  ]
+}

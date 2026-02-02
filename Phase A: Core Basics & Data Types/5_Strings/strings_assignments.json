@@ -1,0 +1,105 @@
+{
+  "topic": "strings",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_helloString.py",
+      "content": "# Goal: Create a string variable and print it exactly.\n# Expected output:\n# Hello, world!\n\nmessage = \"\"\n\nprint(message)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_fullNameConcat.py",
+      "content": "# Goal: Combine first and last name with a single space in between.\n# Expected output:\n# Ada Lovelace\n\nfirst = \"Ada\"\nlast = \"Lovelace\"\n\nfull = None  # TODO: build full name using first and last\nprint(full)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_repeatString.py",
+      "content": "# Goal: Repeat a string a given number of times.\n# Expected output:\n# hahaha\n\nlaugh = \"ha\"\ncount = 3\n\nresult = \"\"  # TODO: use repetition to create the result\nprint(result)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_stringLength.py",
+      "content": "# Goal: Print the number of characters in the string.\n# Expected output:\n# 11\n\ntext = \"hello world\"\n\nlength = 0  # TODO: compute length\nprint(length)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_indexingBasics.py",
+      "content": "# Goal: Print the first and last character separated by a space.\n# Expected output:\n# p n\n\nword = \"python\"\n\nfirst_char = \"\"  # TODO\nlast_char = \"\"   # TODO\nprint(first_char, last_char)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_sliceSubstring.py",
+      "content": "# Goal: Extract and print the substring \"world\" from the text.\n# Expected output:\n# world\n\ntext = \"hello world\"\n\nsub = \"\"  # TODO: slice text to get \"world\"\nprint(sub)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_reverseString.py",
+      "content": "# Goal: Reverse the string and print it.\n# Expected output:\n# nohtyp\n\nword = \"python\"\n\nrev = \"\"  # TODO: reverse using slicing or another approach\nprint(rev)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_countSubstring.py",
+      "content": "# Goal: Count how many times \"na\" appears in the text (non-overlapping) and print the count.\n# Expected output:\n# 2\n\ntext = \"banana\"\n\ncount = 0  # TODO\nprint(count)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_findAndSlice.py",
+      "content": "# Goal: Extract and print the domain part from the email.\n# Expected output:\n# example.com\n\nemail = \"user@example.com\"\n\nat_index = -1  # TODO: find the index of '@'\ndomain = \"\"    # TODO: slice after '@'\nprint(domain)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_stripWhitespace.py",
+      "content": "# Goal: Remove leading and trailing whitespace and print the cleaned string.\n# Expected output:\n# [Python]\n\nraw = \"   Python   \"\n\nclean = raw  # TODO: strip whitespace\nprint(\"[\" + clean + \"]\")\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_replaceCharacters.py",
+      "content": "# Goal: Replace all '-' with '/' and print the result.\n# Expected output:\n# 2026/02/02\n\ndate = \"2026-02-02\"\n\nfixed = \"\"  # TODO\nprint(fixed)\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_caseConversion.py",
+      "content": "# Goal: Print the text in (1) uppercase and (2) lowercase on separate lines.\n# Expected output:\n# PYTHON 101\n# python 101\n\ntext = \"Python 101\"\n\nupper = \"\"  # TODO\nlower = \"\"  # TODO\nprint(upper)\nprint(lower)\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_titleCaseWords.py",
+      "content": "# Goal: Convert the sentence to title case and print it.\n# Expected output:\n# The Quick Brown Fox\n\nsentence = \"the quick brown fox\"\n\ntitled = \"\"  # TODO\nprint(titled)\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_validatePrefixSuffix.py",
+      "content": "# Goal: Print True if the filename ends with '.py' AND starts with 'test_'; otherwise print False.\n# Expected output:\n# True\n\nfilename = \"test_strings.py\"\n\nis_valid = None  # TODO\nprint(is_valid)\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_splitCSVLine.py",
+      "content": "# Goal: Split the CSV line into fields and print them joined by ' | '.\n# Expected output:\n# Ada | Lovelace | 36\n\nline = \"Ada,Lovelace,36\"\n\nparts = []  # TODO: split into a list\nprint(\" | \".join(parts))\n"
+    },
+    {
+      "index": 16,
+      "fileName": "16_joinPathParts.py",
+      "content": "# Goal: Join parts into a URL path with '/' and print it.\n# Expected output:\n# api/v1/users\n\nparts = [\"api\", \"v1\", \"users\"]\n\npath = \"\"  # TODO\nprint(path)\n"
+    },
+    {
+      "index": 17,
+      "fileName": "17_formatUserMessage.py",
+      "content": "# Goal: Use an f-string (or format) to produce the exact message.\n# Expected output:\n# User Ada has 5 new messages.\n\nname = \"Ada\"\nnew_messages = 5\n\nmessage = \"\"  # TODO\nprint(message)\n"
+    },
+    {
+      "index": 18,
+      "fileName": "18_maskCreditCard.py",
+      "content": "# Goal: Mask all but the last 4 digits of the card number with '*'.\n# Keep the length the same as the original string.\n# Expected output:\n# ************1234\n\ncard = \"1234567812341234\"\n\nmasked = \"\"  # TODO\nprint(masked)\n"
+    },
+    {
+      "index": 19,
+      "fileName": "19_extractDigits.py",
+      "content": "# Goal: Extract only digits from the text and print them as one string.\n# Expected output:\n# 15551234\n\ntext = \"Call me at (555) 1234!\"\n\ndigits = \"\"  # TODO: build a string containing only 0-9 characters\nprint(digits)\n"
+    },
+    {
+      "index": 20,
+      "fileName": "20_normalizeSentence.py",
+      "content": "# Goal: Normalize the sentence:\n# 1) remove leading/trailing spaces\n# 2) collapse multiple internal spaces to single spaces\n# 3) make it all lowercase\n# Print the normalized result.\n# Expected output:\n# python is fun\n\nsentence = \"   PYTHON   is   FUN   \"\n\nnormalized = \"\"  # TODO\nprint(normalized)\n"
+    }
+  ]
+}

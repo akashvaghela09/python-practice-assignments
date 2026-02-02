@@ -1,0 +1,55 @@
+{
+  "topic": "lists",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_listCreationAndIndexing.py",
+      "content": "# Create a list of weekdays and print specific items.\n# Expected outcome (exact):\n# Monday\n# Sunday\n\nweekdays = [\n    # TODO: add 7 strings for the days of the week starting with Monday\n]\n\nprint(weekdays[0])\nprint(weekdays[  # TODO: index for Sunday\n])\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_listAppendAndLength.py",
+      "content": "# Build a shopping list using append and print the final list and length.\n# Expected outcome (exact):\n# ['milk', 'bread', 'eggs']\n# 3\n\nshopping = []\n\n# TODO: append 'milk'\n# TODO: append 'bread'\n# TODO: append 'eggs'\n\nprint(shopping)\nprint(len(shopping))\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_listSliceBasics.py",
+      "content": "# Use slicing to extract a sublist.\n# Expected outcome (exact):\n# [20, 30, 40]\n\nnums = [10, 20, 30, 40, 50]\n\nmiddle = nums[  # TODO: slice to get [20, 30, 40]\n]\n\nprint(middle)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_listUpdateAndInsert.py",
+      "content": "# Modify a list using assignment and insert.\n# Expected outcome (exact):\n# ['red', 'blue', 'green', 'yellow']\n\ncolors = ['red', 'blue', 'yellow']\n\n# TODO: insert 'green' so it becomes the third element (index 2)\n# TODO: ensure 'yellow' remains last\n\nprint(colors)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_removeAndPop.py",
+      "content": "# Remove items using remove and pop.\n# Expected outcome (exact):\n# removed: 3\n# remaining: [1, 2, 4]\n\nnums = [1, 2, 3, 4, 3]\n\n# TODO: remove only the FIRST 3 from the list\nremoved = nums.pop(  # TODO: pop the element 3 that is still in the list; store it in removed\n)\n\nprint('removed:', removed)\nprint('remaining:', nums)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_listTraversalAndSum.py",
+      "content": "# Compute the sum of all numbers in a list WITHOUT using sum().\n# Expected outcome (exact):\n# total: 21\n\nnums = [1, 2, 3, 4, 5, 6]\n\ntotal = 0\n# TODO: loop through nums and add each number to total\n\nprint('total:', total)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_filteringWithNewList.py",
+      "content": "# Create a new list containing only even numbers.\n# Do NOT modify the original list.\n# Expected outcome (exact):\n# evens: [2, 4, 6]\n\nnums = [1, 2, 3, 4, 5, 6]\n\nevans = []  # intentionally incorrect variable name to fix\n# TODO: rename the list variable to evens\n# TODO: loop and append only even numbers\n\nprint('evens:', evens)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_listComprehensionTransformation.py",
+      "content": "# Use a list comprehension to convert words to uppercase.\n# Expected outcome (exact):\n# ['PYTHON', 'LISTS', 'ROCK']\n\nwords = ['python', 'lists', 'rock']\n\nupper_words = [\n    # TODO: list comprehension producing uppercase versions\n]\n\nprint(upper_words)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_sortingWithoutMutating.py",
+      "content": "# Sort scores descending WITHOUT changing the original list.\n# Expected outcome (exact):\n# original: [50, 20, 40, 10, 30]\n# sorted: [50, 40, 30, 20, 10]\n\nscores = [50, 20, 40, 10, 30]\n\nsorted_scores = None\n# TODO: create a new list sorted in descending order\n# HINT: use sorted(...) with reverse=True\n\nprint('original:', scores)\nprint('sorted:', sorted_scores)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_nestedListsMatrixRowSums.py",
+      "content": "# Given a 3x3 matrix (nested list), compute the sum of each row.\n# Expected outcome (exact):\n# [6, 15, 24]\n\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\nrow_sums = []\n# TODO: for each row in matrix, compute its sum WITHOUT using sum()\n# TODO: append each row total to row_sums in order\n\nprint(row_sums)\n"
+    }
+  ]
+}

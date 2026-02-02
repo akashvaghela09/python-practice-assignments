@@ -1,0 +1,55 @@
+{
+  "topic": "print",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_printHello.py",
+      "content": "# Goal: Print a single line exactly as shown.\n# Expected output:\n# Hello, world!\n\n# TODO: Write one print statement.\nprint()"
+    },
+    {
+      "index": 2,
+      "fileName": "02_printTwoLines.py",
+      "content": "# Goal: Print two lines in order.\n# Expected output:\n# Line 1\n# Line 2\n\n# TODO: Use two separate print statements.\nprint()\nprint()"
+    },
+    {
+      "index": 3,
+      "fileName": "03_printWithQuotes.py",
+      "content": "# Goal: Print a line that includes double quotes.\n# Expected output:\n# She said, \"Python is fun!\"\n\n# TODO: Print the exact sentence including the quotes.\nprint()"
+    },
+    {
+      "index": 4,
+      "fileName": "04_printWithBackslash.py",
+      "content": "# Goal: Print a Windows-style path with backslashes.\n# Expected output:\n# C:\\Users\\Ava\\Documents\n\n# TODO: Print the exact path.\nprint()"
+    },
+    {
+      "index": 5,
+      "fileName": "05_printNoNewline.py",
+      "content": "# Goal: Print two words on the same line separated by a single space, using two print calls.\n# Expected output:\n# Hello there\n\n# TODO: Use end= so the first print does NOT add a newline.\nprint()\nprint()"
+    },
+    {
+      "index": 6,
+      "fileName": "06_printCustomSeparator.py",
+      "content": "# Goal: Print three numbers separated by ' | ' on one line.\n# Expected output:\n# 1 | 2 | 3\n\n# TODO: Use a single print statement and the sep parameter.\nprint()"
+    },
+    {
+      "index": 7,
+      "fileName": "07_printFormattedNumbers.py",
+      "content": "# Goal: Print a total with exactly 2 digits after the decimal point.\n# Expected output:\n# Total: 19.90\n\ntotal = 19.9\n\n# TODO: Print exactly as shown using formatting (f-string or format).\nprint()"
+    },
+    {
+      "index": 8,
+      "fileName": "08_printAlignedTable.py",
+      "content": "# Goal: Print a simple aligned table with fixed-width columns.\n# Expected output:\n# Item      Qty\n# Apples      3\n# Bananas    12\n\n# TODO: Complete the print statements so the spacing matches exactly.\n# Hint: Use string alignment with a fixed width.\nprint()\nprint()\nprint()"
+    },
+    {
+      "index": 9,
+      "fileName": "09_printProgressLine.py",
+      "content": "# Goal: Print progress updates on the SAME line, ending with a newline at the end.\n# Expected output (what the user sees after the program finishes):\n# Loading... 100%\n\n# TODO: Use carriage return (\\r) and end='' to overwrite the line.\n# TODO: Ensure the final state ends with a newline.\nprint()\nprint()\nprint()"
+    },
+    {
+      "index": 10,
+      "fileName": "10_printAsciiBox.py",
+      "content": "# Goal: Print an ASCII box exactly as shown.\n# Expected output:\n# +----------+\n# |  Python  |\n# +----------+\n\ntext = \"Python\"\n\n# TODO: Build the three lines and print them.\n# Rules:\n# - The top and bottom borders must be exactly 12 characters long.\n# - The middle line must have a single space on both sides of the word.\n# - Do not hardcode the entire final output as one triple-quoted string.\nline1 = \nline2 = \nline3 = \n\nprint(line1)\nprint(line2)\nprint(line3)"
+    }
+  ]
+}

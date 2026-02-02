@@ -1,0 +1,55 @@
+{
+  "topic": "for loop",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_printNumbers.py",
+      "content": "# Print the numbers 1 through 5 (each on its own line) using a for loop.\n# Expected outcome (exactly):\n# 1\n# 2\n# 3\n# 4\n# 5\n\n# TODO: Use a for loop with range(...) to print 1..5\nfor ____ in ____:\n    print(____)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_sumFirstN.py",
+      "content": "# Compute the sum of integers from 1 to n (inclusive) using a for loop.\n# Expected outcome when n = 10: print 55\n\nn = 10\ntotal = 0\n\n# TODO: Add 1..n to total using a for loop\nfor ____ in ____:\n    total = ____\n\nprint(total)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_countVowels.py",
+      "content": "# Count vowels in the given text using a for loop.\n# Vowels are: a, e, i, o, u (both lowercase and uppercase).\n# Expected outcome for the given text: print 5\n\ntext = \"Education\"\nvowels = \"aeiouAEIOU\"\ncount = 0\n\n# TODO: Loop through each character and count vowels\nfor ____ in ____:\n    if ____:\n        count = ____\n\nprint(count)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_multiplicationTable.py",
+      "content": "# Print the 7 times table from 7 x 1 to 7 x 5.\n# Expected outcome (exactly):\n# 7 x 1 = 7\n# 7 x 2 = 14\n# 7 x 3 = 21\n# 7 x 4 = 28\n# 7 x 5 = 35\n\nn = 7\n\n# TODO: Use a for loop to print the lines above\nfor i in ____:\n    product = ____\n    print(f\"{n} x {i} = {product}\")\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_filterEvens.py",
+      "content": "# Build a list containing only the even numbers from nums using a for loop.\n# Expected outcome: print [2, 8, 0, -4]\n\nnums = [3, 2, 5, 8, 1, 0, -4]\nevens = []\n\n# TODO: Append only even numbers to evens\nfor ____ in ____:\n    if ____:\n        evens.____(____)\n\nprint(evens)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_runningTotal.py",
+      "content": "# Create a list of running totals.\n# For example: [2, 5, 3] -> [2, 7, 10]\n# Expected outcome: print [2, 7, 10, 20]\n\nnums = [2, 5, 3, 10]\nrunning = []\ncurrent = 0\n\n# TODO: Use a for loop to build running totals\nfor ____ in ____:\n    current = ____\n    running.append(____)\n\nprint(running)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_nestedGrid.py",
+      "content": "# Use nested for loops to print a 3x4 grid of '*' characters (no spaces).\n# Expected outcome (exactly):\n# ****\n# ****\n# ****\n\nrows = 3\ncols = 4\n\n# TODO: Use nested loops; each row should be printed on its own line\nfor r in ____:\n    line = \"\"\n    for c in ____:\n        line = ____\n    print(____)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_findFirstMultiple.py",
+      "content": "# Find the first number in nums that is a multiple of 7.\n# Use a for loop and stop as soon as you find it.\n# Expected outcome: print 21\n\nnums = [10, 13, 21, 28, 5]\nfound = None\n\n# TODO: Set found to the first multiple of 7 and break\nfor x in ____:\n    if ____:\n        found = ____\n        ____\n\nprint(found)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_wordFrequencies.py",
+      "content": "# Count word frequencies using a for loop.\n# Split on whitespace, treat words as case-insensitive.\n# Expected outcome: print {'to': 3, 'be': 2, 'or': 1}\n\ntext = \"To be or to be to\"\nwords = text.lower().split()\ncounts = {}\n\n# TODO: Use a for loop to count occurrences into the dictionary\nfor w in ____:\n    if ____:\n        counts[w] = ____\n    else:\n        counts[w] = ____\n\nprint(counts)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_primeCounter.py",
+      "content": "# Count how many prime numbers are in the list using for loops.\n# A prime is an integer > 1 with no divisors other than 1 and itself.\n# Expected outcome: print 5\n\nnums = [2, 3, 4, 5, 9, 11, 12, 13]\nprime_count = 0\n\n# TODO: For each number, determine if it's prime using a nested for loop.\n# Hints:\n# - Assume is_prime = True for n > 1\n# - Try divisors from 2 to n-1 (or to int(sqrt(n)) + 1 if you prefer)\n# - If divisible, set is_prime = False and break\nfor n in ____:\n    if n <= 1:\n        continue\n    is_prime = True\n    for d in ____:\n        if ____:\n            is_prime = ____\n            ____\n    if ____:\n        prime_count = ____\n\nprint(prime_count)\n"
+    }
+  ]
+}

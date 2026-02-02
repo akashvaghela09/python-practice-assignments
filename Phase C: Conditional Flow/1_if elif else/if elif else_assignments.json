@@ -1,0 +1,55 @@
+{
+  "topic": "if elif else",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_evenOrOdd.py",
+      "content": "# Goal: Print whether a given integer is Even or Odd.\n# Expected outcome for n=7: Odd\n# Expected outcome for n=12: Even\n\nn = 7\n\n# TODO: Use if/else to print exactly \"Even\" or \"Odd\"\n\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_temperatureCheck.py",
+      "content": "# Goal: Categorize temperature as Cold, Warm, or Hot.\n# Rules:\n# - temp < 15 -> Cold\n# - 15 <= temp <= 25 -> Warm\n# - temp > 25 -> Hot\n# Expected outcome for temp=22: Warm\n\ntemp = 22\n\n# TODO: Use if/elif/else to print exactly one label: Cold, Warm, or Hot\n\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_letterGrade.py",
+      "content": "# Goal: Convert a numeric score (0-100) into a letter grade.\n# Rules:\n# - 90-100: A\n# - 80-89: B\n# - 70-79: C\n# - 60-69: D\n# - 0-59: F\n# Expected outcome for score=83: B\n\nscore = 83\n\n# TODO: Use if/elif/else to print exactly one letter grade\n# NOTE: You may assume score is between 0 and 100 for this assignment.\n\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_smallestOfThree.py",
+      "content": "# Goal: Print the smallest of three numbers.\n# Expected outcome for a=8, b=3, c=5: 3\n\na = 8\nb = 3\nc = 5\n\n# TODO: Use if/elif/else to determine and print the smallest value\n# Constraint: Do not use min().\n\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_triangleType.py",
+      "content": "# Goal: Determine triangle type based on side lengths.\n# Rules:\n# - If any side <= 0 OR triangle inequality fails -> Not a triangle\n# - Else if all three sides equal -> Equilateral\n# - Else if exactly two sides equal -> Isosceles\n# - Else -> Scalene\n# Expected outcome for a=2, b=2, c=3: Isosceles\n\na = 2\nb = 2\nc = 3\n\n# TODO: Use if/elif/else to print exactly one of:\n# \"Not a triangle\", \"Equilateral\", \"Isosceles\", \"Scalene\"\n\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_shippingCost.py",
+      "content": "# Goal: Compute shipping cost based on weight and membership.\n# Rules:\n# - If weight <= 0 -> print \"Invalid weight\"\n# - Else if member is True:\n#     - weight <= 2 -> cost 0\n#     - weight <= 5 -> cost 3\n#     - else -> cost 7\n# - Else (non-member):\n#     - weight <= 2 -> cost 5\n#     - weight <= 5 -> cost 8\n#     - else -> cost 12\n# Expected outcome for weight=4.5, member=False: Shipping cost: 8\n\nweight = 4.5\nmember = False\n\n# TODO: Use if/elif/else to print either:\n# \"Invalid weight\" OR \"Shipping cost: <number>\"\n\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_leapYear.py",
+      "content": "# Goal: Determine whether a year is a leap year.\n# Rules:\n# - divisible by 400 -> Leap\n# - divisible by 100 -> Not Leap\n# - divisible by 4 -> Leap\n# - otherwise -> Not Leap\n# Expected outcome for year=1900: Not Leap\n# Expected outcome for year=2000: Leap\n\nyear = 1900\n\n# TODO: Use if/elif/else (no nested required, but allowed) to print exactly:\n# \"Leap\" or \"Not Leap\"\n\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_loginStatus.py",
+      "content": "# Goal: Print a login status message based on multiple conditions.\n# Rules (in this order):\n# - If username is empty -> \"Missing username\"\n# - Elif password is empty -> \"Missing password\"\n# - Elif locked is True -> \"Account locked\"\n# - Elif username == correct_user AND password == correct_pass -> \"Access granted\"\n# - Else -> \"Access denied\"\n# Expected outcome for username=\"\", password=\"abc\", locked=False: Missing username\n\ncorrect_user = \"admin\"\ncorrect_pass = \"s3cr3t\"\n\nusername = \"\"\npassword = \"abc\"\nlocked = False\n\n# TODO: Use if/elif/else to print exactly one status message\n\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_ticketPrice.py",
+      "content": "# Goal: Calculate ticket price with age and time-based pricing.\n# Rules:\n# - If age < 0 -> print \"Invalid age\"\n# - Else determine base price:\n#     - age <= 12 -> 8\n#     - age <= 64 -> 12\n#     - else -> 9\n# - Then apply time discount:\n#     - if show_time is \"matinee\" -> subtract 2 from base price\n#     - elif show_time is \"evening\" -> no change\n#     - else -> print \"Invalid show time\" (and do not print a price)\n# Expected outcome for age=70, show_time=\"matinee\": Ticket price: 7\n\nage = 70\nshow_time = \"matinee\"  # \"matinee\" or \"evening\"\n\n# TODO: Use if/elif/else to print exactly:\n# \"Invalid age\" OR \"Invalid show time\" OR \"Ticket price: <number>\"\n\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_simpleCalculator.py",
+      "content": "# Goal: Perform a calculation based on an operator and handle errors.\n# Rules:\n# - Supported operators: \"+\", \"-\", \"*\", \"/\"\n# - If operator is not supported -> print \"Unsupported operator\"\n# - For division:\n#     - if b == 0 -> print \"Cannot divide by zero\"\n#     - else perform a / b\n# - For other operations, perform normally.\n# Expected outcome for a=10, op=\"/\", b=0: Cannot divide by zero\n\na = 10\nop = \"/\"\nb = 0\n\n# TODO: Use if/elif/else to print either an error message or:\n# \"Result: <value>\"\n# Note: For division, result may be a float.\n\n"
+    }
+  ]
+}

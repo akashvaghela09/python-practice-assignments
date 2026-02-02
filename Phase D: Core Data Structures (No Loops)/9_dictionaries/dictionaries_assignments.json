@@ -1,0 +1,80 @@
+{
+  "topic": "dictionaries",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_createAndAccess.py",
+      "content": "# Goal: Create a dictionary and access values by key.\n# Expected outcome when run:\n# 202\n# Ada\n\nemployee = {\n    \"id\": 202,\n    # TODO: add key \"name\" with value \"Ada\"\n}\n\nprint(employee[\"id\"])\n# TODO: print the value for key \"name\"\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_updateAndAdd.py",
+      "content": "# Goal: Update an existing key and add a new key.\n# Expected outcome when run:\n# {'status': 'active', 'points': 15}\n\nprofile = {\n    \"status\": \"inactive\",\n    \"points\": 10\n}\n\n# TODO: update \"status\" to \"active\"\n# TODO: add 5 to \"points\"\n\nprint(profile)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_safeGetDefault.py",
+      "content": "# Goal: Use dict.get to avoid KeyError and provide a default.\n# Expected outcome when run:\n# guest\n# 0\n\nuser = {\n    \"role\": \"guest\"\n}\n\nprint(user.get(\"role\"))\n# TODO: print user.get(\"logins\", 0)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_countWords.py",
+      "content": "# Goal: Build a frequency dictionary for words.\n# Expected outcome when run:\n# {'red': 2, 'blue': 1, 'green': 2}\n\ntext = \"red blue green red green\"\nwords = text.split()\ncounts = {}\n\nfor w in words:\n    # TODO: update counts so each word is counted\n    pass\n\nprint(counts)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_iterateKeysValues.py",
+      "content": "# Goal: Iterate through items and format output.\n# Expected outcome when run:\n# apples=3\n# bananas=5\n# cherries=2\n\ninventory = {\n    \"apples\": 3,\n    \"bananas\": 5,\n    \"cherries\": 2\n}\n\n# TODO: loop through inventory items and print \"<key>=<value>\" per line\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_filterByValue.py",
+      "content": "# Goal: Create a new dict containing only entries meeting a condition.\n# Expected outcome when run:\n# {'b': 12, 'd': 9}\n\nscores = {\"a\": 3, \"b\": 12, \"c\": 5, \"d\": 9}\npassed = {}\n\n# TODO: copy into passed only items with value >= 8\n\nprint(passed)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_invertMappingUnique.py",
+      "content": "# Goal: Invert a dictionary where values are unique.\n# Expected outcome when run:\n# {'A': 1, 'B': 2, 'C': 3}\n\noriginal = {1: \"A\", 2: \"B\", 3: \"C\"}\ninverted = {}\n\n# TODO: invert original into inverted\n\nprint(inverted)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_groupByFirstLetter.py",
+      "content": "# Goal: Group words by their first letter (values should be lists).\n# Expected outcome when run:\n# {'a': ['ant', 'art'], 'b': ['bat', 'ball'], 'c': ['cat']}\n\nwords = [\"ant\", \"bat\", \"art\", \"ball\", \"cat\"]\ngroups = {}\n\nfor word in words:\n    first = word[0]\n    # TODO: append word into groups[first], creating a list if needed\n    pass\n\nprint(groups)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_mergeCounts.py",
+      "content": "# Goal: Merge two count dictionaries by summing counts for matching keys.\n# Expected outcome when run:\n# {'apple': 5, 'banana': 2, 'orange': 5}\n\nc1 = {\"apple\": 2, \"banana\": 2, \"orange\": 1}\nc2 = {\"apple\": 3, \"orange\": 4}\nmerged = {}\n\n# TODO: start merged as a copy of c1\n# TODO: add counts from c2 into merged (sum when key exists)\n\nprint(merged)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_nestedAccessAndUpdate.py",
+      "content": "# Goal: Access and update nested dictionary data.\n# Expected outcome when run:\n# 94110\n# {'name': 'Riley', 'address': {'city': 'SF', 'zip': '94110'}, 'visits': 3}\n\ncustomer = {\n    \"name\": \"Riley\",\n    \"address\": {\"city\": \"SF\", \"zip\": \"94107\"},\n    \"visits\": 2\n}\n\n# TODO: print the zip code\n# TODO: update zip to \"94110\"\n# TODO: increment visits by 1\n\nprint(customer[\"address\"][\"zip\"])\nprint(customer)\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_sortByValue.py",
+      "content": "# Goal: Print keys sorted by their values (descending).\n# Expected outcome when run:\n# ['c', 'a', 'b']\n\nscores = {\"a\": 10, \"b\": 7, \"c\": 13}\n\n# TODO: create a list of keys sorted by scores value descending\nsorted_keys = None\n\nprint(sorted_keys)\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_validateRequiredKeys.py",
+      "content": "# Goal: Validate required keys exist in each record.\n# Expected outcome when run:\n# 2\n\nrecords = [\n    {\"id\": 1, \"name\": \"Kai\"},\n    {\"id\": 2},\n    {\"name\": \"Mina\"},\n    {\"id\": 4, \"name\": \"Sol\"}\n]\nrequired = {\"id\", \"name\"}\nvalid_count = 0\n\nfor rec in records:\n    # TODO: if all required keys are present in rec, increment valid_count\n    pass\n\nprint(valid_count)\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_parseQueryString.py",
+      "content": "# Goal: Parse a simple query string into a dictionary.\n# Rules:\n# - Pairs are separated by '&'\n# - Key and value are separated by '='\n# - Values should remain strings\n# Expected outcome when run:\n# {'lang': 'py', 'level': '2', 'mode': 'practice'}\n\nquery = \"lang=py&level=2&mode=practice\"\nparams = {}\n\n# TODO: split query into pairs and fill params\n\nprint(params)\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_findMostFrequentChar.py",
+      "content": "# Goal: Find the most frequent non-space character in a string.\n# If there's a tie, choose the alphabetically smallest character.\n# Expected outcome when run:\n# a\n\ns = \"a b a c c\"\ncounts = {}\n\nfor ch in s:\n    if ch == \" \":\n        continue\n    # TODO: count characters\n    pass\n\n# TODO: determine the most frequent character with tie-break rule\nmost_common = None\n\nprint(most_common)\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_inventoryTransactions.py",
+      "content": "# Goal: Process transactions to update an inventory dictionary.\n# Rules:\n# - inventory maps item -> quantity\n# - each transaction is a dict with keys: \"item\", \"delta\"\n# - if an item doesn't exist yet, treat its starting quantity as 0\n# - after applying all transactions, remove any items with quantity == 0\n# Expected outcome when run:\n# {'apple': 2, 'orange': 4}\n\ninventory = {\"apple\": 1, \"orange\": 3}\ntransactions = [\n    {\"item\": \"apple\", \"delta\": 3},\n    {\"item\": \"orange\", \"delta\": 1},\n    {\"item\": \"banana\", \"delta\": 2},\n    {\"item\": \"banana\", \"delta\": -2},\n    {\"item\": \"apple\", \"delta\": -2}\n]\n\n# TODO: apply transactions to inventory\n# TODO: remove zero-quantity items\n\nprint(inventory)\n"
+    }
+  ]
+}

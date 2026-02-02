@@ -1,0 +1,55 @@
+{
+  "topic": "boolean values (True, False)",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_booleanLiteral.py",
+      "content": "# Assignment 1: Boolean literals and printing\n# Goal: Create a boolean variable and print it.\n\n# TODO: Set is_active to True\nis_active = \n\n# TODO: Print is_active (should print: True)\nprint()\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_booleanTypeCheck.py",
+      "content": "# Assignment 2: Check the type of a boolean\n# Goal: Print the type of a boolean variable.\n\nis_complete = False\n\n# TODO: Print the type of is_complete (should print exactly: <class 'bool'>)\nprint()\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_booleanNegation.py",
+      "content": "# Assignment 3: Negate a boolean using 'not'\n# Goal: Use 'not' to flip a boolean.\n\nis_raining = True\n\n# TODO: Create is_dry that is the opposite of is_raining\nis_dry = \n\n# Expected output (two lines):\n# True\n# False\nprint(is_raining)\nprint(is_dry)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_booleanAndOrBasics.py",
+      "content": "# Assignment 4: Combine booleans with 'and' / 'or'\n# Goal: Compute two results and print them.\n\nhas_id = True\nhas_ticket = False\n\n# TODO: allowed_in should be True only if both has_id and has_ticket are True\nallowed_in = \n\n# TODO: needs_help should be True if either has_id is False OR has_ticket is False\nneeds_help = \n\n# Expected output (two lines):\n# False\n# True\nprint(allowed_in)\nprint(needs_help)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_comparisonsToBooleans.py",
+      "content": "# Assignment 5: Comparisons produce booleans\n# Goal: Fill in comparisons to match expected boolean results.\n\nage = 17\nmin_age = 18\n\n# TODO: is_adult should be False\nis_adult = \n\nscore = 90\npassing_score = 60\n\n# TODO: passed should be True\npassed = \n\n# Expected output (two lines):\n# False\n# True\nprint(is_adult)\nprint(passed)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_booleanInIf.py",
+      "content": "# Assignment 6: Use a boolean in an if/else\n# Goal: Print a specific message based on a boolean.\n\nis_member = False\n\n# TODO: If is_member is True, print: Member price\n# Otherwise print: Regular price\nif \n    print()\nelse:\n    print()\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_booleanExpressionWithParentheses.py",
+      "content": "# Assignment 7: Build a boolean expression with parentheses\n# Goal: Produce a specific boolean result.\n\n# Rules:\n# - A user can reset their password if:\n#   (they have email_access OR they have phone_access) AND their account is not locked.\n\nemail_access = False\nphone_access = True\naccount_locked = True\n\n# TODO: Compute can_reset using the rule above.\ncan_reset = \n\n# Expected output (one line):\n# False\nprint(can_reset)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_booleanFunctionReturn.py",
+      "content": "# Assignment 8: Write a function that returns a boolean\n# Goal: Implement a boolean-returning function with a single return statement.\n\ndef is_even(n):\n    # TODO: Return True if n is even, otherwise False\n    return \n\n# Expected output (three lines):\n# True\n# False\n# True\nprint(is_even(10))\nprint(is_even(7))\nprint(is_even(0))\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_validateAllBooleansInList.py",
+      "content": "# Assignment 9: Validate that all values in a list are booleans\n# Goal: Complete the function so it returns True only if every element is exactly a bool.\n\ndef all_bools(values):\n    # TODO: Iterate through values and verify each item is a bool.\n    # Hint: Use type(x) is bool (not isinstance) to avoid counting ints.\n    for v in values:\n        \n    return \n\n# Expected output (three lines):\n# True\n# False\n# False\nprint(all_bools([True, False, True]))\nprint(all_bools([True, 1, False]))\nprint(all_bools([]))\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_truthTableGenerator.py",
+      "content": "# Assignment 10: Generate a truth table for a boolean expression\n# Goal: Print a 4-line truth table for: (A and not B) or (not A and B)\n# This is XOR: True when exactly one of A or B is True.\n\n# TODO: Complete the code to iterate over all combinations of A and B in this order:\n# (False, False), (False, True), (True, False), (True, True)\n\npairs = [\n    (False, False),\n    (False, True),\n    (True, False),\n    (True, True)\n]\n\nfor A, B in pairs:\n    # TODO: Compute result for (A and not B) or (not A and B)\n    result = \n    # TODO: Print exactly in this format:\n    # A=<value> B=<value> => <result>\n    print()\n\n# Expected output (4 lines):\n# A=False B=False => False\n# A=False B=True => True\n# A=True B=False => True\n# A=True B=True => False\n"
+    }
+  ]
+}

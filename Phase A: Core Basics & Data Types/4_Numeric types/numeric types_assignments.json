@@ -1,0 +1,55 @@
+{
+  "topic": "numeric types",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_intFloatBasics.py",
+      "content": "# Goal: Create integer and float variables and print their types.\n# Expected outcome (exact lines):\n# <class 'int'>\n# <class 'float'>\n\nage = 21\npi = 3.14\n\nprint(__________)\nprint(__________)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_numericLiteralsAndUnderscores.py",
+      "content": "# Goal: Use numeric literals with underscores and different bases, then print values.\n# Expected outcome (exact lines):\n# 1000000\n# 255\n# 10\n\nmillion = 1_000_000\nhex_ff = 0xFF\nbinary_ten = 0b1010\n\nprint(__________)\nprint(__________)\nprint(__________)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_integerDivisionAndRemainder.py",
+      "content": "# Goal: Compute quotient and remainder using // and %.\n# Expected outcome (exact lines):\n# 3\n# 2\n\nnumerator = 17\ndenominator = 5\n\nquotient = __________\nremainder = __________\n\nprint(quotient)\nprint(remainder)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_floatRoundingAndFormatting.py",
+      "content": "# Goal: Round a float to 2 decimals and print exactly two decimal places.\n# Expected outcome (exact lines):\n# 3.14\n# 3.14\n\nx = 3.14159\n\nrounded = __________  # use round\nformatted = __________ # use f-string formatting to 2 decimal places\n\nprint(rounded)\nprint(formatted)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_convertStringsToNumbers.py",
+      "content": "# Goal: Convert numeric strings to int/float and compute a total.\n# Expected outcome (exact lines):\n# 42\n# 7.5\n# 49.5\n\ns_int = \"42\"\ns_float = \"7.5\"\n\na = __________\nb = __________\n\ntotal = __________\n\nprint(a)\nprint(b)\nprint(total)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_complexNumbersBasics.py",
+      "content": "# Goal: Work with complex numbers: access real/imag parts and magnitude.\n# Expected outcome (exact lines):\n# 3.0\n# 4.0\n# 5.0\n\nz = 3 + 4j\n\nreal_part = __________\nimag_part = __________\nmagnitude = __________  # use abs\n\nprint(real_part)\nprint(imag_part)\nprint(magnitude)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_numericTypePromotion.py",
+      "content": "# Goal: Demonstrate type promotion in arithmetic and print resulting types.\n# Expected outcome (exact lines):\n# <class 'float'>\n# <class 'complex'>\n\nresult1 = 5 + 2.0\nresult2 = 5 + 2j\n\nprint(__________)\nprint(__________)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_equalityAndFloatTolerance.py",
+      "content": "# Goal: Avoid direct float equality; use a tolerance check.\n# Expected outcome (exact lines):\n# False\n# True\n\nx = 0.1 + 0.2\n\nprint(x == 0.3)\n\ntolerance = 1e-9\nis_close = __________  # compare absolute difference to tolerance\n\nprint(is_close)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_parseMixedBaseAndSum.py",
+      "content": "# Goal: Parse numbers in different bases from strings and sum them.\n# Expected outcome (exact lines):\n# 31\n# 31\n# 62\n\ns1 = \"0b11111\"  # 31 in binary with prefix\ns2 = \"1F\"       # 31 in hex without prefix\n\nn1 = __________  # parse s1 correctly\nn2 = __________  # parse s2 correctly as hex\n\nprint(n1)\nprint(n2)\nprint(n1 + n2)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_moneyWithDecimals.py",
+      "content": "# Goal: Use Decimal for money to avoid float issues.\n# Expected outcome (exact lines):\n# 0.3\n# 0.30\n# 3.50\n\nfrom decimal import Decimal, getcontext\n\ngetcontext().prec = 28\n\na = Decimal(\"0.1\")\nb = Decimal(\"0.2\")\n\nsum_ab = __________\n\n# Print sum_ab as a plain number (should show 0.3)\nprint(sum_ab)\n\n# Print sum_ab with exactly two decimal places\nprint(__________)  # use quantize\n\nprice = Decimal(\"1.75\")\nqty = 2\n\n# Compute total cost as Decimal and print with two decimals (3.50)\ntotal_cost = __________\nprint(__________)  # quantize to 2 decimals\n"
+    }
+  ]
+}

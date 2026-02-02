@@ -1,0 +1,55 @@
+{
+  "topic": "in and not in in python",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_membershipBasics_strings.py",
+      "content": "# Goal: Practice using 'in' with strings.\n# Expected outcome:\n# - Prints exactly:\n#   True\n#   False\n\nword = \"python\"\n\n# TODO: Replace None with membership checks using 'in'\nprint(None)  # should be True because 'py' is in \"python\"\nprint(None)  # should be False because 'java' is not in \"python\"\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_membershipBasics_lists.py",
+      "content": "# Goal: Practice using 'in' and 'not in' with lists.\n# Expected outcome:\n# - Prints exactly:\n#   True\n#   True\n#   False\n\nnumbers = [2, 4, 6, 8]\n\n# TODO: Fill in the conditions\nprint(6 in None)         # True\nprint(5 not in None)     # True\nprint(8 not in None)     # False\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_caseInsensitive_contains.py",
+      "content": "# Goal: Use 'in' with case-insensitive matching.\n# Expected outcome:\n# - Prints exactly:\n#   True\n#   False\n\nsentence = \"Learning Python is fun\"\n\n# TODO: Make the checks case-insensitive by transforming sentence and/or the query.\nprint(None)  # should check whether \"python\" is in the sentence (case-insensitive)\nprint(None)  # should check whether \"JAVA\" is in the sentence (case-insensitive)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_validate_username_characters.py",
+      "content": "# Goal: Validate that a username contains only allowed characters using 'in' / 'not in'.\n# Allowed characters: lowercase letters, digits, underscore.\n# Expected outcome:\n# - Prints exactly:\n#   VALID\n#   INVALID\n\nallowed = \"abcdefghijklmnopqrstuvwxyz0123456789_\"\n\nusernames = [\"dev_42\", \"Bad-Name\"]\n\nfor name in usernames:\n    # TODO: Set is_valid to True only if every character in name is in allowed\n    is_valid = None\n\n    if is_valid:\n        print(\"VALID\")\n    else:\n        print(\"INVALID\")\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_find_first_forbidden_character.py",
+      "content": "# Goal: Find the first character that is NOT allowed.\n# Expected outcome:\n# - Prints exactly:\n#   forbidden: '#'\n\nallowed = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \"\ntext = \"Meet me at 5#pm\"\n\n# TODO: Scan text from left to right and print the first forbidden character.\n# If none are forbidden, print \"forbidden: None\"\nfor ch in text:\n    if None:\n        print(f\"forbidden: {repr(ch)}\")\n        break\nelse:\n    print(\"forbidden: None\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_filter_stopwords.py",
+      "content": "# Goal: Remove stopwords using 'not in'.\n# Expected outcome:\n# - Prints exactly:\n#   keep: ['quick', 'brown', 'fox']\n\nwords = [\"the\", \"quick\", \"brown\", \"fox\"]\nstopwords = {\"the\", \"a\", \"an\"}\n\nkeep = []\nfor w in words:\n    # TODO: Append only words not in stopwords\n    if None:\n        keep.append(w)\n\nprint(f\"keep: {keep}\")\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_dict_membership_keys_vs_values.py",
+      "content": "# Goal: Understand 'in' with dictionaries (keys by default).\n# Expected outcome:\n# - Prints exactly:\n#   key_exists\n#   value_missing\n\nprices = {\"apple\": 1.25, \"banana\": 0.75}\n\n# TODO: Use membership tests correctly.\nif None:\n    print(\"key_exists\")\n\n# TODO: Check whether the VALUE 1.25 exists in the dictionary values.\nif None:\n    print(\"value_missing\")\nelse:\n    # This branch should NOT run for the expected outcome\n    print(\"value_exists\")\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_unique_preserve_order.py",
+      "content": "# Goal: Build a list of unique items while preserving order using 'not in'.\n# Expected outcome:\n# - Prints exactly:\n#   unique: [3, 1, 2, 4]\n\nitems = [3, 1, 2, 3, 2, 4, 1]\n\nunique = []\nfor x in items:\n    # TODO: Add x only if it is not already in unique\n    if None:\n        unique.append(x)\n\nprint(f\"unique: {unique}\")\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_permissions_check_any_all.py",
+      "content": "# Goal: Use 'in' with any()/all() for permission checks.\n# Expected outcome:\n# - Prints exactly:\n#   missing: ['delete']\n\nrequired = [\"read\", \"write\", \"delete\"]\nuser_permissions = {\"read\", \"write\"}\n\nmissing = []\n# TODO: Fill missing with permissions from required that are not in user_permissions\nfor perm in required:\n    if None:\n        missing.append(perm)\n\nprint(f\"missing: {missing}\")\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_subsequence_search_in_2d.py",
+      "content": "# Goal: Use 'in' / 'not in' in a more complex setting: seat availability in a 2D grid.\n# Seats are labeled like 'A1', 'A2', ... rows A-C and columns 1-4.\n# Some seats are reserved; determine which requested seats are available.\n# Expected outcome:\n# - Prints exactly:\n#   available: ['A1', 'B4']\n#   unavailable: ['A2', 'C3']\n\nrows = [\"A\", \"B\", \"C\"]\ncols = [1, 2, 3, 4]\n\nreserved = {\"A2\", \"C3\", \"B1\"}\nrequested = [\"A1\", \"A2\", \"B4\", \"C3\"]\n\n# TODO: Build a full set of valid seats (e.g., {'A1', ...}) using rows and cols\nvalid_seats = None\n\navailable = []\nunavailable = []\n\nfor seat in requested:\n    # TODO: A seat is available only if it is in valid_seats AND not in reserved\n    if None:\n        available.append(seat)\n    else:\n        unavailable.append(seat)\n\nprint(f\"available: {available}\")\nprint(f\"unavailable: {unavailable}\")\n"
+    }
+  ]
+}

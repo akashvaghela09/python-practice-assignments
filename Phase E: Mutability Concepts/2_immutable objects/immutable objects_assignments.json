@@ -1,0 +1,80 @@
+{
+  "topic": "immutable objects",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_intIdentity.py",
+      "content": "# Goal: Observe that ints are immutable by comparing identities before/after an operation.\n# Expected outcome:\n# - Prints two different ids for x and y\n# - Prints: \"x is y? False\"\n\nx = 10\n# TODO: store id of x in before\nbefore = None\n\ny = x + 1  # creates a new int object\n# TODO: store id of y in after\nafter = None\n\nprint(before)\nprint(after)\nprint(\"x is y?\", x is y)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_stringConcat.py",
+      "content": "# Goal: Show that string concatenation produces a new object.\n# Expected outcome:\n# - Prints: \"original: hello\"\n# - Prints: \"new: hello world\"\n# - Prints: \"same object? False\"\n\ns = \"hello\"\n# TODO: capture original object id\norig_id = None\n\n# TODO: create t by adding \" world\" to s without modifying s\nt = None\n\nprint(\"original:\", s)\nprint(\"new:\", t)\nprint(\"same object?\", id(s) == id(t))\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_tupleBasics.py",
+      "content": "# Goal: Work with tuples as immutable sequences.\n# Expected outcome:\n# - Prints: \"first=3 last=5\"\n# - Prints: \"len=3\"\n\nnums = (3, 4, 5)\n\n# TODO: set first and last using indexing\nfirst = None\nlast = None\n\n# TODO: set n to the length of nums\nn = None\n\nprint(f\"first={first} last={last}\")\nprint(f\"len={n}\")\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_attemptTupleMutation.py",
+      "content": "# Goal: Intentionally trigger and catch a TypeError when trying to mutate a tuple.\n# Expected outcome:\n# - Prints: \"error: TypeError\"\n# - Prints: \"tuple still: (1, 2, 3)\"\n\nt = (1, 2, 3)\n\ntry:\n    # TODO: attempt to change the middle element to 99\n    pass\nexcept Exception as e:\n    print(\"error:\", type(e).__name__)\n\nprint(\"tuple still:\", t)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_bytesVsBytearray.py",
+      "content": "# Goal: Contrast immutable bytes with mutable bytearray.\n# Expected outcome:\n# - Prints: \"bytes error: TypeError\"\n# - Prints: \"bytearray after: bytearray(b'jello')\"\n\nb = b\"hello\"\nba = bytearray(b\"hello\")\n\ntry:\n    # TODO: attempt to change first byte of b to 'j'\n    pass\nexcept Exception as e:\n    print(\"bytes error:\", type(e).__name__)\n\n# TODO: change first byte of ba to 'j' (ASCII)\n\nprint(\"bytearray after:\", ba)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_frozensetBasics.py",
+      "content": "# Goal: Use frozenset as an immutable set.\n# Expected outcome:\n# - Prints: \"contains 2? True\"\n# - Prints: \"union size: 4\"\n\nfs = frozenset({1, 2, 3})\n\n# TODO: set has_two to whether 2 is in fs\nhas_two = None\n\n# TODO: create new_fs as union of fs with {4}\nnew_fs = None\n\nprint(\"contains 2?\", has_two)\nprint(\"union size:\", len(new_fs))\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_hashability.py",
+      "content": "# Goal: Determine what can be used as dictionary keys (hashable/immutable).\n# Expected outcome:\n# - Prints: \"tuple_key_ok: True\"\n# - Prints: \"list_key_error: TypeError\"\n\n# TODO: create a dict using a tuple key (1, 2)\nd = None\n\n# TODO: set tuple_key_ok to True if lookup by (1, 2) yields \"ok\"\ntuple_key_ok = None\n\ntry:\n    # TODO: attempt to use a list [1, 2] as a dict key\n    pass\nexcept Exception as e:\n    print(\"list_key_error:\", type(e).__name__)\n\nprint(\"tuple_key_ok:\", tuple_key_ok)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_copyingTuples.py",
+      "content": "# Goal: Show that 'copying' a tuple via slicing returns the same object.\n# Expected outcome:\n# - Prints: \"same object: True\"\n# - Prints: \"same value: True\"\n\nt = (\"a\", \"b\", \"c\")\n\n# TODO: create t2 as a slice copy of t\nt2 = None\n\nprint(\"same object:\", t2 is t)\nprint(\"same value:\", t2 == t)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_stringInterningCheck.py",
+      "content": "# Goal: Compare equality vs identity for strings built differently.\n# Note: Do not rely on interning for identity; demonstrate that == is correct.\n# Expected outcome:\n# - Prints: \"equal: True\"\n# - Prints: \"identical: False\" (build one string dynamically so identity differs)\n\n# TODO: create a as literal \"python\"\na = None\n\n# TODO: create b dynamically so it equals \"python\" but is typically a different object\n# Hint: use ''.join([...]) or format\nb = None\n\nprint(\"equal:\", a == b)\nprint(\"identical:\", a is b)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_safeDefaultArgs.py",
+      "content": "# Goal: Use an immutable default argument safely.\n# Expected outcome:\n# - Prints exactly:\n#   ()\n#   (1,)\n#   ()\n\ndef add_item(item, items=()):\n    \"\"\"Return a NEW tuple containing previous items plus item.\"\"\"\n    # TODO: implement by returning a new tuple\n    pass\n\nprint(add_item(None))\nprint(add_item(1))\nprint(add_item(None))\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_dictWithImmutableValues.py",
+      "content": "# Goal: Update a mapping by replacing (not mutating) an immutable value.\n# Expected outcome:\n# - Prints: \"before: (1, 2)\"\n# - Prints: \"after: (1, 2, 3)\"\n\nprefs = {\"dims\": (1, 2)}\n\nprint(\"before:\", prefs[\"dims\"])\n\n# TODO: append 3 to the tuple by creating a new tuple and reassigning prefs[\"dims\"]\n\nprint(\"after:\", prefs[\"dims\"])\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_frozenDataclassPoint.py",
+      "content": "# Goal: Create an immutable object using a frozen dataclass and observe mutation failure.\n# Expected outcome:\n# - Prints: \"Point(x=2, y=5)\"\n# - Prints: \"mutate error: FrozenInstanceError\" (or a subclass name depending on Python)\n\nfrom dataclasses import dataclass\n\n# TODO: define a frozen dataclass Point with fields x:int and y:int\n\n# TODO: instantiate p = Point(2, 5)\np = None\nprint(p)\n\ntry:\n    # TODO: attempt to modify p.x\n    pass\nexcept Exception as e:\n    print(\"mutate error:\", type(e).__name__)\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_hashingImmutableComposite.py",
+      "content": "# Goal: Build an immutable, hashable composite key from nested data.\n# Expected outcome:\n# - Prints: \"key hashable: True\"\n# - Prints: \"lookup: found\"\n\nuser = {\n    \"name\": \"Ada\",\n    \"roles\": [\"admin\", \"editor\"],\n    \"region\": \"EU\"\n}\n\n# TODO: create an immutable key using (name, tuple(roles), region)\nkey = None\n\n# TODO: create a dict cache mapping key -> \"found\"\ncache = None\n\n# TODO: set key_hashable to True if hash(key) works without raising\nkey_hashable = None\n\nprint(\"key hashable:\", key_hashable)\nprint(\"lookup:\", cache.get(key))\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_noMutationFunction.py",
+      "content": "# Goal: Write a function that accepts a tuple and returns a modified NEW tuple without mutating input.\n# Expected outcome:\n# - Prints: \"in: (10, 20, 30)\"\n# - Prints: \"out: (10, 99, 30)\"\n# - Prints: \"same input object: True\" (input variable still refers to original tuple)\n\ndef replace_at(t, index, value):\n    \"\"\"Return a new tuple equal to t but with t[index] replaced by value.\"\"\"\n    # TODO: implement using slicing and concatenation\n    pass\n\ninp = (10, 20, 30)\nout = replace_at(inp, 1, 99)\n\nprint(\"in:\", inp)\nprint(\"out:\", out)\nprint(\"same input object:\", inp is (10, 20, 30))\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_deepImmutabilityAudit.py",
+      "content": "# Goal: Convert a nested structure into a deeply immutable equivalent.\n# Supported conversions:\n# - list -> tuple\n# - dict -> tuple of sorted (key, value) pairs, with values also frozen\n# - set -> frozenset\n# Leave primitives (int/str/None/bool/float) as-is.\n# Expected outcome:\n# - Prints: \"type: tuple\"\n# - Prints: \"hashable: True\"\n# - Prints: \"frozen_repr: (('a', (1, 2)), ('b', frozenset({3, 4})), ('c', (('x', 9),)))\" (ordering must match sorted keys)\n\ndata = {\n    \"b\": {3, 4},\n    \"a\": [1, 2],\n    \"c\": {\"x\": 9}\n}\n\ndef freeze(obj):\n    # TODO: implement deep freezing per rules above\n    # Hint: for dict, sort keys to ensure deterministic output\n    pass\n\nfrozen = freeze(data)\n\nprint(\"type:\", type(frozen).__name__)\n\n# TODO: set hashable to True if hash(frozen) succeeds\nhashable = None\nprint(\"hashable:\", hashable)\n\nprint(\"frozen_repr:\", frozen)\n"
+    }
+  ]
+}

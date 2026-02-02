@@ -1,0 +1,55 @@
+{
+  "topic": "using and, or in conditions in python",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_andOrBasics.py",
+      "content": "# Goal: Print whether the number is within an inclusive range using 'and'.\n# Expected outcome:\n# For number=7, print exactly: IN RANGE\n# For number=3, print exactly: OUT OF RANGE\n\nnumber = 7\nlow = 5\nhigh = 10\n\n# TODO: Use 'and' to check if number is between low and high (inclusive).\nif ____:\n    print(\"IN RANGE\")\nelse:\n    print(\"OUT OF RANGE\")\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_eitherCondition.py",
+      "content": "# Goal: Print whether a user is eligible based on age OR having a parent permission.\n# Expected outcome:\n# With age=16 and has_permission=True, print exactly: ELIGIBLE\n# With age=16 and has_permission=False, print exactly: NOT ELIGIBLE\n\nage = 16\nhas_permission = True\n\n# TODO: Use 'or' to decide eligibility: eligible if age >= 18 OR has_permission is True.\nif ____:\n    print(\"ELIGIBLE\")\nelse:\n    print(\"NOT ELIGIBLE\")\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_combinedAndOr.py",
+      "content": "# Goal: Decide if a discount applies.\n# Rule: discount applies if (is_student AND age < 26) OR is_veteran\n# Expected outcome:\n# With is_student=True, age=20, is_veteran=False => print exactly: DISCOUNT\n# If you change age to 30 (keeping others the same) => print exactly: NO DISCOUNT\n\nis_student = True\nage = 20\nis_veteran = False\n\n# TODO: Fill in the combined condition using 'and' and 'or'.\nif ____:\n    print(\"DISCOUNT\")\nelse:\n    print(\"NO DISCOUNT\")\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_loginCheck.py",
+      "content": "# Goal: Validate a login attempt.\n# Rule: access granted if username is not empty AND (password matches OR has_reset_token)\n# Expected outcome:\n# With username='sam', password='secret', expected_password='secret', has_reset_token=False => ACCESS GRANTED\n# With username='sam', password='wrong', expected_password='secret', has_reset_token=False => ACCESS DENIED\n\nusername = \"sam\"\npassword = \"secret\"\nexpected_password = \"secret\"\nhas_reset_token = False\n\n# TODO: Use 'and'/'or' to implement the rule.\nif ____:\n    print(\"ACCESS GRANTED\")\nelse:\n    print(\"ACCESS DENIED\")\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_shippingRules.py",
+      "content": "# Goal: Determine shipping type.\n# Rules:\n# - FREE if (cart_total >= 50 AND is_domestic) OR is_premium_member\n# - Otherwise STANDARD\n# Expected outcome:\n# With cart_total=45, is_domestic=True, is_premium_member=True => print exactly: FREE\n# With cart_total=45, is_domestic=True, is_premium_member=False => print exactly: STANDARD\n\ncart_total = 45\nis_domestic = True\nis_premium_member = True\n\n# TODO: Implement the FREE/ STANDARD decision.\nif ____:\n    print(\"FREE\")\nelse:\n    print(\"STANDARD\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_temperatureAlert.py",
+      "content": "# Goal: Print an alert category based on temperature and humidity.\n# Rules:\n# - Print DANGER if temperature >= 40 OR (temperature >= 35 AND humidity >= 70)\n# - Else print OK\n# Expected outcome:\n# With temperature=36, humidity=75 => print exactly: DANGER\n# With temperature=34, humidity=80 => print exactly: OK\n\ntemperature = 36\nhumidity = 75\n\n# TODO: Use 'and'/'or' with correct precedence (use parentheses where needed).\nif ____:\n    print(\"DANGER\")\nelse:\n    print(\"OK\")\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_eventEntryPolicy.py",
+      "content": "# Goal: Determine if someone can enter an event.\n# Rules:\n# - Must have ticket.\n# - If age < 18, must also be accompanied.\n# - VIPs can enter without a ticket only if they are on the guest list.\n# Print exactly: ENTER or DENY\n# Expected outcome:\n# With has_ticket=False, is_vip=True, on_guest_list=True, age=25, accompanied=False => ENTER\n# With has_ticket=True, is_vip=False, on_guest_list=False, age=16, accompanied=False => DENY\n\nhas_ticket = False\nis_vip = True\non_guest_list = True\nage = 25\naccompanied = False\n\n# TODO: Build the condition using 'and'/'or' to match the policy.\n# Hint: Break it into parts like regular_entry, vip_entry.\nregular_entry = ____\nvip_entry = ____\n\nif ____:\n    print(\"ENTER\")\nelse:\n    print(\"DENY\")\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_passwordPolicy.py",
+      "content": "# Goal: Validate a password with multiple requirements.\n# Requirements:\n# - length >= 8\n# - must contain at least one digit OR at least one special character from '!@#'\n# - must NOT contain spaces\n# Print exactly: VALID or INVALID\n# Expected outcome:\n# With password='abcde1fg' => VALID\n# With password='abcd e1fg' => INVALID\n\npassword = \"abcde1fg\"\n\nhas_digit = any(ch.isdigit() for ch in password)\nhas_special = any(ch in \"!@#\" for ch in password)\nhas_space = (\" \" in password)\n\n# TODO: Combine conditions using 'and', 'or', and 'not'.\nif ____:\n    print(\"VALID\")\nelse:\n    print(\"INVALID\")\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_filterOrders.py",
+      "content": "# Goal: Count how many orders require manual review.\n# Manual review rules:\n# - (amount > 1000 AND is_international) OR\n# - (amount > 2000) OR\n# - (is_flagged AND amount > 100)\n# Expected outcome:\n# For the provided orders list, print exactly: MANUAL REVIEW COUNT: 3\n\norders = [\n    {\"id\": 1, \"amount\": 1500, \"is_international\": True,  \"is_flagged\": False},\n    {\"id\": 2, \"amount\": 900,  \"is_international\": True,  \"is_flagged\": False},\n    {\"id\": 3, \"amount\": 2500, \"is_international\": False, \"is_flagged\": False},\n    {\"id\": 4, \"amount\": 120,  \"is_international\": False, \"is_flagged\": True},\n    {\"id\": 5, \"amount\": 80,   \"is_international\": False, \"is_flagged\": True},\n    {\"id\": 6, \"amount\": 1100, \"is_international\": False, \"is_flagged\": False}\n]\n\ncount = 0\nfor order in orders:\n    amount = order[\"amount\"]\n    is_international = order[\"is_international\"]\n    is_flagged = order[\"is_flagged\"]\n\n    # TODO: Write the condition for manual review using 'and'/'or'.\n    if ____:\n        count += 1\n\nprint(f\"MANUAL REVIEW COUNT: {count}\")\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_accessControlMatrix.py",
+      "content": "# Goal: Determine access level for a system based on multiple inputs.\n# Rules (in order):\n# 1) If is_suspended is True => print NO ACCESS\n# 2) Else if (role is 'admin') OR (role is 'staff' AND has_2fa AND is_on_network) => print FULL ACCESS\n# 3) Else if (role is 'guest' AND has_invite) OR (role is 'staff' AND has_2fa) => print LIMITED ACCESS\n# 4) Else => print NO ACCESS\n# Expected outcome:\n# With role='staff', has_2fa=True, is_on_network=False, has_invite=False, is_suspended=False => LIMITED ACCESS\n# If you change is_on_network=True (keeping others same) => FULL ACCESS\n\nrole = \"staff\"\nhas_2fa = True\nis_on_network = False\nhas_invite = False\nis_suspended = False\n\n# TODO: Implement the rule order using if/elif/else and 'and'/'or'.\nif ____:\n    print(\"NO ACCESS\")\nelif ____:\n    print(\"FULL ACCESS\")\nelif ____:\n    print(\"LIMITED ACCESS\")\nelse:\n    print(\"NO ACCESS\")\n"
+    }
+  ]
+}

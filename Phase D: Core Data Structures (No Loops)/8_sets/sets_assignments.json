@@ -1,0 +1,80 @@
+{
+  "topic": "sets",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_createAndPrintSet.py",
+      "content": "# Goal: Create a set of unique fruits and print it.\n# Expected outcome: When run, it prints a set containing exactly these elements (order may vary):\n# {'apple', 'banana', 'orange'}\n\nfruits = ____  # TODO: create a set with 'apple', 'banana', 'orange'\nprint(fruits)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_removeDuplicatesFromList.py",
+      "content": "# Goal: Convert a list with duplicates into a set and print the unique items.\n# Expected outcome: It prints a set with exactly {1, 2, 3, 4, 5} (order may vary).\n\nnums = [1, 2, 2, 3, 4, 4, 4, 5]\nunique_nums = ____  # TODO: convert nums to a set\nprint(unique_nums)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_membershipTest.py",
+      "content": "# Goal: Check membership in a set.\n# Expected outcome: It prints:\n# True\n# False\n\ncolors = {'red', 'green', 'blue'}\nprint(____)  # TODO: print whether 'green' is in colors\nprint(____)  # TODO: print whether 'yellow' is in colors\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_addAndDiscard.py",
+      "content": "# Goal: Add and discard elements in a set.\n# Expected outcome: It prints a set containing exactly {'a', 'c', 'd'} (order may vary).\n\nletters = {'a', 'b', 'c'}\n____  # TODO: add 'd' to letters\n____  # TODO: discard 'b' from letters\nprint(letters)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_setLengthAndEmpty.py",
+      "content": "# Goal: Create an empty set correctly and print its length after adding elements.\n# Expected outcome: It prints:\n# 0\n# 2\n\nempty = ____  # TODO: create an empty set (not an empty dict)\nprint(len(empty))\nempty.add('x')\nempty.add('y')\nprint(len(empty))\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_unionAndIntersection.py",
+      "content": "# Goal: Compute union and intersection of two sets.\n# Expected outcome: It prints two lines:\n# union: {1, 2, 3, 4, 5, 6}\n# intersection: {3, 4}\n# (Set order may vary, but contents must match.)\n\nA = {1, 2, 3, 4}\nB = {3, 4, 5, 6}\n\nu = ____  # TODO: union of A and B\ninter = ____  # TODO: intersection of A and B\n\nprint('union:', u)\nprint('intersection:', inter)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_differenceAndSymmetricDifference.py",
+      "content": "# Goal: Compute difference and symmetric difference.\n# Expected outcome: It prints:\n# A-B: {'a', 'b'}\n# symdiff: {'a', 'b', 'e'}\n# (Order may vary.)\n\nA = {'a', 'b', 'c', 'd'}\nB = {'c', 'd', 'e'}\n\ndiff = ____  # TODO: elements in A not in B\nsym = ____   # TODO: elements in exactly one of A or B\n\nprint('A-B:', diff)\nprint('symdiff:', sym)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_subsetSupersetChecks.py",
+      "content": "# Goal: Check subset and superset relationships.\n# Expected outcome: It prints:\n# True\n# False\n# True\n\nsmall = {2, 4}\nbig = {1, 2, 3, 4, 5}\nother = {4, 6}\n\nprint(____)  # TODO: small is subset of big\nprint(____)  # TODO: other is subset of big\nprint(____)  # TODO: big is superset of small\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_updateOperations.py",
+      "content": "# Goal: Use in-place set update operations.\n# Expected outcome: It prints:\n# {1, 2, 3, 4, 5}\n# {3, 4, 5}\n# (Order may vary.)\n\ns = {1, 2, 3}\n____  # TODO: update s with {3, 4, 5} so s becomes {1,2,3,4,5}\nprint(s)\n\n____  # TODO: intersect-update s with {3, 4, 5, 6} so s becomes {3,4,5}\nprint(s)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_uniqueWordsInSentence.py",
+      "content": "# Goal: Build a set of unique words from a sentence (case-insensitive).\n# Expected outcome: It prints 5 on a single line.\n# Explanation of expected: unique words are {'the','cat','sat','on','mat'}\n\nsentence = 'The cat sat on the mat'\nwords = ____  # TODO: split sentence, lowercase each word, put into a set\nprint(len(words))\n"
+    },
+    {
+      "index": 11,
+      "fileName": "11_findCommonAttendees.py",
+      "content": "# Goal: Find people who attended both events.\n# Expected outcome: It prints a set containing exactly {'Ava', 'Noah'} (order may vary).\n\nevent1 = {'Ava', 'Noah', 'Mia', 'Liam'}\nevent2 = {'Noah', 'Ava', 'Ethan'}\n\nboth = ____  # TODO: compute intersection\nprint(both)\n"
+    },
+    {
+      "index": 12,
+      "fileName": "12_validateIsogram.py",
+      "content": "# Goal: Determine if a word is an isogram (no repeated letters), ignoring hyphens and spaces.\n# Expected outcome: It prints:\n# True\n# False\n\nword1 = 'six-year'\nword2 = 'programming'\n\ndef is_isogram(text: str) -> bool:\n    cleaned = ____  # TODO: lowercase text and remove '-' and spaces\n    letters = ____  # TODO: build a list or iterable of alphabetic characters only\n    return ____  # TODO: True if no repeats, else False\n\nprint(is_isogram(word1))\nprint(is_isogram(word2))\n"
+    },
+    {
+      "index": 13,
+      "fileName": "13_deduplicatePreserveOrder.py",
+      "content": "# Goal: Remove duplicates from a list while preserving original order.\n# Expected outcome: It prints exactly:\n# [3, 1, 2, 5, 4]\n\nitems = [3, 1, 3, 2, 1, 5, 2, 4, 5]\n\nseen = set()\nresult = []\nfor x in items:\n    ____  # TODO: if x not in seen, add to seen and append to result\n\nprint(result)\n"
+    },
+    {
+      "index": 14,
+      "fileName": "14_setComprehensionSquares.py",
+      "content": "# Goal: Use a set comprehension to generate unique squares for numbers in a list.\n# Expected outcome: It prints a set containing exactly {0, 1, 4, 9, 16} (order may vary).\n\nnums = [0, 1, 2, 2, 3, 4, 4]\nsquares = ____  # TODO: set comprehension of n*n for each n in nums\nprint(squares)\n"
+    },
+    {
+      "index": 15,
+      "fileName": "15_frozenSetAsDictionaryKey.py",
+      "content": "# Goal: Use frozenset to group anagrams as dictionary keys (order-independent letters).\n# Expected outcome: It prints exactly 3 on a single line.\n# Explanation: There should be 3 anagram groups: {'eat','tea','ate'}, {'tan','nat'}, {'bat'}.\n\nwords = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat']\n\ngroups = {}  # maps frozenset/tuple-like key -> list of words\nfor w in words:\n    key = ____  # TODO: create a hashable key representing letters in w (sorted) using frozenset or tuple\n    ____       # TODO: add w into groups under that key\n\nprint(len(groups))\n"
+    }
+  ]
+}

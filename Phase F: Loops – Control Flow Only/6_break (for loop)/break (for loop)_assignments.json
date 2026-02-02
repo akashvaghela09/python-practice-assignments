@@ -1,0 +1,55 @@
+{
+  "topic": "break (for loop)",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_breakOnFirstNegative.py",
+      "content": "# Goal: Print numbers from the list until the first negative number appears (do not print the negative).\n# Expected outcome:\n# 4\n# 2\n# 7\n\nnums = [4, 2, 7, -1, 9]\n\nfor n in nums:\n    # TODO: if n is negative, stop the loop\n    # TODO: otherwise print n\n    pass\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_breakOnTargetLetter.py",
+      "content": "# Goal: Print characters from the string until you encounter '!'. Do not print '!'.\n# Expected outcome:\n# H\n# e\n# l\n# l\n# o\n\ntext = \"Hello!World\"\n\nfor ch in text:\n    # TODO: stop when ch is '!'\n    # TODO: otherwise print ch\n    pass\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_findFirstMultiple.py",
+      "content": "# Goal: Find and print the first number in the list that is divisible by 7, then stop searching.\n# Expected outcome:\n# 21\n\nnums = [10, 13, 21, 28, 35]\n\nfor n in nums:\n    # TODO: if n is divisible by 7, print it and break\n    pass\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_sumUntilLimit.py",
+      "content": "# Goal: Add numbers in order until the running total would exceed 15.\n# Do not add the number that would make it exceed 15.\n# Print the final total.\n# Expected outcome:\n# 14\n\nnums = [5, 4, 6, 2, 9]\n\ntotal = 0\nfor n in nums:\n    # TODO: if total + n would be > 15, break\n    # TODO: otherwise add n to total\n    pass\n\nprint(total)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_countBeforeStopWord.py",
+      "content": "# Goal: Count how many words appear before the word 'STOP' (not included).\n# Print the count.\n# Expected outcome:\n# 3\n\nwords = [\"go\", \"north\", \"now\", \"STOP\", \"later\"]\n\ncount = 0\nfor w in words:\n    # TODO: if w is 'STOP', break\n    # TODO: otherwise increment count\n    pass\n\nprint(count)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_firstAboveThresholdIndex.py",
+      "content": "# Goal: Print the index of the first value greater than 100, then stop.\n# Expected outcome:\n# 3\n\nvalues = [10, 50, 100, 101, 200]\n\nfor i in range(len(values)):\n    # TODO: if values[i] > 100, print i and break\n    pass\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_validateUsernameStopAtSpace.py",
+      "content": "# Goal: Build a username from the string until a space is found.\n# Only include lowercase letters a-z; ignore digits and punctuation.\n# Stop at the first space using break.\n# Print the resulting username.\n# Expected outcome:\n# alice\n\nraw = \"Alice99! Bob\"\n\nusername = \"\"\nfor ch in raw:\n    # TODO: if ch is a space, break\n    # TODO: convert ch to lowercase\n    # TODO: if it's a letter a-z, append to username\n    pass\n\nprint(username)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_search2DGridBreakInner.py",
+      "content": "# Goal: In the grid below, find the first occurrence of 'X'.\n# Print its position as 'row,col' (zero-based) and stop scanning further in that row using break.\n# (Only break out of the inner loop; the outer loop can continue.)\n# Expected outcome:\n# 1,2\n\ngrid = [\n    [\".\", \".\", \".\", \".\"],\n    [\".\", \".\", \"X\", \".\"],\n    [\"X\", \".\", \".\", \".\"]\n]\n\nfor r in range(len(grid)):\n    for c in range(len(grid[r])):\n        # TODO: if grid[r][c] == 'X', print f\"{r},{c}\" and break\n        pass\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_passwordCheckStopOnInvalidChar.py",
+      "content": "# Goal: Scan the password and stop at the first invalid character.\n# Valid characters are letters and digits only.\n# Print the first invalid character found.\n# Expected outcome:\n# #\n\npwd = \"abC12#xy\"\n\nfor ch in pwd:\n    # TODO: if ch is not alphanumeric, print ch and break\n    pass\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_nestedBreakUsingFlagFirstPrime.py",
+      "content": "# Goal: Find the first prime number in the list and print it.\n# Use a nested for-loop to test divisibility.\n# Use break to stop checking divisors when a divisor is found.\n# Use a flag variable to decide if the number is prime.\n# Once the first prime is printed, stop the outer loop using break.\n# Expected outcome:\n# 29\n\nnums = [1, 21, 25, 29, 35, 37]\n\nfor n in nums:\n    # TODO: skip numbers less than 2\n    is_prime = True\n\n    # TODO: test divisors from 2 up to n-1 (or a smarter limit if you want)\n    for d in range(2, n):\n        # TODO: if n % d == 0, set is_prime to False and break\n        pass\n\n    # TODO: if is_prime is True, print n and break out of the outer loop\n    pass\n"
+    }
+  ]
+}

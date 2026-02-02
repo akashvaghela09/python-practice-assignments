@@ -1,0 +1,55 @@
+{
+  "topic": "break in while loops",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_breakOnSentinel.py",
+      "content": "# Goal: Keep reading integers until the user enters -1, then stop using break.\n# Expected outcome: After inputs 3, 8, -1 the program prints exactly: You entered 2 numbers\n\ncount = 0\n\nwhile True:\n    n = int(input())\n    # TODO: if n is -1, stop the loop using break\n    # TODO: otherwise, increase count\n    pass\n\nprint(f\"You entered {count} numbers\")\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_findFirstNegative.py",
+      "content": "# Goal: Read integers until a negative number appears. Use break to stop immediately.\n# Expected outcome: For inputs 4, 2, -7, 9 the program prints exactly: First negative: -7\n\nwhile True:\n    n = int(input())\n    # TODO: if n is negative, print \"First negative: <n>\" and break\n    pass\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_passwordAttempts.py",
+      "content": "# Goal: Ask for a password up to 3 times. If correct, break early.\n# Password is: \"python\"\n# Expected outcome:\n# - If the inputs are: java, ruby, python -> print exactly: Access granted\n# - If the inputs are: java, ruby, go -> print exactly: Access denied\n\nPASSWORD = \"python\"\nattempts = 0\n\nwhile attempts < 3:\n    guess = input()\n    # TODO: if guess matches PASSWORD, print \"Access granted\" and break\n    # TODO: otherwise, increment attempts\n    pass\n\n# TODO: if loop ended because attempts reached 3 (and no break happened), print \"Access denied\"\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_sumUntilZero.py",
+      "content": "# Goal: Sum integers until 0 is entered, then stop using break.\n# Expected outcome: For inputs 5, 10, -3, 0 the program prints exactly: Sum: 12\n\ntotal = 0\n\nwhile True:\n    n = int(input())\n    # TODO: if n is 0, break\n    # TODO: otherwise add n to total\n    pass\n\nprint(f\"Sum: {total}\")\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_scanForTarget.py",
+      "content": "# Goal: Read words until the word \"STOP\" is entered. If you find the target word first, break.\n# Target word is \"python\".\n# Expected outcome:\n# - If inputs: java, ruby, python, STOP -> print exactly: Found target\n# - If inputs: java, ruby, STOP -> print exactly: Not found\n\ntarget = \"python\"\nfound = False\n\nwhile True:\n    word = input()\n    # TODO: if word is \"STOP\", break\n    # TODO: if word matches target, set found True and break\n    pass\n\n# TODO: print \"Found target\" if found else \"Not found\"\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_firstMultipleOf7.py",
+      "content": "# Goal: Find the first multiple of 7 within a range using a while loop and break.\n# Read two integers: start and end (inclusive). Assume start <= end.\n# Expected outcome:\n# - Input: 10 then 30 -> print exactly: 14\n# - Input: 1 then 6 -> print exactly: None\n\nstart = int(input())\nend = int(input())\n\nx = start\nresult = None\n\nwhile x <= end:\n    # TODO: if x is a multiple of 7, set result to x and break\n    x += 1\n\n# TODO: print result (prints \"None\" if no multiple was found)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_primeCheckWithBreak.py",
+      "content": "# Goal: Determine if a number n is prime using a while loop.\n# Use break as soon as you find a divisor.\n# Expected outcome:\n# - Input: 29 -> print exactly: Prime\n# - Input: 30 -> print exactly: Not prime\n\nn = int(input())\n\nif n < 2:\n    print(\"Not prime\")\nelse:\n    d = 2\n    is_prime = True\n    while d * d <= n:\n        # TODO: if n % d == 0, set is_prime False and break\n        d += 1\n\n    # TODO: print \"Prime\" if is_prime else \"Not prime\"\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_menuLoopExit.py",
+      "content": "# Goal: Implement a menu loop that runs until the user chooses to quit.\n# Use break to exit when the user enters \"q\".\n# Valid commands:\n# - \"inc\": increment a counter\n# - \"dec\": decrement a counter\n# - \"q\": quit\n# Any other input should be ignored.\n# Expected outcome: For inputs inc, inc, dec, q the program prints exactly: Counter: 1\n\ncounter = 0\n\nwhile True:\n    cmd = input().strip()\n    # TODO: if cmd is \"q\", break\n    # TODO: if cmd is \"inc\", update counter\n    # TODO: if cmd is \"dec\", update counter\n    pass\n\nprint(f\"Counter: {counter}\")\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_runningAverageStop.py",
+      "content": "# Goal: Read integers and compute the running average until the user enters \"done\".\n# Use break when \"done\" is entered.\n# Print the average with exactly 2 decimal places.\n# Expected outcome: For inputs 10, 20, 30, done -> print exactly: Average: 20.00\n\ncount = 0\ntotal = 0\n\nwhile True:\n    s = input().strip()\n    # TODO: if s == \"done\", break\n    # TODO: otherwise parse int, add to total, increment count\n    pass\n\n# TODO: compute average (assume count > 0) and print with 2 decimals\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_nestedLoopBreakOnMarker.py",
+      "content": "# Goal: Process multiple lines of input. Each line contains space-separated integers.\n# Use a while loop to read lines until the line \"END\" is entered.\n# For each line, scan numbers left-to-right and stop scanning that line when you hit 0 (break).\n# Keep a grand total of all numbers processed (excluding zeros and excluding numbers after the first 0 in each line).\n# Expected outcome:\n# If the input lines are:\n# \"1 2 0 100\"\n# \"5 5\"\n# \"9 0 9\"\n# \"END\"\n# Then the program prints exactly: Total: 22\n\ngrand_total = 0\n\nwhile True:\n    line = input().strip()\n    # TODO: if line == \"END\", break out of the outer loop\n\n    parts = line.split()\n    i = 0\n    while i < len(parts):\n        num = int(parts[i])\n        # TODO: if num == 0, break out of the inner loop\n        # TODO: otherwise add num to grand_total\n        i += 1\n\nprint(f\"Total: {grand_total}\")\n"
+    }
+  ]
+}

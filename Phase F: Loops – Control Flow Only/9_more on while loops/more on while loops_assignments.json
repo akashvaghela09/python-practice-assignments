@@ -1,0 +1,55 @@
+{
+  "topic": "more on while loops",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_countUpToN.py",
+      "content": "# Print all integers from 1 to n (inclusive) using a while loop.\n# Input: a single integer n\n# Output: numbers each on their own line\n# Example: n=3 prints:\n# 1\n# 2\n# 3\n\nn = int(input().strip())\n\n# TODO: initialize a counter\n\n# TODO: while loop to print 1..n\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_countDownByTwo.py",
+      "content": "# Print all even numbers from n down to 0 using a while loop.\n# Input: integer n\n# Output: even numbers descending, each on its own line.\n# Expected outcome example: if n=9, output:\n# 8\n# 6\n# 4\n# 2\n# 0\n\nn = int(input().strip())\n\n# TODO: start from the largest even <= n\n\n# TODO: while loop that decreases by 2 and prints values down to 0\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_sumUntilZero.py",
+      "content": "# Repeatedly read integers until the user enters 0.\n# Then print the sum of all non-zero numbers entered.\n# Input: multiple lines of integers ending with 0\n# Output: a single integer (the sum)\n# Expected outcome example input:\n# 5\n# -2\n# 7\n# 0\n# Output:\n# 10\n\ntotal = 0\n\n# TODO: read first value\n\n# TODO: while value is not 0, add to total and read next value\n\nprint(total)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_passwordAttempts.py",
+      "content": "# Ask for a password up to 3 attempts using a while loop.\n# Correct password is: \"opensesame\"\n# If correct within 3 attempts, print: Access granted\n# Otherwise print: Access denied\n# Input: up to 3 lines, each a password attempt\n# Output: exactly one line.\n\nCORRECT = \"opensesame\"\nmax_attempts = 3\nattempts = 0\n\n# TODO: loop while attempts < max_attempts\n# - read attempt\n# - if correct, print Access granted and stop early\n# - otherwise increment attempts and continue\n\n# TODO: if loop ends without success, print Access denied\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_averageUntilBlank.py",
+      "content": "# Read numbers (one per line) until a blank line is entered.\n# Then print the average rounded to 2 decimals.\n# If no numbers were entered, print: No data\n# Input: multiple lines; termination is an empty line\n# Output: either \"No data\" or a number like 3.50\n# Expected outcome example input:\n# 3\n# 4\n# 3\n# \n# Output:\n# 3.33\n\ncount = 0\ntotal = 0.0\n\nline = input()\n\n# TODO: while line is not blank:\n# - convert to float\n# - update total and count\n# - read next line\n\n# TODO: after loop, print average to 2 decimals, or No data if count==0\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_collatzSteps.py",
+      "content": "# Compute how many steps it takes to reach 1 using the Collatz process.\n# Rule: if n is even, n = n//2 else n = 3*n + 1\n# Input: integer n (n > 0)\n# Output: a single integer: number of steps to reach 1\n# Expected outcome example: input 6 -> output 8\n\nn = int(input().strip())\nsteps = 0\n\n# TODO: while n != 1:\n# - apply Collatz rule\n# - increment steps\n\nprint(steps)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_findFirstMultiple.py",
+      "content": "# Find the smallest positive multiple of k that is >= start.\n# Input: two integers start and k (k > 0)\n# Output: the smallest multiple of k that is >= start\n# Expected outcome example: start=17, k=6 -> output 18\n\nstart = int(input().strip())\nk = int(input().strip())\n\n# TODO: set candidate to start\n\n# TODO: while candidate is not a multiple of k, increase candidate by 1\n\n# TODO: print the candidate\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_primeCheckWhile.py",
+      "content": "# Determine if a number is prime using a while loop.\n# Input: integer n (n >= 0)\n# Output:\n# - print \"Prime\" if n is prime\n# - otherwise print \"Not prime\"\n# Expected outcome examples:\n# n=2 -> Prime\n# n=9 -> Not prime\n# n=1 -> Not prime\n\nn = int(input().strip())\n\n# TODO: handle small cases (n < 2)\n\n# TODO: try divisors starting at 2 up to sqrt(n) using while\n# Use a flag like is_prime = True/False\n\n# TODO: print Prime or Not prime\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_gcdEuclidWhile.py",
+      "content": "# Compute the greatest common divisor (GCD) of two integers using Euclid's algorithm.\n# Input: two integers a and b (can be negative)\n# Output: a single non-negative integer gcd(a, b)\n# Expected outcome example: a=54, b=24 -> output 6\n\na = int(input().strip())\nb = int(input().strip())\n\n# TODO: make a and b non-negative\n\n# TODO: while b != 0:\n# - set a, b = b, a % b\n\n# TODO: print a\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_menuLoopCalculator.py",
+      "content": "# Build a simple menu-driven calculator that runs until the user chooses to quit.\n# The program should repeatedly:\n# 1) read a command (one of: add, sub, mul, div, quit)\n# 2) if command is quit, print \"Bye\" and stop\n# 3) otherwise read two numbers (floats) and print the result on its own line\n# Division by zero should print: \"Cannot divide by zero\" (and then continue loop)\n# Outputs must be exact strings as specified.\n# Expected outcome example interaction (inputs shown as lines):\n# add\n# 2\n# 3\n# sub\n# 10\n# 4\n# div\n# 5\n# 0\n# quit\n# Output:\n# 5.0\n# 6.0\n# Cannot divide by zero\n# Bye\n\n# TODO: start an infinite loop with while True\n\n# TODO: read command\n\n# TODO: handle quit\n\n# TODO: for other commands, read x and y as floats and compute result\n\n# TODO: print results exactly as required\n"
+    }
+  ]
+}

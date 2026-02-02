@@ -1,0 +1,55 @@
+{
+  "topic": "operator precedence",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_basicArithmeticPrecedence.py",
+      "content": "# Goal: Practice operator precedence with + and *.\n# Fill in the expression so that result becomes 14.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# 14\n\nresult = 2 + __ * 4\nprint(result)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_parenthesesOverride.py",
+      "content": "# Goal: Use parentheses to override default precedence.\n# Fill in the missing parentheses so that result becomes 20.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# 20\n\nresult = 2 + 3 * 6\n# Add parentheses on the next line by rewriting the expression:\nresult = __\nprint(result)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_exponentBeforeMultiply.py",
+      "content": "# Goal: Understand that ** has higher precedence than * and +.\n# Replace the blanks so that result becomes 19.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# 19\n\nresult = 3 + 2 ** __\nprint(result)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_leftToRightWithSamePrecedence.py",
+      "content": "# Goal: Understand left-to-right evaluation for * and /.\n# Choose numbers to make the expression evaluate to 6.0.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# 6.0\n\nresult = __ / __ * __\nprint(float(result))\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_floorDivisionAndMod.py",
+      "content": "# Goal: Practice precedence and behavior of // and %.\n# Fill in the blanks so that the script prints the two specified lines.\n\n# Expected outcome:\n# It must print exactly:\n# q=3\n# r=2\n\nn = __\nd = __\nq = n // d\nr = n % d\nprint(f\"q={q}\")\nprint(f\"r={r}\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_unaryMinusVsExponent.py",
+      "content": "# Goal: Understand precedence between unary minus and exponentiation.\n# Fill in expr so that the printed value is -9.\n# Hint: -3**2 is not the same as (-3)**2.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# -9\n\nexpr = __\nprint(expr)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_comparisonsAndArithmetic.py",
+      "content": "# Goal: Combine arithmetic with comparisons and confirm precedence.\n# Fill in the blanks so that the script prints exactly: True\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# True\n\nx = __\ny = __\ncheck = x + 2 * 3 > y\nprint(check)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_booleanPrecedence_not_and_or.py",
+      "content": "# Goal: Practice boolean operator precedence: not > and > or.\n# Fill in A, B, C (True/False) so that result prints as True.\n# Do NOT add parentheses.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# True\n\nA = __\nB = __\nC = __\nresult = not A and B or C\nprint(result)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_membershipAndComparisonChain.py",
+      "content": "# Goal: Understand chaining comparisons and membership precedence.\n# Fill in missing values so that the script prints exactly: True\n# Do NOT change the structure of the expression.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# True\n\nnums = [__ , __ , __ , __]\nx = __\n# Expression uses a chained comparison plus membership test:\nresult = 1 < x <= 3 and x in nums\nprint(result)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_complexExpressionRefactor.py",
+      "content": "# Goal: Refactor a complex expression by adding parentheses to match a target outcome.\n# You must only add parentheses; do not change numbers/operators.\n# Rewrite the expression on the second assignment line.\n\n# Expected outcome:\n# When you run this file, it must print exactly:\n# 1\n\nvalue = 8 - 3 * 2 ** 2 // 3 + 1\n# Add parentheses to make the final printed value equal to 1:\nvalue = __\nprint(value)\n"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "topic": "unpacking tuples",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_basicPairUnpacking.py",
+      "content": "# Unpack a 2-item tuple into two variables and print them.\n\npair = (10, 20)\n\n# TODO: unpack pair into a and b\n\nprint(a)\nprint(b)\n# Expected outcome:\n# 10\n# 20\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_swapWithUnpacking.py",
+      "content": "# Swap two variables using tuple unpacking and print the result.\n\nx = \"left\"\ny = \"right\"\n\n# TODO: swap x and y in one statement\n\nprint(x)\nprint(y)\n# Expected outcome:\n# right\n# left\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_unpackFromReturnTuple.py",
+      "content": "# A function returns a tuple. Unpack it into named variables and print them.\n\ndef stats(nums):\n    return (min(nums), max(nums))\n\nvalues = [7, 2, 9, 4]\n\n# TODO: unpack the result of stats(values) into lo and hi\n\nprint(lo, hi)\n# Expected outcome:\n# 2 9\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_nestedTupleUnpacking.py",
+      "content": "# Unpack a nested tuple to extract city and zip code, then print them.\n\naddress = (\"Ava\", (\"Austin\", \"TX\"), 78701)\n\n# TODO: unpack to get city and zip_code only (ignore other pieces)\n\nprint(city)\nprint(zip_code)\n# Expected outcome:\n# Austin\n# 78701\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_unpackInLoop.py",
+      "content": "# Use tuple unpacking in a loop over a list of pairs and build a formatted string.\n\npoints = [(1, 2), (3, 4), (5, 6)]\n\nresult_lines = []\n# TODO: loop through points, unpack each (x, y), and append \"x=<x>, y=<y>\" to result_lines\n\noutput = \"\\n\".join(result_lines)\nprint(output)\n# Expected outcome:\n# x=1, y=2\n# x=3, y=4\n# x=5, y=6\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_starUnpackingMiddle.py",
+      "content": "# Use star-unpacking to capture the middle elements.\n\nnums = (5, 10, 15, 20, 25)\n\n# TODO: unpack so that first=5, last=25, and middle contains the remaining values\n\nprint(first)\nprint(middle)\nprint(last)\n# Expected outcome:\n# 5\n# [10, 15, 20]\n# 25\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_unpackIgnoringWithUnderscore.py",
+      "content": "# Unpack a tuple while ignoring unwanted values using underscores.\n\nrecord = (\"order-17\", \"2026-02-01\", \"PAID\", 49.99)\n\n# TODO: unpack into order_id and amount only, ignoring the date and status\n\nprint(order_id)\nprint(amount)\n# Expected outcome:\n# order-17\n# 49.99\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_unpackFromDictItems.py",
+      "content": "# Iterate over dict items and unpack key/value pairs. Build a comma-separated summary.\n\nprices = {\"apple\": 1.25, \"banana\": 0.75, \"cherry\": 2.5}\n\nparts = []\n# TODO: iterate over prices.items(), unpack into name and price, append \"name=price\" with exact formatting below\n# Formatting rules:\n# - Use exactly two decimal places for the price\n# - Keep the iteration order as given by the literal\n\nsummary = \", \".join(parts)\nprint(summary)\n# Expected outcome:\n# apple=1.25, banana=0.75, cherry=2.50\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_unpackWithEnumerate.py",
+      "content": "# Use enumerate with unpacking to label each item. Start counting at 1.\n\nnames = (\"Ada\", \"Linus\", \"Grace\")\n\nlines = []\n# TODO: loop with enumerate(names, start=1) and unpack (i, name)\n# Append lines like \"1: Ada\" to lines\n\nprint(\"\\n\".join(lines))\n# Expected outcome:\n# 1: Ada\n# 2: Linus\n# 3: Grace\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_validateAndUnpackTriples.py",
+      "content": "# Each item should be a 3-tuple: (product, qty, unit_price).\n# Unpack each triple, compute line totals, and compute the grand total.\n# If any item is not length 3, skip it.\n\nitems = [\n    (\"pen\", 3, 1.50),\n    (\"notebook\", 2, 4.00),\n    (\"bad-item\", 9),\n    (\"eraser\", 1, 0.75)\n]\n\nline_totals = []\ngrand_total = 0.0\n\n# TODO:\n# - Loop through items\n# - If the tuple does not have exactly 3 elements, continue\n# - Otherwise unpack into product, qty, unit_price\n# - Compute total = qty * unit_price\n# - Append (product, total) to line_totals\n# - Add total to grand_total\n\nprint(line_totals)\nprint(f\"{grand_total:.2f}\")\n# Expected outcome:\n# [('pen', 4.5), ('notebook', 8.0), ('eraser', 0.75)]\n# 13.25\n"
+    }
+  ]
+}

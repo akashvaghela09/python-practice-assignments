@@ -1,0 +1,55 @@
+{
+  "topic": "numeric operators",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_addSubtractTotals.py",
+      "content": "# Goal: Use + and - to compute a final total.\n# Expected outcome: When run, the program prints exactly:\n# Total: 23\n\nprice = 30\ncoupon = 7\nshipping = 0\n\n# TODO: compute total using numeric operators\n# total = ???\n\ntotal = None\n\nprint(\"Total:\", total)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_multiplyAndAdd.py",
+      "content": "# Goal: Use * and + to compute a bill.\n# Expected outcome: When run, the program prints exactly:\n# Bill: 68\n\nitem_price = 17\nquantity = 4\nfee = 0\n\n# TODO: bill = item_price * quantity + fee\nbill = None\n\nprint(\"Bill:\", bill)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_trueDivisionFloat.py",
+      "content": "# Goal: Use / to compute a float result.\n# Expected outcome: When run, the program prints exactly:\n# Average: 12.5\n\ntotal_points = 50\nnum_tests = 4\n\n# TODO: average should be 12.5\naverage = None\n\nprint(\"Average:\", average)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_floorDivision.py",
+      "content": "# Goal: Use // to compute full boxes.\n# Expected outcome: When run, the program prints exactly:\n# Full boxes: 6\n\ncookies = 53\nbox_size = 8\n\n# TODO: full_boxes should use floor division\nfull_boxes = None\n\nprint(\"Full boxes:\", full_boxes)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_moduloRemainder.py",
+      "content": "# Goal: Use % to compute leftovers.\n# Expected outcome: When run, the program prints exactly:\n# Leftover cookies: 5\n\ncookies = 53\nbox_size = 8\n\n# TODO: leftover should use modulo\nleftover = None\n\nprint(\"Leftover cookies:\", leftover)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_exponentiationPowers.py",
+      "content": "# Goal: Use ** to compute powers.\n# Expected outcome: When run, the program prints exactly:\n# 2^10 = 1024\n\nbase = 2\nexp = 10\n\n# TODO: compute power using **\nresult = None\n\nprint(f\"{base}^{exp} =\", result)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_operatorPrecedence.py",
+      "content": "# Goal: Use parentheses to control order of operations.\n# Expected outcome: When run, the program prints exactly:\n# Result: 16\n\n# Without parentheses, 2 + 3 * 4 would be 14.\n# TODO: add parentheses so the result becomes 16.\nresult = None  # replace with an expression\n\nprint(\"Result:\", result)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_augmentedAssignment.py",
+      "content": "# Goal: Use augmented assignment operators (+=, -=, *=, //=, %=).\n# Expected outcome: When run, the program prints exactly:\n# Score: 42\n\nscore = 10\n\n# TODO:\n# 1) add 15 to score using +=\n# 2) multiply score by 2 using *=\n# 3) subtract 3 using -=\n# After these steps, score should be 42.\n\n# score ???\n\nprint(\"Score:\", score)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_convertMinutesToHHMM.py",
+      "content": "# Goal: Use // and % to convert minutes into hours and minutes.\n# Expected outcome: When run, the program prints exactly:\n# 135 minutes = 2h 15m\n\ntotal_minutes = 135\n\n# TODO:\n# hours = total_minutes // 60\n# minutes = total_minutes % 60\nhours = None\nminutes = None\n\nprint(f\"{total_minutes} minutes = {hours}h {minutes}m\")\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_compoundExpressionAndRounding.py",
+      "content": "# Goal: Combine numeric operators to compute a discounted total with tax.\n# Rules:\n# - subtotal = price * qty\n# - discount_amount = subtotal * (discount_percent / 100)\n# - after_discount = subtotal - discount_amount\n# - tax_amount = after_discount * (tax_percent / 100)\n# - final_total = after_discount + tax_amount\n# - final_total should be rounded to 2 decimals using round(final_total, 2)\n# Expected outcome: When run, the program prints exactly:\n# Final total: 91.07\n\nprice = 19.99\nqty = 4\ndiscount_percent = 10\ntax_percent = 8.25\n\n# TODO: compute final_total following the rules above\nfinal_total = None\n\nprint(\"Final total:\", final_total)\n"
+    }
+  ]
+}

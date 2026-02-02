@@ -1,0 +1,55 @@
+{
+  "topic": "replacing items in list",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_replaceSingleItemByIndex.py",
+      "content": "# Goal: Replace one item in a list by index.\n# Expected outcome: printing the list shows ['red', 'blue', 'green']\n\ncolors = ['red', 'black', 'green']\n\n# TODO: replace 'black' with 'blue' using an index assignment.\n\nprint(colors)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_replaceLastItemNegativeIndex.py",
+      "content": "# Goal: Replace the last item using a negative index.\n# Expected outcome: printing the list shows ['sun', 'moon', 'stars']\n\nwords = ['sun', 'moon', 'clouds']\n\n# TODO: replace the last element with 'stars' using a negative index.\n\nprint(words)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_replaceUsingValueSearch.py",
+      "content": "# Goal: Find a value and replace it using .index().\n# Expected outcome: printing the list shows ['cat', 'dog', 'fish']\n\npets = ['cat', 'dog', 'bird']\n\n# TODO:\n# 1) find the index of 'bird'\n# 2) replace it with 'fish'\n\nprint(pets)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_replaceMultipleByLoopWithIndex.py",
+      "content": "# Goal: Replace all occurrences of a value by iterating with indexes.\n# Expected outcome: printing the list shows [1, 0, 2, 0, 3, 0]\n\nnums = [1, -1, 2, -1, 3, -1]\n\n# TODO: replace every -1 with 0 using a for-loop over indexes.\n\nprint(nums)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_replaceUsingSliceAssignment.py",
+      "content": "# Goal: Replace a range of items using slice assignment.\n# Expected outcome: printing the list shows ['a', 'X', 'Y', 'e']\n\nletters = ['a', 'b', 'c', 'd', 'e']\n\n# TODO: replace the middle three items (b, c, d) with 'X', 'Y' using slice assignment.\n\nprint(letters)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_replaceEveryNthItem.py",
+      "content": "# Goal: Replace every 3rd item (index 2, 5, 8, ...) with 'X'.\n# Expected outcome: printing the list shows ['a', 'b', 'X', 'd', 'e', 'X', 'g', 'h', 'X', 'j']\n\nitems = ['a','b','c','d','e','f','g','h','i','j']\n\n# TODO: use a loop with range(start, stop, step) to replace every 3rd item with 'X'.\n\nprint(items)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_replaceWithConditionInPlace.py",
+      "content": "# Goal: Replace items in place based on a condition.\n# Rule: if a score is below 60, replace it with 0.\n# Expected outcome: printing the list shows [88, 0, 73, 0, 60]\n\nscores = [88, 41, 73, 59, 60]\n\n# TODO: modify 'scores' in place by scanning indexes and applying the rule.\n\nprint(scores)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_replaceStringsCaseInsensitive.py",
+      "content": "# Goal: Replace all case-insensitive matches of 'yes' with 'Y'.\n# Expected outcome: printing the list shows ['Y', 'no', 'Y', 'maybe', 'Y']\n\nanswers = ['Yes', 'no', 'YES', 'maybe', 'yes']\n\n# TODO:\n# Replace any element that equals 'yes' ignoring case with 'Y'.\n# Keep other elements unchanged.\n\nprint(answers)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_replaceUsingMappingParallelList.py",
+      "content": "# Goal: Replace items in one list based on a mapping defined by two parallel lists.\n# Replace any fruit found in old_names with the corresponding item in new_names.\n# Expected outcome: printing the list shows ['banana', 'orange', 'kiwi', 'orange', 'banana']\n\nbasket = ['apple', 'orange', 'kiwi', 'orange', 'apple']\nold_names = ['apple']\nnew_names = ['banana']\n\n# TODO:\n# For each element in basket, if it exists in old_names, replace it with the matching element in new_names.\n# Do this in place.\n\nprint(basket)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_replaceSublistPatternInPlace.py",
+      "content": "# Goal: Replace a specific consecutive pattern (sublist) in place.\n# Pattern: [0, 0, 0] should be replaced with [1, 1]. Replace all non-overlapping occurrences from left to right.\n# Expected outcome: printing the list shows [5, 1, 1, 2, 1, 1, 9]\n\ndata = [5, 0, 0, 0, 2, 0, 0, 0, 9]\npattern = [0, 0, 0]\nreplacement = [1, 1]\n\n# TODO:\n# Walk through the list and whenever you find 'pattern' starting at the current index,\n# replace that slice with 'replacement', then continue scanning from after the inserted replacement.\n# (Do not use .replace() since this is a list, not a string.)\n\nprint(data)\n"
+    }
+  ]
+}

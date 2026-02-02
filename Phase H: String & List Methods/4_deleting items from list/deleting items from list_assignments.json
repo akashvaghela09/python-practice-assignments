@@ -1,0 +1,55 @@
+{
+  "topic": "deleting items from list",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_deleteByIndexWithDel.py",
+      "content": "# Delete a single item using del\n# Goal: Remove the item at index 2 (the third item) from the list.\n# Expected output:\n# fruits: ['apple', 'banana', 'date']\n\nfruits = ['apple', 'banana', 'cherry', 'date']\n\n# TODO: delete the item at index 2 using del\n\nprint('fruits:', fruits)\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_deleteLastItem.py",
+      "content": "# Delete the last item using del and negative indexing\n# Goal: Remove the last item from the list.\n# Expected output:\n# nums: [10, 20, 30]\n\nnums = [10, 20, 30, 40]\n\n# TODO: delete the last item using del and a negative index\n\nprint('nums:', nums)\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_removeByValueFirstOccurrence.py",
+      "content": "# Remove by value using remove (first occurrence only)\n# Goal: Remove the first occurrence of 'red' from the list.\n# Expected output:\n# colors: ['blue', 'red', 'green']\n\ncolors = ['red', 'blue', 'red', 'green']\n\n# TODO: remove the first 'red' using remove\n\nprint('colors:', colors)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_popAndUseReturnedValue.py",
+      "content": "# Pop an item and use the returned value\n# Goal: Pop the item at index 1 and store it in removed.\n# Expected output:\n# removed: 200\n# data: [100, 300, 400]\n\ndata = [100, 200, 300, 400]\n\n# TODO: pop the item at index 1 into a variable named removed\n\nprint('removed:', removed)\nprint('data:', data)\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_deleteSliceRange.py",
+      "content": "# Delete a range of items using del with slicing\n# Goal: Delete indices 1 through 3 (items 2,3,4) from the list.\n# Expected output:\n# letters: ['a', 'e', 'f']\n\nletters = ['a', 'b', 'c', 'd', 'e', 'f']\n\n# TODO: delete a slice so that b,c,d are removed\n\nprint('letters:', letters)\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_removeAllOccurrencesLoop.py",
+      "content": "# Remove all occurrences of a value from a list\n# Goal: Remove ALL occurrences of 0 from nums.\n# Constraint: Use a while loop and remove (do not build a new list).\n# Expected output:\n# nums: [1, 2, 3, 4]\n\nnums = [0, 1, 0, 2, 3, 0, 4]\n\n# TODO: while 0 is in nums, remove it\n\nprint('nums:', nums)\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_deleteByIndexesInDescendingOrder.py",
+      "content": "# Delete multiple items by their indexes\n# Goal: Delete items at indexes 1, 3, and 4 from the ORIGINAL list.\n# Hint: If you delete in ascending order, indexes shift.\n# Expected output:\n# items: ['a', 'c', 'g']\n\nitems = ['a', 'b', 'c', 'd', 'e', 'f', 'g']\nindexes_to_delete = [1, 3, 4]\n\n# TODO: delete the specified indexes correctly\n# Constraint: Use del, and avoid deleting the wrong elements due to shifting.\n\nprint('items:', items)\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_removeItemsMatchingConditionInPlace.py",
+      "content": "# Remove items matching a condition, in place\n# Goal: Remove all numbers less than 0 from nums (modify the same list).\n# Constraint: Do NOT create a new list.\n# Expected output:\n# nums: [3, 0, 2, 5]\n\nnums = [3, -1, 0, -7, 2, 5, -2]\n\n# TODO: iterate safely and delete negatives in place\n# Tip: one safe approach is iterating backwards using indexes.\n\nprint('nums:', nums)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_safeRemovalWithTryExcept.py",
+      "content": "# Safely remove an item that may or may not exist\n# Goal: Try to remove 'kiwi' from fruits.\n# If 'kiwi' is not present, do nothing.\n# Expected output:\n# fruits: ['apple', 'banana', 'mango']\n\nfruits = ['apple', 'banana', 'mango']\n\n# TODO: attempt to remove 'kiwi' without crashing\n# Constraint: Use try/except with list.remove\n\nprint('fruits:', fruits)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_deleteDuplicatesKeepFirstOccurrence.py",
+      "content": "# Delete duplicates in place, keeping the first occurrence\n# Goal: Remove duplicates from nums IN PLACE while preserving order of first occurrences.\n# Example: [2, 1, 2, 3, 1, 4, 3] -> [2, 1, 3, 4]\n# Constraint: Do NOT create a second list of numbers (no new list like unique = []).\n# You may use a set to track seen values.\n# Expected output:\n# nums: [2, 1, 3, 4]\n\nnums = [2, 1, 2, 3, 1, 4, 3]\n\n# TODO: remove duplicates in place using deletions (del or pop)\n# Hint: manage an index variable carefully as you delete.\n\nprint('nums:', nums)\n"
+    }
+  ]
+}

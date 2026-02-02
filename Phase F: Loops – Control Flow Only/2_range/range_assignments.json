@@ -1,0 +1,55 @@
+{
+  "topic": "range",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_rangeToListBasics.py",
+      "content": "# Goal: Create a list containing the numbers 0 through 4 using range.\n\nnums = list(_____(_____))\nprint(nums)\n\n# Expected outcome:\n# [0, 1, 2, 3, 4]\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_rangeWithStartStop.py",
+      "content": "# Goal: Create a list containing the numbers 3 through 7 (inclusive) using range.\n\nnums = list(range(_____, _____))\nprint(nums)\n\n# Expected outcome:\n# [3, 4, 5, 6, 7]\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_rangeWithStep.py",
+      "content": "# Goal: Create a list of even numbers from 0 to 10 (inclusive) using range with a step.\n\nevens = list(range(_____, _____, _____))\nprint(evens)\n\n# Expected outcome:\n# [0, 2, 4, 6, 8, 10]\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_countdownRange.py",
+      "content": "# Goal: Create a countdown list from 5 down to 1 using range.\n\ncountdown = list(range(_____, _____, _____))\nprint(countdown)\n\n# Expected outcome:\n# [5, 4, 3, 2, 1]\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_sumUsingRange.py",
+      "content": "# Goal: Compute the sum of numbers from 1 to 100 (inclusive) using range.\n\ntotal = 0\nfor n in range(_____, _____):\n    total += n\n\nprint(total)\n\n# Expected outcome:\n# 5050\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_countMultiplesInRange.py",
+      "content": "# Goal: Count how many multiples of 3 are between 1 and 30 (inclusive).\n# Use range and a loop (no list comprehensions).\n\ncount = 0\nfor n in range(_____, _____):\n    if n % 3 == 0:\n        count += 1\n\nprint(count)\n\n# Expected outcome:\n# 10\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_indexLoopWithRangeLen.py",
+      "content": "# Goal: Print each item with its index in the format 'index:item'.\n# Use range(len(items)).\n\nitems = [\"a\", \"b\", \"c\", \"d\"]\n\nfor i in range(_____):\n    print(f\"{i}:{items[i]}\")\n\n# Expected outcome:\n# 0:a\n# 1:b\n# 2:c\n# 3:d\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_sliceByIndicesUsingRange.py",
+      "content": "# Goal: Build a new list containing elements at even indices from data.\n# Use range with a step and append.\n\ndata = [10, 11, 12, 13, 14, 15, 16]\nresult = []\n\nfor i in range(_____, _____, _____):\n    result.append(data[i])\n\nprint(result)\n\n# Expected outcome:\n# [10, 12, 14, 16]\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_fizzBuzzRange.py",
+      "content": "# Goal: Print the FizzBuzz sequence from 1 to 15 (inclusive), one per line.\n# Rules:\n# - divisible by 3 -> Fizz\n# - divisible by 5 -> Buzz\n# - divisible by both -> FizzBuzz\n# - otherwise print the number\n\nfor n in range(_____, _____):\n    # TODO: complete the conditional logic\n    _____\n\n# Expected outcome (15 lines):\n# 1\n# 2\n# Fizz\n# 4\n# Buzz\n# Fizz\n# 7\n# 8\n# Fizz\n# Buzz\n# 11\n# Fizz\n# 13\n# 14\n# FizzBuzz\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_customRangeGenerator.py",
+      "content": "# Goal: Implement a function that behaves like range(start, stop, step) for positive step.\n# It must return a list of numbers (not a range object).\n# Assume: step > 0.\n\ndef my_range(start, stop, step):\n    values = []\n    # TODO: add numbers starting at start, increasing by step, stopping before stop\n    _____\n    return values\n\nprint(my_range(2, 11, 3))\nprint(my_range(0, 1, 1))\nprint(my_range(5, 5, 2))\n\n# Expected outcome:\n# [2, 5, 8]\n# [0]\n# []\n"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "topic": "while loop",
+  "assignments": [
+    {
+      "index": 1,
+      "fileName": "01_whileCountUp.py",
+      "content": "# Goal: Print the numbers 1 through 5, each on its own line, using a while loop.\n# Expected outcome (exact lines):\n# 1\n# 2\n# 3\n# 4\n# 5\n\nn = 1\n\n# TODO: write a while loop that prints n and increments it until 5\nwhile __________:\n    print(__________)\n    __________\n"
+    },
+    {
+      "index": 2,
+      "fileName": "02_whileCountDown.py",
+      "content": "# Goal: Print a countdown from 5 to 1, each on its own line, using a while loop.\n# Expected outcome (exact lines):\n# 5\n# 4\n# 3\n# 2\n# 1\n\nn = 5\n\n# TODO: write a while loop that prints n and decrements it until 1\nwhile __________:\n    print(__________)\n    __________\n"
+    },
+    {
+      "index": 3,
+      "fileName": "03_sumFirstN.py",
+      "content": "# Goal: Compute the sum of integers from 1 to limit (inclusive) using a while loop.\n# For limit = 10, expected outcome (exact line):\n# Sum is 55\n\nlimit = 10\n\n# TODO: use a while loop to compute total\ncurrent = 1\ntotal = 0\nwhile __________:\n    total = __________\n    current = __________\n\nprint(\"Sum is\", total)\n"
+    },
+    {
+      "index": 4,
+      "fileName": "04_evenNumbersUpTo.py",
+      "content": "# Goal: Print all even numbers from 2 up to max_n (inclusive) using a while loop.\n# For max_n = 12, expected outcome (exact lines):\n# 2\n# 4\n# 6\n# 8\n# 10\n# 12\n\nmax_n = 12\n\n# TODO: implement the loop\nn = 2\nwhile __________:\n    print(__________)\n    n = __________\n"
+    },
+    {
+      "index": 5,
+      "fileName": "05_inputUntilQuit.py",
+      "content": "# Goal: Keep reading input until the user types 'quit' (case-sensitive).\n# Count how many non-quit lines were entered and print the count once finished.\n# Example interaction:\n# input: hello\n# input: world\n# input: quit\n# Expected outcome (exact line):\n# You entered 2 lines\n\ncount = 0\n\n# TODO: use a while loop to repeatedly call input() until 'quit'\ntext = input(\"Enter text (or quit): \")\nwhile __________:\n    count = __________\n    text = input(\"Enter text (or quit): \")\n\nprint(\"You entered\", count, \"lines\")\n"
+    },
+    {
+      "index": 6,
+      "fileName": "06_passwordAttempts.py",
+      "content": "# Goal: Allow up to 3 attempts to enter the correct password.\n# If the correct password is entered, print 'Access granted'. Otherwise, after 3 failures, print 'Access denied'.\n# Use a while loop.\n# With inputs: a, b, secret\n# Expected outcome (exact line):\n# Access granted\n\ncorrect = \"secret\"\nattempts = 0\n\n# TODO: loop while attempts remain and password not correct\nentered = input(\"Password: \")\nwhile __________:\n    attempts = __________\n    entered = input(\"Password: \")\n\n# TODO: print the correct final message\nif __________:\n    print(\"Access granted\")\nelse:\n    print(\"Access denied\")\n"
+    },
+    {
+      "index": 7,
+      "fileName": "07_multiplicationTableRow.py",
+      "content": "# Goal: Print the 7-times table from 7 x 1 through 7 x 5 using a while loop.\n# Expected outcome (exact lines):\n# 7 x 1 = 7\n# 7 x 2 = 14\n# 7 x 3 = 21\n# 7 x 4 = 28\n# 7 x 5 = 35\n\nbase = 7\nmult = 1\n\n# TODO: while loop to print the formatted lines up to 5\nwhile __________:\n    product = __________\n    print(f\"{base} x {mult} = {product}\")\n    mult = __________\n"
+    },
+    {
+      "index": 8,
+      "fileName": "08_collatzSteps.py",
+      "content": "# Goal: Given a positive integer n, repeatedly apply:\n# - if n is even: n = n // 2\n# - else: n = 3*n + 1\n# Stop when n becomes 1. Count how many steps it takes and print the step count.\n# For n = 6, sequence is 6 -> 3 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1, so steps = 8\n# Expected outcome (exact line):\n# Steps: 8\n\nn = 6\nsteps = 0\n\n# TODO: implement Collatz with a while loop\nwhile __________:\n    if __________:\n        n = __________\n    else:\n        n = __________\n    steps = __________\n\nprint(\"Steps:\", steps)\n"
+    },
+    {
+      "index": 9,
+      "fileName": "09_findFirstDivisor.py",
+      "content": "# Goal: Find the smallest divisor of number greater than 1.\n# If number is prime, the smallest divisor should be the number itself.\n# Use a while loop.\n# For number = 91, expected outcome (exact line):\n# Smallest divisor: 7\n\nnumber = 91\n\nd = 2\n\n# TODO: loop until you find a divisor\nwhile __________:\n    d = __________\n\nprint(\"Smallest divisor:\", d)\n"
+    },
+    {
+      "index": 10,
+      "fileName": "10_newtonSqrtApprox.py",
+      "content": "# Goal: Approximate sqrt(value) using Newton's method until the approximation changes by less than tolerance.\n# Newton update: x = (x + value/x) / 2\n# Start with x = value (for value > 0). Use a while loop.\n# For value = 25.0 and tolerance = 1e-6, expected outcome (exact line, rounded to 6 decimals):\n# Approx sqrt: 5.000000\n\nvalue = 25.0\ntolerance = 1e-6\n\n# TODO: initialize x and prev so the loop works correctly\nx = __________\nprev = __________\n\n# TODO: loop until the absolute change is less than tolerance\nwhile __________:\n    prev = x\n    x = (x + value / x) / 2\n\nprint(\"Approx sqrt:\", f\"{x:.6f}\")\n"
+    }
+  ]
+}
