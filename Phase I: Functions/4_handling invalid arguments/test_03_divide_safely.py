@@ -1,7 +1,17 @@
 import math
 import pytest
+import importlib.util
+from pathlib import Path
 
-from 03_divide_safely import divide
+# --- dynamic import for numbered module ---
+MODULE_PATH = Path(__file__).parent / "03_divide_safely.py"
+
+spec = importlib.util.spec_from_file_location("divide_safely_03", MODULE_PATH)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+divide = module.divide
+# -----------------------------------------
 
 
 @pytest.mark.parametrize(
@@ -21,7 +31,9 @@ def test_divide_valid_values(a, b, expected):
 
 def test_divide_returns_float_for_int_inputs():
     actual = divide(1, 2)
-    assert isinstance(actual, float), f"expected {float.__name__} got {type(actual).__name__}"
+    assert isinstance(actual, float), (
+        f"expected {float.__name__} got {type(actual).__name__}"
+    )
 
 
 def test_divide_by_zero_raises_valueerror_with_message():
@@ -29,7 +41,9 @@ def test_divide_by_zero_raises_valueerror_with_message():
         divide(10, 0)
     expected_msg = "b must not be zero"
     actual_msg = str(excinfo.value)
-    assert actual_msg == expected_msg, f"expected {expected_msg!r} got {actual_msg!r}"
+    assert actual_msg == expected_msg, (
+        f"expected {expected_msg!r} got {actual_msg!r}"
+    )
 
 
 @pytest.mark.parametrize(
@@ -47,7 +61,9 @@ def test_divide_rejects_bool_inputs(a, b):
         divide(a, b)
     expected_msg = "a and b must be numbers"
     actual_msg = str(excinfo.value)
-    assert actual_msg == expected_msg, f"expected {expected_msg!r} got {actual_msg!r}"
+    assert actual_msg == expected_msg, (
+        f"expected {expected_msg!r} got {actual_msg!r}"
+    )
 
 
 @pytest.mark.parametrize(
@@ -70,7 +86,9 @@ def test_divide_rejects_non_number_inputs(a, b):
         divide(a, b)
     expected_msg = "a and b must be numbers"
     actual_msg = str(excinfo.value)
-    assert actual_msg == expected_msg, f"expected {expected_msg!r} got {actual_msg!r}"
+    assert actual_msg == expected_msg, (
+        f"expected {expected_msg!r} got {actual_msg!r}"
+    )
 
 
 def test_divide_zero_numerator_ok():
@@ -84,7 +102,9 @@ def test_divide_negative_zero_denominator_raises():
         divide(10, -0.0)
     expected_msg = "b must not be zero"
     actual_msg = str(excinfo.value)
-    assert actual_msg == expected_msg, f"expected {expected_msg!r} got {actual_msg!r}"
+    assert actual_msg == expected_msg, (
+        f"expected {expected_msg!r} got {actual_msg!r}"
+    )
 
 
 def test_divide_float_zero_denominator_raises():
@@ -92,9 +112,13 @@ def test_divide_float_zero_denominator_raises():
         divide(10, 0.0)
     expected_msg = "b must not be zero"
     actual_msg = str(excinfo.value)
-    assert actual_msg == expected_msg, f"expected {expected_msg!r} got {actual_msg!r}"
+    assert actual_msg == expected_msg, (
+        f"expected {expected_msg!r} got {actual_msg!r}"
+    )
 
 
 def test_divide_handles_infinite_results():
     actual = divide(1.0, 1e-300)
-    assert math.isfinite(actual), f"expected {True} got {math.isfinite(actual)}"
+    assert math.isfinite(actual), (
+        f"expected {True} got {math.isfinite(actual)}"
+    )
