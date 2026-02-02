@@ -1,40 +1,29 @@
-import importlib.util
-import io
-import os
 import sys
+import importlib.util
+from pathlib import Path
 
 
-def load_module(path, name):
-    spec = importlib.util.spec_from_file_location(name, path)
+def _run_script(script_path: Path):
+    if not script_path.exists():
+        raise AssertionError(f"Expected output:\n[5, 4, 3, 2, 1]\nActual output:\n<missing file: {script_path.name}>")
+
+    spec = importlib.util.spec_from_file_location(script_path.stem, script_path)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore[attr-defined]
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_countdown_range_print_and_value(capsys):
-    path = os.path.join(os.path.dirname(__file__), "04_countdownRange.py")
-    load_module(path, "countdown_mod")
-
-    out = capsys.readouterr().out.strip()
-    expected = str([5, 4, 3, 2, 1])
-    assert out == expected, f"expected={expected} actual={out}"
-
-
-def test_countdown_variable_exists_and_correct():
-    path = os.path.join(os.path.dirname(__file__), "04_countdownRange.py")
-    mod = load_module(path, "countdown_mod2")
-
-    expected = [5, 4, 3, 2, 1]
-    actual = getattr(mod, "countdown", None)
-    assert actual == expected, f"expected={expected} actual={actual}"
-
-
-def test_no_extra_output_lines(capsys):
-    path = os.path.join(os.path.dirname(__file__), "04_countdownRange.py")
-    load_module(path, "countdown_mod3")
-
-    out = capsys.readouterr().out
-    lines = [line for line in out.splitlines() if line.strip() != ""]
-    expected_count = 1
-    actual_count = len(lines)
-    assert actual_count == expected_count, f"expected={expected_count} actual={actual_count}"
+def test_output_exact():
+    script_path = Path(__file__).resolve().parent / "04_countdownRange.py"
+    actual = _run_script(script_path)
+    expected = "[5, 4, 3, 2, 1]\n"
+    if actual != expected:
+        raise AssertionError(f"Expected output:\n{expected}Actual output:\n{actual}")

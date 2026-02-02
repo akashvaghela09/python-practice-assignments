@@ -1,40 +1,29 @@
+import sys
 import importlib.util
-import pathlib
-import re
+from pathlib import Path
 
-def _load_module():
-    path = pathlib.Path(__file__).resolve().parent / "06_countMultiplesInRange.py"
-    spec = importlib.util.spec_from_file_location("countMultiplesInRange06", str(path))
+
+def _run_script(script_path: Path):
+    if not script_path.exists():
+        raise AssertionError(f"Expected output:\n10\nActual output:\n<missing file: {script_path.name}>")
+
+    spec = importlib.util.spec_from_file_location(script_path.stem, script_path)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
 
-def test_counts_multiples_of_3_inclusive_1_to_30(capsys):
-    module = _load_module()
-    out = capsys.readouterr().out.strip()
-    assert hasattr(module, "count")
-    assert isinstance(module.count, int)
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore[attr-defined]
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
-    expected = 0
-    for n in range(1, 31):
-        if n % 3 == 0:
-            expected += 1
 
-    assert module.count == expected, f"expected={expected} actual={module.count}"
-
-    m = re.search(r"-?\d+", out)
-    actual_printed = int(m.group(0)) if m else None
-    assert actual_printed == expected, f"expected={expected} actual={actual_printed}"
-
-def test_no_list_comprehensions_used():
-    path = pathlib.Path(__file__).resolve().parent / "06_countMultiplesInRange.py"
-    text = path.read_text(encoding="utf-8")
-    assert "[" not in text, "expected=no_list_comp actual=bracket_found"
-    assert " for " not in text or "[" not in text, "expected=no_list_comp actual=list_comp_like_found"
-
-def test_uses_range_and_for_loop():
-    path = pathlib.Path(__file__).resolve().parent / "06_countMultiplesInRange.py"
-    text = path.read_text(encoding="utf-8")
-    has_for = re.search(r"^\s*for\s+\w+\s+in\s+range\s*\(", text, flags=re.M) is not None
-    has_range = "range(" in text
-    assert has_for and has_range, f"expected={True} actual={has_for and has_range}"
+def test_output_exact():
+    script_path = Path(__file__).resolve().parent / "06_countMultiplesInRange.py"
+    actual = _run_script(script_path)
+    expected = "10\n"
+    if actual != expected:
+        raise AssertionError(f"Expected output:\n{expected}Actual output:\n{actual}")

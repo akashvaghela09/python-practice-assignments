@@ -1,35 +1,21 @@
-import importlib
-import io
-import contextlib
-import pytest
+import sys
+import importlib.util
+from pathlib import Path
 
 
-def test_running_total_output():
-    mod_name = "03_sumRunningTotal"
-    buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
-        importlib.import_module(mod_name)
-    out = buf.getvalue().strip().splitlines()
-    expected = ["total: 15"]
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+def _run_script(path: Path, capsys):
+    if not path.exists():
+        raise AssertionError(f"Missing assignment file: {path}")
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
+    sys.modules.pop(spec.name, None)
+    spec.loader.exec_module(module)
+    return capsys.readouterr().out
 
 
-def test_running_total_single_print():
-    mod_name = "03_sumRunningTotal"
-    buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
-        importlib.reload(importlib.import_module(mod_name))
-    out = buf.getvalue().strip().splitlines()
-    expected_len = 1
-    actual_len = len(out)
-    assert actual_len == expected_len, f"expected={expected_len!r} actual={actual_len!r}"
-
-
-def test_running_total_format_exact():
-    mod_name = "03_sumRunningTotal"
-    buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
-        importlib.reload(importlib.import_module(mod_name))
-    out = buf.getvalue()
+def test_output_exact(capsys):
+    script_path = Path(__file__).resolve().parent / "03_sumRunningTotal.py"
+    actual = _run_script(script_path, capsys)
     expected = "total: 15\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")

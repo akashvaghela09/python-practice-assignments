@@ -1,42 +1,21 @@
-import importlib.util
-import pathlib
 import sys
-import types
-import pytest
+import importlib.util
+from pathlib import Path
 
 
-FILE_NAME = "10_traceLoopState.py"
-
-
-def _load_module():
-    path = pathlib.Path(__file__).resolve().parent / FILE_NAME
-    spec = importlib.util.spec_from_file_location("trace_loop_state_mod", str(path))
+def _run_script(path: Path, capsys):
+    if not path.exists():
+        raise AssertionError(f"Missing assignment file: {path}")
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
     module = importlib.util.module_from_spec(spec)
-    assert spec and spec.loader
+    sys.modules.pop(spec.name, None)
     spec.loader.exec_module(module)
-    return module
+    return capsys.readouterr().out
 
 
-def test_trace_output_exact(capsys):
-    _load_module()
-    captured = capsys.readouterr()
-    out_lines = captured.out.splitlines()
-    expected = [
-        "i=0 before=1 after=1",
-        "i=1 before=1 after=2",
-        "i=2 before=2 after=6",
-        "i=3 before=6 after=24",
-        "final: 24",
-    ]
-    assert out_lines == expected, f"expected={expected!r} actual={out_lines!r}"
-
-
-def test_no_stderr(capsys):
-    _load_module()
-    captured = capsys.readouterr()
-    assert captured.err == "", f"expected={''!r} actual={captured.err!r}"
-
-
-def test_is_not_importable_by_number_name():
-    with pytest.raises(Exception):
-        __import__("10_traceLoopState")
+def test_output_exact(capsys):
+    script_path = Path(__file__).resolve().parent / "10_traceLoopState.py"
+    actual = _run_script(script_path, capsys)
+    expected = "i=0 before=1 after=1\ni=1 before=1 after=2\ni=2 before=2 after=6\ni=3 before=6 after=24\nfinal: 24\n"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")

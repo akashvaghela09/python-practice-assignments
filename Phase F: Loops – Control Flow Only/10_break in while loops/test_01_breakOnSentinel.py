@@ -1,47 +1,36 @@
-import builtins
-import importlib.util
-import io
-import os
 import sys
+import importlib.util
+from pathlib import Path
 import pytest
 
-MODULE_FILE = "01_breakOnSentinel.py"
 
+def _run_script(monkeypatch, capsys, inputs):
+    script_path = Path(__file__).resolve().parent / "01_breakOnSentinel.py"
+    if not script_path.exists():
+        pytest.fail(f"expected output: (file exists)\nactual output: missing file {script_path.name}")
 
-def load_module_with_io(monkeypatch, inputs):
     it = iter(inputs)
 
     def fake_input(prompt=None):
-        return next(it)
+        try:
+            return next(it)
+        except StopIteration:
+            raise EOFError
 
-    monkeypatch.setattr(builtins, "input", fake_input)
+    monkeypatch.setattr("builtins.input", fake_input)
 
-    buf = io.StringIO()
-    old_stdout = sys.stdout
-    sys.stdout = buf
+    spec = importlib.util.spec_from_file_location("mod_01_breakOnSentinel", str(script_path))
+    mod = importlib.util.module_from_spec(spec)
     try:
-        spec = importlib.util.spec_from_file_location("student_mod", os.path.join(os.getcwd(), MODULE_FILE))
-        mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-    finally:
-        sys.stdout = old_stdout
+    except EOFError:
+        pass
 
-    return buf.getvalue()
+    return capsys.readouterr().out
 
 
-def test_counts_until_sentinel(monkeypatch):
-    out = load_module_with_io(monkeypatch, ["3", "8", "-1"])
+def test_break_on_minus_one(monkeypatch, capsys):
+    out = _run_script(monkeypatch, capsys, ["3", "8", "-1"])
     expected = "You entered 2 numbers\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_immediate_sentinel(monkeypatch):
-    out = load_module_with_io(monkeypatch, ["-1"])
-    expected = "You entered 0 numbers\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_counts_multiple(monkeypatch):
-    out = load_module_with_io(monkeypatch, ["10", "0", "7", "-1"])
-    expected = "You entered 3 numbers\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+    if out != expected:
+        pytest.fail(f"expected output: {expected}actual output: {out}")

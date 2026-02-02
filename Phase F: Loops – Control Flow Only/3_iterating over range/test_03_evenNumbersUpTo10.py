@@ -1,76 +1,76 @@
-import importlib.util
-import io
-import os
 import sys
+import importlib.util
+from pathlib import Path
 import pytest
 
-MODULE_FILENAME = "03_evenNumbersUpTo10.py"
 
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
 
-def load_module_from_file(tmp_path, source_text):
-    file_path = tmp_path / MODULE_FILENAME
-    file_path.write_text(source_text, encoding="utf-8")
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
 
-    spec = importlib.util.spec_from_file_location("student_module", str(file_path))
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
 
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
 
-def run_file_capture_stdout(file_path):
-    old_stdout = sys.stdout
-    sys.stdout = io.StringIO()
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
     try:
-        spec = importlib.util.spec_from_file_location("student_run", str(file_path))
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
         module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        return sys.stdout.getvalue()
+        try:
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
     finally:
-        sys.stdout = old_stdout
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
 
 
-def test_program_runs_without_placeholders(tmp_path):
-    src_path = os.path.join(os.path.dirname(__file__), MODULE_FILENAME)
-    assert os.path.exists(src_path), f"missing={MODULE_FILENAME}"
-    src = open(src_path, "r", encoding="utf-8").read()
-    assert "____" not in src
-    load_module_from_file(tmp_path, src)
-
-
-def test_prints_even_numbers_0_to_10_each_on_own_line(tmp_path):
-    src_path = os.path.join(os.path.dirname(__file__), MODULE_FILENAME)
-    src = open(src_path, "r", encoding="utf-8").read()
-    file_path = tmp_path / MODULE_FILENAME
-    file_path.write_text(src, encoding="utf-8")
-
-    out = run_file_capture_stdout(file_path)
-
-    expected_lines = ["0", "2", "4", "6", "8", "10"]
-    actual_lines = out.splitlines()
-
-    assert expected_lines == actual_lines, f"expected={expected_lines!r} actual={actual_lines!r}"
-
-
-def test_no_extra_whitespace_on_lines(tmp_path):
-    src_path = os.path.join(os.path.dirname(__file__), MODULE_FILENAME)
-    src = open(src_path, "r", encoding="utf-8").read()
-    file_path = tmp_path / MODULE_FILENAME
-    file_path.write_text(src, encoding="utf-8")
-
-    out = run_file_capture_stdout(file_path)
-    actual_lines = out.splitlines()
-    trimmed_lines = [line.strip() for line in actual_lines]
-
-    assert trimmed_lines == actual_lines, f"expected={trimmed_lines!r} actual={actual_lines!r}"
-
-
-def test_ends_with_newline(tmp_path):
-    src_path = os.path.join(os.path.dirname(__file__), MODULE_FILENAME)
-    src = open(src_path, "r", encoding="utf-8").read()
-    file_path = tmp_path / MODULE_FILENAME
-    file_path.write_text(src, encoding="utf-8")
-
-    out = run_file_capture_stdout(file_path)
-    expected = True
-    actual = (out == "") or out.endswith("\n")
-    assert expected == actual, f"expected={expected!r} actual={actual!r}"
+def test_prints_even_numbers_0_to_10_inclusive():
+    script = Path(__file__).resolve().parent / "03_evenNumbersUpTo10.py"
+    expected = "0\n2\n4\n6\n8\n10\n"
+    actual = _run_script(script)
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

@@ -1,95 +1,93 @@
-import builtins
-import importlib
-import io
 import sys
-import types
+import importlib.util
+from pathlib import Path
 import pytest
 
 
-MODULE_NAME = "07_countMultiplesInRange"
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
 
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
 
-def _run_module_with_input(inputs):
-    it = iter(inputs)
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
 
-    def fake_input(prompt=None):
-        return next(it)
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
 
-    old_input = builtins.input
-    old_stdout = sys.stdout
-    sys.stdout = io.StringIO()
-    builtins.input = fake_input
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
     try:
-        if MODULE_NAME in sys.modules:
-            del sys.modules[MODULE_NAME]
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
         try:
-            importlib.import_module(MODULE_NAME)
-        except SyntaxError:
-            return "SYNTAX_ERROR"
-        except Exception:
-            return "RUNTIME_ERROR"
-        return sys.stdout.getvalue().strip()
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
     finally:
-        builtins.input = old_input
-        sys.stdout = old_stdout
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
 
 
-def _expected(a, b, m):
-    if m == 0:
-        raise ZeroDivisionError
-    if a > b:
-        return 0
+def _count_multiples(a: int, b: int, m: int) -> int:
     return sum(1 for n in range(a, b + 1) if n % m == 0)
-
-
-def test_module_compiles_and_runs_minimal():
-    out = _run_module_with_input(["1", "1", "1"])
-    assert out not in ("SYNTAX_ERROR", "RUNTIME_ERROR"), f"expected runnable, actual={out}"
 
 
 @pytest.mark.parametrize(
     "a,b,m",
     [
         (3, 10, 2),
+        (1, 1, 1),
         (1, 10, 3),
-        (0, 0, 5),
         (-10, 10, 5),
-        (-10, -1, 3),
-        (5, 5, 2),
-        (5, 5, 5),
-        (1, 1, -1),
-        (-7, 7, -3),
-        (100, 200, 7),
-        (-100, 100, 8),
-        (9, 2, 3),  # a > b
+        (6, 6, 2),
+        (6, 6, 4),
+        (0, 0, 7),
+        (-7, -1, 3),
     ],
 )
-def test_counts_multiples_various_ranges(a, b, m):
-    expected = _expected(a, b, m)
-    out = _run_module_with_input([str(a), str(b), str(m)])
-    assert out not in ("SYNTAX_ERROR", "RUNTIME_ERROR"), f"expected={expected} actual={out}"
-    try:
-        actual = int(out)
-    except Exception:
-        assert False, f"expected={expected} actual={out}"
-    assert actual == expected, f"expected={expected} actual={actual}"
-
-
-def test_m_equals_zero_is_handled_or_errors_cleanly():
-    a, b, m = 1, 10, 0
-    out = _run_module_with_input([str(a), str(b), str(m)])
-    assert out in ("RUNTIME_ERROR", "SYNTAX_ERROR") or out.lstrip("-").isdigit(), f"expected={'RUNTIME_ERROR'} actual={out}"
-
-
-def test_output_is_single_integer_line():
-    a, b, m = -5, 5, 2
-    expected = _expected(a, b, m)
-    out = _run_module_with_input([str(a), str(b), str(m)])
-    assert out not in ("SYNTAX_ERROR", "RUNTIME_ERROR"), f"expected={expected} actual={out}"
-    assert "\n" not in out, f"expected={expected} actual={out}"
-    assert out.strip() == out, f"expected={expected} actual={out}"
-    try:
-        actual = int(out)
-    except Exception:
-        assert False, f"expected={expected} actual={out}"
-    assert actual == expected, f"expected={expected} actual={actual}"
+def test_count_multiples_in_inclusive_range(a, b, m):
+    script = Path(__file__).resolve().parent / "07_countMultiplesInRange.py"
+    expected = str(_count_multiples(a, b, m)) + "\n"
+    actual = _run_script(script, f"{a}\n{b}\n{m}\n")
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

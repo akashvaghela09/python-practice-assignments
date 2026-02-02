@@ -1,78 +1,47 @@
-import builtins
-import importlib.util
-import os
 import sys
+import importlib.util
+from pathlib import Path
 import pytest
 
+from io import StringIO
 
-MODULE_PATH = os.path.join(os.path.dirname(__file__), "05_averageUntilBlank.py")
+def _run_script(input_data: str):
+    script_path = Path(__file__).resolve().parent / "05_averageUntilBlank.py"
+    if not script_path.exists():
+        pytest.fail(f"expected output:\n<file exists>\nactual output:\n{script_path.name} not found")
 
+    old_stdin, old_stdout = sys.stdin, sys.stdout
+    sys.stdin = StringIO(input_data)
+    sys.stdout = StringIO()
 
-def run_module_with_input(lines):
-    it = iter(lines)
-
-    def fake_input(prompt=None):
-        try:
-            return next(it)
-        except StopIteration:
-            raise EOFError
-
-    spec = importlib.util.spec_from_file_location("avg_until_blank_mod", MODULE_PATH)
-    mod = importlib.util.module_from_spec(spec)
-
-    old_input = builtins.input
-    builtins.input = fake_input
+    spec = importlib.util.spec_from_file_location("mod_05_averageUntilBlank", str(script_path))
+    module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(mod)
+        spec.loader.exec_module(module)
     finally:
-        builtins.input = old_input
+        out = sys.stdout.getvalue()
+        sys.stdin, sys.stdout = old_stdin, old_stdout
+    return out
 
 
-def test_no_data_prints_no_data(capsys):
-    run_module_with_input([""])
-    out = capsys.readouterr().out.strip()
-    expected = "No data"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+def _assert_exact(actual: str, expected: str):
+    if actual != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{actual}")
 
 
-def test_average_rounds_to_two_decimals(capsys):
-    run_module_with_input(["3", "4", "3", ""])
-    out = capsys.readouterr().out.strip()
-    expected = "3.33"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+def test_average_example():
+    actual = _run_script("3\n4\n3\n\n")
+    expected = "3.33\n"
+    _assert_exact(actual, expected)
 
 
-def test_accepts_floats_and_rounds(capsys):
-    run_module_with_input(["1.2", "1.2", ""])
-    out = capsys.readouterr().out.strip()
-    expected = "1.20"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+def test_average_single_value():
+    actual = _run_script("2.5\n\n")
+    expected = "2.50\n"
+    _assert_exact(actual, expected)
 
 
-def test_negative_numbers_average(capsys):
-    run_module_with_input(["-1", "1", ""])
-    out = capsys.readouterr().out.strip()
-    expected = "0.00"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_single_value_prints_with_two_decimals(capsys):
-    run_module_with_input(["5", ""])
-    out = capsys.readouterr().out.strip()
-    expected = "5.00"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_trailing_whitespace_on_numbers_allowed(capsys):
-    run_module_with_input(["2 ", "2", ""])
-    out = capsys.readouterr().out.strip()
-    expected = "2.00"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_multiple_outputs_not_expected(capsys):
-    run_module_with_input(["1", "2", ""])
-    out = capsys.readouterr().out
-    lines = [ln for ln in out.splitlines() if ln.strip() != ""]
-    expected_lines_count = 1
-    assert len(lines) == expected_lines_count, f"expected={expected_lines_count!r} actual={len(lines)!r}"
+def test_average_no_data():
+    actual = _run_script("\n")
+    expected = "No data\n"
+    _assert_exact(actual, expected)

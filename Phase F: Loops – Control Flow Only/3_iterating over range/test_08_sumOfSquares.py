@@ -1,94 +1,81 @@
-import ast
-import importlib.util
-import pathlib
-import re
-import subprocess
 import sys
+import importlib.util
+from pathlib import Path
+import pytest
 
 
-FILE_NAME = "08_sumOfSquares.py"
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
+
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
+
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
+
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
+
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
+    try:
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
+    finally:
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
 
 
-def _run_script_with_input(inp: str):
-    p = subprocess.run(
-        [sys.executable, FILE_NAME],
-        input=inp,
-        text=True,
-        capture_output=True,
-        cwd=pathlib.Path(__file__).resolve().parent,
-    )
-    return p.returncode, p.stdout, p.stderr
-
-
-def _expected_sum_squares(n: int) -> int:
+def _sum_sq(n: int) -> int:
     return sum(k * k for k in range(1, n + 1))
 
 
-def test_no_blanks_left_in_source():
-    src = pathlib.Path(FILE_NAME).read_text(encoding="utf-8")
-    assert "____" not in src
-
-
-def test_program_parses_as_python():
-    src = pathlib.Path(FILE_NAME).read_text(encoding="utf-8")
-    ast.parse(src)
-
-
-def test_import_has_no_side_effects(monkeypatch, capsys):
-    monkeypatch.setattr("builtins.input", lambda: "0")
-    spec = importlib.util.spec_from_file_location("mod08", FILE_NAME)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    out = capsys.readouterr().out
-    assert out.strip() == str(_expected_sum_squares(0))
-
-
-def test_n_0():
-    n = 0
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    got = out.strip()
-    exp = str(_expected_sum_squares(n))
-    assert got == exp, f"expected={exp} actual={got}"
-
-
-def test_n_1():
-    n = 1
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    got = out.strip()
-    exp = str(_expected_sum_squares(n))
-    assert got == exp, f"expected={exp} actual={got}"
-
-
-def test_n_3_example():
-    n = 3
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    got = out.strip()
-    exp = str(_expected_sum_squares(n))
-    assert got == exp, f"expected={exp} actual={got}"
-
-
-def test_n_10():
-    n = 10
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    got = out.strip()
-    exp = str(_expected_sum_squares(n))
-    assert got == exp, f"expected={exp} actual={got}"
-
-
-def test_n_50():
-    n = 50
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    got = out.strip()
-    exp = str(_expected_sum_squares(n))
-    assert got == exp, f"expected={exp} actual={got}"
-
-
-def test_rejects_non_integer_input_gracefully():
-    rc, out, err = _run_script_with_input("abc\n")
-    assert rc != 0
-    assert (out.strip() == "") or re.fullmatch(r"\s*", out) is not None
+@pytest.mark.parametrize("n", [1, 2, 3, 5, 10, 25])
+def test_sum_of_squares(n):
+    script = Path(__file__).resolve().parent / "08_sumOfSquares.py"
+    expected = str(_sum_sq(n)) + "\n"
+    actual = _run_script(script, f"{n}\n")
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

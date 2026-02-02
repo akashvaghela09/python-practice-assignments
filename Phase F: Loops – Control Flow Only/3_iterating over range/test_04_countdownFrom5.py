@@ -1,36 +1,76 @@
+import sys
 import importlib.util
-import pathlib
-import re
+from pathlib import Path
+import pytest
 
-def _run_script_capture_stdout(script_path, capsys):
-    spec = importlib.util.spec_from_file_location("student_module_04", script_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    out = capsys.readouterr().out
-    return out
 
-def test_countdown_output_exact(capsys):
-    script_path = pathlib.Path(__file__).resolve().parent / "04_countdownFrom5.py"
-    out = _run_script_capture_stdout(str(script_path), capsys)
-    actual_lines = [line.rstrip("\n") for line in out.splitlines()]
-    expected_lines = ["5", "4", "3", "2", "1"]
-    assert actual_lines == expected_lines, f"expected={expected_lines} actual={actual_lines}"
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
 
-def test_no_extra_whitespace_in_lines(capsys):
-    script_path = pathlib.Path(__file__).resolve().parent / "04_countdownFrom5.py"
-    out = _run_script_capture_stdout(str(script_path), capsys)
-    actual_lines = out.splitlines()
-    stripped = [s.strip() for s in actual_lines]
-    assert actual_lines == stripped, f"expected={stripped} actual={actual_lines}"
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
 
-def test_prints_only_integers_5_to_1_once_each(capsys):
-    script_path = pathlib.Path(__file__).resolve().parent / "04_countdownFrom5.py"
-    out = _run_script_capture_stdout(str(script_path), capsys)
-    nums = []
-    for line in out.splitlines():
-        if re.fullmatch(r"-?\d+", line.strip()):
-            nums.append(int(line.strip()))
-        else:
-            nums.append(None)
-    expected = [5, 4, 3, 2, 1]
-    assert nums == expected, f"expected={expected} actual={nums}"
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
+
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
+
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
+    try:
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
+    finally:
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
+
+
+def test_countdown_5_to_1_exactly():
+    script = Path(__file__).resolve().parent / "04_countdownFrom5.py"
+    expected = "5\n4\n3\n2\n1\n"
+    actual = _run_script(script)
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

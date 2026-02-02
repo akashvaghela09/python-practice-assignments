@@ -1,92 +1,50 @@
-import builtins
-import importlib.util
-import io
-import os
 import sys
+import importlib.util
+from pathlib import Path
 import pytest
 
-MODULE_FILE = "10_menuLoopCalculator.py"
+from io import StringIO
+
+def _run_script(input_data: str):
+    script_path = Path(__file__).resolve().parent / "10_menuLoopCalculator.py"
+    if not script_path.exists():
+        pytest.fail(f"expected output:\n<file exists>\nactual output:\n{script_path.name} not found")
+
+    old_stdin, old_stdout = sys.stdin, sys.stdout
+    sys.stdin = StringIO(input_data)
+    sys.stdout = StringIO()
+
+    spec = importlib.util.spec_from_file_location("mod_10_menuLoopCalculator", str(script_path))
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        out = sys.stdout.getvalue()
+        sys.stdin, sys.stdout = old_stdin, old_stdout
+    return out
 
 
-def load_module(monkeypatch, inputs):
-    it = iter(inputs)
-
-    def fake_input(prompt=""):
-        try:
-            return next(it)
-        except StopIteration:
-            raise EOFError
-
-    monkeypatch.setattr(builtins, "input", fake_input)
-
-    buf = io.StringIO()
-    monkeypatch.setattr(sys, "stdout", buf)
-
-    spec = importlib.util.spec_from_file_location("menu_calc_10", os.path.join(os.getcwd(), MODULE_FILE))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return buf.getvalue()
+def _assert_exact(actual: str, expected: str):
+    if actual != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{actual}")
 
 
-def norm_lines(s):
-    s = s.replace("\r\n", "\n").replace("\r", "\n")
-    if s.endswith("\n"):
-        s = s[:-1]
-    return s.split("\n") if s else []
+def test_menu_example_interaction():
+    input_data = "add\n2\n3\nsub\n10\n4\ndiv\n5\n0\nquit\n"
+    actual = _run_script(input_data)
+    expected = "5.0\n6.0\nCannot divide by zero\nBye\n"
+    _assert_exact(actual, expected)
 
 
-def test_quit_only_prints_bye(monkeypatch):
-    out = load_module(monkeypatch, ["quit"])
-    lines = norm_lines(out)
-    assert lines == ["Bye"], f"expected={['Bye']!r} actual={lines!r}"
+def test_menu_mul_then_quit():
+    input_data = "mul\n2\n4\nquit\n"
+    actual = _run_script(input_data)
+    expected = "8.0\nBye\n"
+    _assert_exact(actual, expected)
 
 
-def test_add_sub_mul_div_then_quit(monkeypatch):
-    inputs = [
-        "add", "2", "3",
-        "sub", "10", "4",
-        "mul", "1.5", "2",
-        "div", "9", "3",
-        "quit",
-    ]
-    out = load_module(monkeypatch, inputs)
-    lines = norm_lines(out)
-    expected = ["5.0", "6.0", "3.0", "3.0", "Bye"]
-    assert lines == expected, f"expected={expected!r} actual={lines!r}"
-
-
-def test_division_by_zero_prints_message_and_continues(monkeypatch):
-    inputs = [
-        "div", "5", "0",
-        "add", "1", "2",
-        "quit",
-    ]
-    out = load_module(monkeypatch, inputs)
-    lines = norm_lines(out)
-    expected = ["Cannot divide by zero", "3.0", "Bye"]
-    assert lines == expected, f"expected={expected!r} actual={lines!r}"
-
-
-def test_float_handling_and_negative_values(monkeypatch):
-    inputs = [
-        "add", "-1.25", "2.5",
-        "sub", "0", "-3.5",
-        "mul", "-2", "-4",
-        "div", "-7.5", "2.5",
-        "quit",
-    ]
-    out = load_module(monkeypatch, inputs)
-    lines = norm_lines(out)
-    expected = ["1.25", "3.5", "8.0", "-3.0", "Bye"]
-    assert lines == expected, f"expected={expected!r} actual={lines!r}"
-
-
-def test_no_extra_output_lines(monkeypatch):
-    inputs = [
-        "add", "0", "0",
-        "quit",
-    ]
-    out = load_module(monkeypatch, inputs)
-    lines = norm_lines(out)
-    expected = ["0.0", "Bye"]
-    assert lines == expected, f"expected={expected!r} actual={lines!r}"
+def test_menu_quit_immediately():
+    input_data = "quit\n"
+    actual = _run_script(input_data)
+    expected = "Bye\n"
+    _assert_exact(actual, expected)

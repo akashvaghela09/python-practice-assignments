@@ -1,48 +1,31 @@
-import importlib.util
-import pathlib
 import sys
+import importlib.util
+from pathlib import Path
 import pytest
 
 
-def _load_module(module_name, file_path):
-    spec = importlib.util.spec_from_file_location(module_name, str(file_path))
+def _run_script(path: Path):
+    if not path.exists():
+        pytest.fail(f"Missing assignment file: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
 
-
-def test_module_imports_without_syntax_error():
-    file_path = pathlib.Path(__file__).resolve().parent / "07_nestedGrid.py"
-    assert file_path.exists()
-    _load_module("nestedGrid07_import_test", file_path)
-
-
-def test_printed_grid_exact_output(capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "07_nestedGrid.py"
+    old_stdout = sys.stdout
     try:
-        _load_module("nestedGrid07_output_test", file_path)
-    except Exception as e:
-        pytest.fail(f"expected=<module runs without error> actual=<{type(e).__name__}: {e}>")
+        from io import StringIO
+        sys.stdout = StringIO()
+        spec.loader.exec_module(module)
+        output = sys.stdout.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
-    out = capsys.readouterr().out
+    return output
+
+
+def test_nested_grid_exact_stdout():
+    script_path = Path(__file__).resolve().parent / "07_nestedGrid.py"
+    out = _run_script(script_path)
     expected = "****\n****\n****\n"
-    assert out == expected, f"expected=<{expected!r}> actual=<{out!r}>"
-
-
-def test_printed_grid_has_3_lines_each_4_chars(capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "07_nestedGrid.py"
-    try:
-        _load_module("nestedGrid07_structure_test", file_path)
-    except Exception as e:
-        pytest.fail(f"expected=<module runs without error> actual=<{type(e).__name__}: {e}>")
-
-    out = capsys.readouterr().out
-    lines = out.splitlines()
-    expected_lines = 3
-    assert len(lines) == expected_lines, f"expected=<{expected_lines}> actual=<{len(lines)}>"
-    for i, line in enumerate(lines):
-        expected_len = 4
-        assert len(line) == expected_len, f"expected=<{expected_len}> actual=<{len(line)}>"
-        expected_set = {"*"}
-        actual_set = set(line)
-        assert actual_set == expected_set, f"expected=<{expected_set}> actual=<{actual_set}>"
+    if out != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{out}")

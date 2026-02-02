@@ -1,86 +1,30 @@
-import importlib
 import sys
-import types
-import builtins
-import pytest
+import importlib.util
+from pathlib import Path
 
 
-MODULE_NAME = "09_fizzBuzzRange"
+def _run_script(script_path: Path):
+    expected = "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n"
+    if not script_path.exists():
+        raise AssertionError(f"Expected output:\n{expected}Actual output:\n<missing file: {script_path.name}>")
+
+    spec = importlib.util.spec_from_file_location(script_path.stem, script_path)
+    module = importlib.util.module_from_spec(spec)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore[attr-defined]
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def _run_module_capture_output(monkeypatch):
-    output = []
-
-    def fake_print(*args, **kwargs):
-        sep = kwargs.get("sep", " ")
-        end = kwargs.get("end", "\n")
-        s = sep.join(str(a) for a in args) + end
-        output.append(s)
-
-    monkeypatch.setattr(builtins, "print", fake_print)
-
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-
-    importlib.import_module(MODULE_NAME)
-
-    text = "".join(output)
-    lines = text.splitlines()
-    return lines, text
-
-
-def test_fizzbuzz_prints_15_lines(monkeypatch):
-    lines, _ = _run_module_capture_output(monkeypatch)
-    assert len(lines) == 15, f"expected=15 actual={len(lines)}"
-
-
-def test_fizzbuzz_exact_sequence(monkeypatch):
-    lines, _ = _run_module_capture_output(monkeypatch)
-    expected = [
-        "1",
-        "2",
-        "Fizz",
-        "4",
-        "Buzz",
-        "Fizz",
-        "7",
-        "8",
-        "Fizz",
-        "Buzz",
-        "11",
-        "Fizz",
-        "13",
-        "14",
-        "FizzBuzz",
-    ]
-    assert lines == expected, f"expected={expected!r} actual={lines!r}"
-
-
-@pytest.mark.parametrize(
-    "idx, expected",
-    [
-        (0, "1"),
-        (2, "Fizz"),
-        (4, "Buzz"),
-        (8, "Fizz"),
-        (9, "Buzz"),
-        (14, "FizzBuzz"),
-    ],
-)
-def test_fizzbuzz_key_positions(monkeypatch, idx, expected):
-    lines, _ = _run_module_capture_output(monkeypatch)
-    actual = lines[idx] if idx < len(lines) else None
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_fizzbuzz_lines_are_nonempty(monkeypatch):
-    lines, _ = _run_module_capture_output(monkeypatch)
-    empties = [i for i, s in enumerate(lines) if s == ""]
-    assert empties == [], f"expected={[]} actual={empties}"
-
-
-def test_fizzbuzz_only_allowed_tokens(monkeypatch):
-    lines, _ = _run_module_capture_output(monkeypatch)
-    allowed = {str(i) for i in range(1, 16)} | {"Fizz", "Buzz", "FizzBuzz"}
-    bad = [(i, s) for i, s in enumerate(lines) if s not in allowed]
-    assert bad == [], f"expected={[]} actual={bad}"
+def test_output_exact():
+    script_path = Path(__file__).resolve().parent / "09_fizzBuzzRange.py"
+    actual = _run_script(script_path)
+    expected = "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n"
+    if actual != expected:
+        raise AssertionError(f"Expected output:\n{expected}Actual output:\n{actual}")

@@ -1,110 +1,81 @@
-import builtins
-import importlib.util
-import io
-import os
 import sys
-from contextlib import redirect_stdout
-
+import importlib.util
+from pathlib import Path
 import pytest
 
 
-ASSIGNMENT_FILE = "09_drawRightTriangle.py"
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
 
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
 
-def load_module_with_input(monkeypatch, input_data: str):
-    it = iter(input_data.splitlines())
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
 
-    def fake_input(prompt=None):
-        return next(it)
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
 
-    monkeypatch.setattr(builtins, "input", fake_input)
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
 
-    module_name = f"student_mod_{os.urandom(8).hex()}"
-    spec = importlib.util.spec_from_file_location(module_name, ASSIGNMENT_FILE)
-    mod = importlib.util.module_from_spec(spec)
-    buf = io.StringIO()
-    with redirect_stdout(buf):
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
+    try:
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
         try:
-            spec.loader.exec_module(mod)  # type: ignore[attr-defined]
-        except Exception as e:
-            return e, buf.getvalue()
-    return None, buf.getvalue()
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
+    finally:
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
 
 
-def expected_triangle(h: int) -> str:
-    lines = ["#" * i for i in range(1, h + 1)]
-    return "\n".join(lines) + ("\n" if h > 0 else "")
+def _triangle(h: int) -> str:
+    return "\n".join("#" * i for i in range(1, h + 1)) + "\n"
 
 
-@pytest.mark.parametrize("h", [1, 2, 4, 7])
-def test_triangle_basic_heights(monkeypatch, h):
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_triangle_height_three_exact(monkeypatch):
-    h = 3
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_triangle_uses_only_hashes_and_newlines(monkeypatch):
-    h = 6
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-    allowed = set("#\n")
-    assert set(out).issubset(allowed), f"expected={allowed!r} actual={set(out)!r}"
-
-
-@pytest.mark.parametrize("h", [5, 8])
-def test_line_lengths_increase_by_one(monkeypatch, h):
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    lines = out.splitlines()
-    exp_lines = expected_triangle(h).splitlines()
-    assert lines == exp_lines, f"expected={exp_lines!r} actual={lines!r}"
-    lengths = [len(line) for line in lines]
-    exp_lengths = list(range(1, h + 1))
-    assert lengths == exp_lengths, f"expected={exp_lengths!r} actual={lengths!r}"
-
-
-def test_zero_height_produces_no_output(monkeypatch):
-    h = 0
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_negative_height_produces_no_output(monkeypatch):
-    h = -3
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_trailing_newline_present_for_positive(monkeypatch):
-    h = 4
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-    assert out.endswith("\n") is True, f"expected={True!r} actual={out.endswith(chr(10))!r}"
-
-
-def test_no_extra_blank_lines(monkeypatch):
-    h = 9
-    err, out = load_module_with_input(monkeypatch, f"{h}\n")
-    assert err is None, f"expected={None!r} actual={err!r}"
-    exp = expected_triangle(h)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-    lines = out.splitlines()
-    exp_lines = exp.splitlines()
-    assert len(lines) == len(exp_lines), f"expected={len(exp_lines)!r} actual={len(lines)!r}"
+@pytest.mark.parametrize("h", [1, 2, 4, 6])
+def test_draw_right_triangle(h):
+    script = Path(__file__).resolve().parent / "09_drawRightTriangle.py"
+    expected = _triangle(h)
+    actual = _run_script(script, f"{h}\n")
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

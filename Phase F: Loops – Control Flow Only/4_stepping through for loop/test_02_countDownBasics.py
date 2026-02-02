@@ -1,34 +1,21 @@
-import importlib
-import contextlib
-import io
 import sys
-import pytest
+import importlib.util
+from pathlib import Path
 
-MODULE_NAME = "02_countDownBasics"
 
-def run_module():
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-    buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
-        importlib.import_module(MODULE_NAME)
-    return buf.getvalue()
+def _run_script(path: Path, capsys):
+    if not path.exists():
+        raise AssertionError(f"Missing assignment file: {path}")
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
+    sys.modules.pop(spec.name, None)
+    spec.loader.exec_module(module)
+    return capsys.readouterr().out
 
-def test_outputs_countdown_lines():
-    out = run_module()
-    expected_lines = ["5", "4", "3", "2", "1"]
-    actual_lines = [line.rstrip("\n") for line in out.splitlines()]
-    assert actual_lines == expected_lines, f"expected={expected_lines!r} actual={actual_lines!r}"
 
-def test_outputs_exactly_five_lines():
-    out = run_module()
-    actual_lines = [line.rstrip("\n") for line in out.splitlines()]
-    expected_count = 5
-    actual_count = len(actual_lines)
-    assert actual_count == expected_count, f"expected={expected_count!r} actual={actual_count!r}"
-
-def test_no_extra_whitespace_per_line():
-    out = run_module()
-    actual_lines = out.splitlines()
-    expected_lines = ["5", "4", "3", "2", "1"]
-    assert actual_lines == expected_lines, f"expected={expected_lines!r} actual={actual_lines!r}"
+def test_output_exact(capsys):
+    script_path = Path(__file__).resolve().parent / "02_countDownBasics.py"
+    actual = _run_script(script_path, capsys)
+    expected = "5\n4\n3\n2\n1\n"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")

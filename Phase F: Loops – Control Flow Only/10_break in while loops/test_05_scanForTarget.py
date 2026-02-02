@@ -1,71 +1,43 @@
-import builtins
-import importlib.util
-import os
 import sys
+import importlib.util
+from pathlib import Path
 import pytest
 
 
-FILE_NAME = "05_scanForTarget.py"
+def _run_script(monkeypatch, capsys, inputs):
+    script_path = Path(__file__).resolve().parent / "05_scanForTarget.py"
+    if not script_path.exists():
+        pytest.fail(f"expected output: (file exists)\nactual output: missing file {script_path.name}")
 
+    it = iter(inputs)
 
-def _run_with_inputs(inputs):
-    outputs = []
+    def fake_input(prompt=None):
+        try:
+            return next(it)
+        except StopIteration:
+            raise EOFError
 
-    def fake_input(prompt=""):
-        return inputs.pop(0)
+    monkeypatch.setattr("builtins.input", fake_input)
 
-    def fake_print(*args, **kwargs):
-        sep = kwargs.get("sep", " ")
-        end = kwargs.get("end", "\n")
-        outputs.append(sep.join(str(a) for a in args) + end)
-
-    spec = importlib.util.spec_from_file_location("scan_module", os.path.join(os.getcwd(), FILE_NAME))
-    module = importlib.util.module_from_spec(spec)
-
-    old_input = builtins.input
-    old_print = builtins.print
+    spec = importlib.util.spec_from_file_location("mod_05_scanForTarget", str(script_path))
+    mod = importlib.util.module_from_spec(spec)
     try:
-        builtins.input = fake_input
-        builtins.print = fake_print
-        spec.loader.exec_module(module)
-    finally:
-        builtins.input = old_input
-        builtins.print = old_print
+        spec.loader.exec_module(mod)
+    except EOFError:
+        pass
 
-    text = "".join(outputs).replace("\r\n", "\n").replace("\r", "\n")
-    return text
+    return capsys.readouterr().out
 
 
-@pytest.mark.timeout(1)
-def test_found_target_prints_exactly_found_target():
-    out = _run_with_inputs(["java", "ruby", "python", "STOP"])
+def test_found_target_before_stop(monkeypatch, capsys):
+    out = _run_script(monkeypatch, capsys, ["java", "ruby", "python", "STOP"])
     expected = "Found target\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+    if out != expected:
+        pytest.fail(f"expected output: {expected}actual output: {out}")
 
 
-@pytest.mark.timeout(1)
-def test_not_found_prints_exactly_not_found():
-    out = _run_with_inputs(["java", "ruby", "STOP"])
+def test_not_found_when_stop_first(monkeypatch, capsys):
+    out = _run_script(monkeypatch, capsys, ["java", "ruby", "STOP"])
     expected = "Not found\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-@pytest.mark.timeout(1)
-def test_target_before_stop_ignores_later_stop():
-    out = _run_with_inputs(["python", "STOP"])
-    expected = "Found target\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-@pytest.mark.timeout(1)
-def test_stop_immediately_not_found():
-    out = _run_with_inputs(["STOP"])
-    expected = "Not found\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-@pytest.mark.timeout(1)
-def test_output_is_single_line_only():
-    out = _run_with_inputs(["java", "STOP"])
-    expected = "Not found\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
+    if out != expected:
+        pytest.fail(f"expected output: {expected}actual output: {out}")

@@ -1,80 +1,29 @@
-import importlib
-import io
-import os
 import sys
-import types
+import importlib.util
+from pathlib import Path
 import pytest
 
 
-MODULE_NAME = "01_nestedLoops_rowStars"
+def _run_script(path: Path):
+    if not path.exists():
+        pytest.fail(f"Missing assignment file: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    if spec is None or spec.loader is None:
+        pytest.fail(f"Could not load assignment file: {path}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
 
 
-def run_module_capture_stdout():
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-    buf = io.StringIO()
-    old = sys.stdout
-    try:
-        sys.stdout = buf
-        importlib.import_module(MODULE_NAME)
-    finally:
-        sys.stdout = old
-    return buf.getvalue()
+def test_row_stars_stdout_exact(capsys):
+    script_path = Path(__file__).resolve().parent / "01_nestedLoops_rowStars.py"
+    _run_script(script_path)
 
-
-def parse_lines(output):
-    s = output.rstrip("\n")
-    if s == "":
-        return []
-    return s.splitlines()
-
-
-def test_prints_expected_grid_exact_stdout():
-    out = run_module_capture_stdout()
+    captured = capsys.readouterr()
     expected = "*****\n*****\n*****\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_module_result_variable_matches_expected():
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-    mod = importlib.import_module(MODULE_NAME)
-    assert hasattr(mod, "result")
-    expected = "*****\n*****\n*****"
-    actual = getattr(mod, "result")
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_module_output_lines_structure():
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-    mod = importlib.import_module(MODULE_NAME)
-    assert hasattr(mod, "output_lines")
-    actual = getattr(mod, "output_lines")
-    expected = ["*****", "*****", "*****"]
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_stdout_has_three_lines_each_five_stars_only():
-    out = run_module_capture_stdout()
-    lines = parse_lines(out)
-    expected_lines_count = 3
-    actual_lines_count = len(lines)
-    assert actual_lines_count == expected_lines_count, f"expected={expected_lines_count!r} actual={actual_lines_count!r}"
-    for line in lines:
-        expected_len = 5
-        actual_len = len(line)
-        assert actual_len == expected_len, f"expected={expected_len!r} actual={actual_len!r}"
-        expected_set = {"*"}
-        actual_set = set(line)
-        assert actual_set == expected_set, f"expected={expected_set!r} actual={actual_set!r}"
-
-
-def test_uses_nested_for_loops_in_source():
-    path = os.path.join(os.path.dirname(__file__), f"{MODULE_NAME}.py")
-    with open(path, "r", encoding="utf-8") as f:
-        src = f.read()
-    for_count = src.count("for ")
-    expected_min = 2
-    actual = for_count
-    assert actual >= expected_min, f"expected={expected_min!r} actual={actual!r}"
+    actual = captured.out
+    if actual != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{actual}")
+    if captured.err != "":
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{actual}")

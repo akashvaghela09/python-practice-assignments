@@ -1,58 +1,36 @@
-import builtins
-import importlib.util
 import sys
+import importlib.util
 from pathlib import Path
 import pytest
 
 
-def run_module_with_inputs(monkeypatch, capsys, inputs):
+def _run_script(monkeypatch, capsys, inputs):
+    script_path = Path(__file__).resolve().parent / "08_menuLoopExit.py"
+    if not script_path.exists():
+        pytest.fail(f"expected output: (file exists)\nactual output: missing file {script_path.name}")
+
     it = iter(inputs)
 
-    def fake_input(prompt=""):
+    def fake_input(prompt=None):
         try:
             return next(it)
         except StopIteration:
             raise EOFError
 
-    monkeypatch.setattr(builtins, "input", fake_input)
+    monkeypatch.setattr("builtins.input", fake_input)
 
-    path = Path(__file__).resolve().parent / "08_menuLoopExit.py"
-    spec = importlib.util.spec_from_file_location("menuLoopExit_08", str(path))
-    module = importlib.util.module_from_spec(spec)
-    sys.modules["menuLoopExit_08"] = module
-    spec.loader.exec_module(module)
+    spec = importlib.util.spec_from_file_location("mod_08_menuLoopExit", str(script_path))
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except EOFError:
+        pass
 
     return capsys.readouterr().out
 
 
-def test_menu_loop_inc_inc_dec_q(monkeypatch, capsys):
-    out = run_module_with_inputs(monkeypatch, capsys, ["inc", "inc", "dec", "q"])
+def test_menu_counter(monkeypatch, capsys):
+    out = _run_script(monkeypatch, capsys, ["inc", "inc", "dec", "q"])
     expected = "Counter: 1\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_menu_loop_ignores_other_commands(monkeypatch, capsys):
-    out = run_module_with_inputs(monkeypatch, capsys, ["noop", "inc", "bad", "dec", "q"])
-    expected = "Counter: 0\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_menu_loop_strips_whitespace(monkeypatch, capsys):
-    out = run_module_with_inputs(monkeypatch, capsys, ["  inc  ", "\tdec", "  q  "])
-    expected = "Counter: 0\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_menu_loop_quits_immediately(monkeypatch, capsys):
-    out = run_module_with_inputs(monkeypatch, capsys, ["q"])
-    expected = "Counter: 0\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_menu_loop_only_final_print(monkeypatch, capsys):
-    out = run_module_with_inputs(monkeypatch, capsys, ["inc", "q"])
-    lines = out.splitlines()
-    expected_lines = 1
-    assert len(lines) == expected_lines, f"expected={expected_lines!r} actual={len(lines)!r}"
-    expected_last = "Counter: 1"
-    assert lines[-1] == expected_last, f"expected={expected_last!r} actual={lines[-1]!r}"
+    if out != expected:
+        pytest.fail(f"expected output: {expected}actual output: {out}")

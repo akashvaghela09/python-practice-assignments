@@ -1,46 +1,31 @@
-import importlib.util
-import pathlib
 import sys
+import importlib.util
+from pathlib import Path
+import pytest
 
 
-def _load_module():
-    path = pathlib.Path(__file__).with_name("10_primeCounter.py")
-    name = "primeCounter10"
-    spec = importlib.util.spec_from_file_location(name, str(path))
+def _run_script(path: Path):
+    if not path.exists():
+        pytest.fail(f"Missing assignment file: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        sys.stdout = StringIO()
+        spec.loader.exec_module(module)
+        output = sys.stdout.getvalue()
+    finally:
+        sys.stdout = old_stdout
+
+    return output
 
 
-def test_script_is_valid_python():
-    path = pathlib.Path(__file__).with_name("10_primeCounter.py")
-    src = path.read_text(encoding="utf-8")
-    compile(src, str(path), "exec")
-
-
-def test_prints_expected_prime_count(capsys):
-    _load_module()
-    out = capsys.readouterr().out.strip()
-    expected = "5"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_prime_count_variable_matches_printed_output(capsys):
-    m = _load_module()
-    out = capsys.readouterr().out.strip()
-    expected = "5"
-    assert getattr(m, "prime_count", None) == 5, f"expected={5!r} actual={getattr(m, 'prime_count', None)!r}"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_nums_list_unchanged():
-    m = _load_module()
-    expected = [2, 3, 4, 5, 9, 11, 12, 13]
-    assert getattr(m, "nums", None) == expected, f"expected={expected!r} actual={getattr(m, 'nums', None)!r}"
-
-
-def test_prime_count_is_int_and_nonnegative():
-    m = _load_module()
-    pc = getattr(m, "prime_count", None)
-    assert isinstance(pc, int), f"expected={int!r} actual={type(pc)!r}"
-    assert pc >= 0, f"expected={'>= 0'!r} actual={pc!r}"
+def test_prime_counter_exact_stdout():
+    script_path = Path(__file__).resolve().parent / "10_primeCounter.py"
+    out = _run_script(script_path)
+    expected = "5\n"
+    if out != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{out}")

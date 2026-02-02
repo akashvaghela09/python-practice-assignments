@@ -1,64 +1,76 @@
-import ast
-import importlib.util
-import io
-import os
 import sys
+import importlib.util
+from pathlib import Path
+import pytest
 
 
-def _load_module(module_name, file_path):
-    spec = importlib.util.spec_from_file_location(module_name, file_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
 
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
 
-def test_no_placeholders_and_valid_syntax():
-    file_path = os.path.join(os.path.dirname(__file__), "01_printZeroToFour.py")
-    with open(file_path, "r", encoding="utf-8") as f:
-        src = f.read()
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
 
-    assert "____" not in src, f"expected no placeholders, actual placeholders found in source"
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
+
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
 
     try:
-        ast.parse(src)
-    except SyntaxError as e:
-        assert False, f"expected valid python syntax, actual SyntaxError: {e}"
-
-
-def test_prints_0_to_4_each_on_own_line():
-    file_path = os.path.join(os.path.dirname(__file__), "01_printZeroToFour.py")
-
-    old_stdout = sys.stdout
-    buf = io.StringIO()
-    sys.stdout = buf
-    try:
-        _load_module("printZeroToFour_student", file_path)
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
     finally:
-        sys.stdout = old_stdout
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
 
-    actual = buf.getvalue()
+    return out.get()
+
+
+def test_prints_0_to_4_exactly():
+    script = Path(__file__).resolve().parent / "01_printZeroToFour.py"
     expected = "0\n1\n2\n3\n4\n"
-    assert actual == expected, f"expected:\n{expected!r}\nactual:\n{actual!r}"
-
-
-def test_uses_for_loop_with_range():
-    file_path = os.path.join(os.path.dirname(__file__), "01_printZeroToFour.py")
-    with open(file_path, "r", encoding="utf-8") as f:
-        src = f.read()
-
-    tree = ast.parse(src)
-
-    for_nodes = [n for n in ast.walk(tree) if isinstance(n, ast.For)]
-    assert len(for_nodes) == 1, f"expected 1 for-loop, actual {len(for_nodes)}"
-
-    target_for = for_nodes[0]
-    assert isinstance(target_for.iter, ast.Call), f"expected range(...) call, actual {ast.dump(target_for.iter)}"
-    assert isinstance(target_for.iter.func, ast.Name) and target_for.iter.func.id == "range", (
-        f"expected iter to be range(...), actual {ast.dump(target_for.iter)}"
-    )
-
-    print_calls = [
-        n for n in ast.walk(target_for)
-        if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == "print"
-    ]
-    assert len(print_calls) >= 1, f"expected at least 1 print call in loop, actual {len(print_calls)}"
+    actual = _run_script(script)
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

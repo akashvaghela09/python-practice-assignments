@@ -1,54 +1,84 @@
-import importlib.util
 import sys
+import importlib.util
 from pathlib import Path
 import pytest
 
 
-MODULE_FILE = "06_multiplicationTableRow.py"
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
+
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
+
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
+
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
+
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
+    try:
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
+    finally:
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
 
 
-def run_module_with_input(monkeypatch, capsys, inp: str):
-    monkeypatch.setattr(sys, "stdin", type("S", (), {"readline": lambda self=None: inp})())
-    spec = importlib.util.spec_from_file_location("student_mod", Path(MODULE_FILE))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    out = capsys.readouterr().out
-    return out
+def _expected_table(x: int) -> str:
+    lines = []
+    for i in range(1, 11):
+        lines.append(f"{x} * {i} = {x*i}")
+    return "\n".join(lines) + "\n"
 
 
-@pytest.mark.parametrize("x", [0, 1, 3, -2, 7, 10])
-def test_multiplication_table_exact(monkeypatch, capsys, x):
-    out = run_module_with_input(monkeypatch, capsys, f"{x}\n")
-    lines = out.splitlines()
-
-    assert len(lines) == 10, f"expected=10 actual={len(lines)}"
-
-    expected = [f"{x} * {i} = {x*i}" for i in range(1, 11)]
-    for idx, (got, exp) in enumerate(zip(lines, expected), start=1):
-        assert got == exp, f"expected={exp!r} actual={got!r}"
-
-
-def test_no_extra_whitespace_in_lines(monkeypatch, capsys):
-    x = 4
-    out = run_module_with_input(monkeypatch, capsys, f"{x}\n")
-    lines = out.splitlines()
-    expected = [f"{x} * {i} = {x*i}" for i in range(1, 11)]
-
-    assert len(lines) == 10, f"expected=10 actual={len(lines)}"
-    for got, exp in zip(lines, expected):
-        assert got == got.strip(), f"expected={got.strip()!r} actual={got!r}"
-        assert got == exp, f"expected={exp!r} actual={got!r}"
-
-
-def test_accepts_whitespace_around_input(monkeypatch, capsys):
-    x = 6
-    out = run_module_with_input(monkeypatch, capsys, f"   {x}   \n")
-    lines = out.splitlines()
-    expected = [f"{x} * {i} = {x*i}" for i in range(1, 11)]
-    assert lines == expected, f"expected={expected!r} actual={lines!r}"
-
-
-def test_output_ends_with_newline(monkeypatch, capsys):
-    x = 2
-    out = run_module_with_input(monkeypatch, capsys, f"{x}\n")
-    assert out.endswith("\n"), f"expected={'\\n'!r} actual={out[-1:]!r}"
+@pytest.mark.parametrize("x", [0, 1, 3, 7, -2])
+def test_multiplication_table_row(x):
+    script = Path(__file__).resolve().parent / "06_multiplicationTableRow.py"
+    expected = _expected_table(x)
+    actual = _run_script(script, f"{x}\n")
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

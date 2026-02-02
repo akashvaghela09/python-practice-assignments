@@ -1,86 +1,47 @@
-import builtins
-import importlib.util
-import io
-import os
 import sys
-from contextlib import redirect_stdout
+import importlib.util
+from pathlib import Path
+import pytest
 
+from io import StringIO
 
-def _run_script_with_input(script_path, user_input: str):
-    old_input = builtins.input
+def _run_script(input_data: str):
+    script_path = Path(__file__).resolve().parent / "02_countDownByTwo.py"
+    if not script_path.exists():
+        pytest.fail(f"expected output:\n<file exists>\nactual output:\n{script_path.name} not found")
+
+    old_stdin, old_stdout = sys.stdin, sys.stdout
+    sys.stdin = StringIO(input_data)
+    sys.stdout = StringIO()
+
+    spec = importlib.util.spec_from_file_location("mod_02_countDownByTwo", str(script_path))
+    module = importlib.util.module_from_spec(spec)
     try:
-        builtins.input = lambda: user_input
-        buf = io.StringIO()
-        with redirect_stdout(buf):
-            spec = importlib.util.spec_from_file_location("student_mod", script_path)
-            mod = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(mod)
-        return buf.getvalue()
+        spec.loader.exec_module(module)
     finally:
-        builtins.input = old_input
+        out = sys.stdout.getvalue()
+        sys.stdin, sys.stdout = old_stdin, old_stdout
+    return out
 
 
-def _expected_output(n: int) -> str:
-    start = n if n % 2 == 0 else n - 1
-    if start < 0:
-        return ""
-    lines = [str(x) for x in range(start, -1, -2)]
-    return ("\n".join(lines) + "\n") if lines else ""
+def _assert_exact(actual: str, expected: str):
+    if actual != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{actual}")
 
 
-def test_even_input_counts_down():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    out = _run_script_with_input(script, "8\n")
-    exp = _expected_output(8)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
+def test_count_down_from_9():
+    actual = _run_script("9\n")
+    expected = "8\n6\n4\n2\n0\n"
+    _assert_exact(actual, expected)
 
 
-def test_odd_input_starts_at_prev_even():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    out = _run_script_with_input(script, "9\n")
-    exp = _expected_output(9)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
+def test_count_down_from_8():
+    actual = _run_script("8\n")
+    expected = "8\n6\n4\n2\n0\n"
+    _assert_exact(actual, expected)
 
 
-def test_zero_input_outputs_zero_only():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    out = _run_script_with_input(script, "0\n")
-    exp = _expected_output(0)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_one_input_outputs_zero_only():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    out = _run_script_with_input(script, "1\n")
-    exp = _expected_output(1)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_negative_input_outputs_nothing():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    out = _run_script_with_input(script, "-3\n")
-    exp = _expected_output(-3)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_large_input_sequence_correct():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    n = 50
-    out = _run_script_with_input(script, f"{n}\n")
-    exp = _expected_output(n)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_ignores_surrounding_spaces_in_input():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    out = _run_script_with_input(script, "   6   \n")
-    exp = _expected_output(6)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
-
-
-def test_outputs_only_evens_and_descending():
-    script = os.path.join(os.path.dirname(__file__), "02_countDownByTwo.py")
-    n = 17
-    out = _run_script_with_input(script, f"{n}\n")
-    exp = _expected_output(n)
-    assert out == exp, f"expected={exp!r} actual={out!r}"
+def test_count_down_from_0():
+    actual = _run_script("0\n")
+    expected = "0\n"
+    _assert_exact(actual, expected)

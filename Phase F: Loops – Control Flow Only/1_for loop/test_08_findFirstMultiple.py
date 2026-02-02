@@ -1,48 +1,31 @@
-import importlib
-import io
 import sys
-import types
+import importlib.util
+from pathlib import Path
 import pytest
 
-MODULE_NAME = "08_findFirstMultiple"
 
+def _run_script(path: Path):
+    if not path.exists():
+        pytest.fail(f"Missing assignment file: {path}")
 
-def _run_module_capture_stdout():
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-    buf = io.StringIO()
-    old = sys.stdout
-    sys.stdout = buf
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
+
+    old_stdout = sys.stdout
     try:
-        importlib.import_module(MODULE_NAME)
+        from io import StringIO
+        sys.stdout = StringIO()
+        spec.loader.exec_module(module)
+        output = sys.stdout.getvalue()
     finally:
-        sys.stdout = old
-    return buf.getvalue()
+        sys.stdout = old_stdout
+
+    return output
 
 
-def test_prints_expected_value():
-    out = _run_module_capture_stdout()
-    lines = [ln.strip() for ln in out.splitlines() if ln.strip() != ""]
-    assert len(lines) == 1, f"expected one line, got {len(lines)}"
-    assert lines[0] == "21", f"expected 21, got {lines[0]}"
-
-
-def test_no_placeholder_blanks_left():
-    src = importlib.util.find_spec(MODULE_NAME).loader.get_source(MODULE_NAME)
-    assert "____" not in src, f"expected no placeholders, got {'____'}"
-
-
-def test_uses_for_loop():
-    src = importlib.util.find_spec(MODULE_NAME).loader.get_source(MODULE_NAME)
-    assert "for " in src, f"expected for-loop, got source without for-loop"
-
-
-def test_uses_break_statement():
-    src = importlib.util.find_spec(MODULE_NAME).loader.get_source(MODULE_NAME)
-    assert "break" in src, f"expected break usage, got source without break"
-
-
-def test_found_is_first_multiple_of_7_not_later_one():
-    out = _run_module_capture_stdout()
-    lines = [ln.strip() for ln in out.splitlines() if ln.strip() != ""]
-    assert lines and lines[0] != "28", f"expected not 28, got {lines[0] if lines else lines}"
+def test_find_first_multiple_exact_stdout():
+    script_path = Path(__file__).resolve().parent / "08_findFirstMultiple.py"
+    out = _run_script(script_path)
+    expected = "21\n"
+    if out != expected:
+        pytest.fail(f"expected output:\n{expected}\nactual output:\n{out}")

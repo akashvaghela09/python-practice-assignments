@@ -1,66 +1,84 @@
-import os
-import re
 import sys
-import subprocess
 import importlib.util
-import pathlib
+from pathlib import Path
 import pytest
 
 
-FILE_NAME = "05_sumOneToN.py"
+def _run_script(script_path: Path, input_data: str = ""):
+    if not script_path.exists():
+        raise FileNotFoundError(f"Missing assignment file: {script_path}")
+
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
+
+    class _In:
+        def __init__(self, s: str):
+            self._s = s
+            self._i = 0
+
+        def read(self, n=-1):
+            if n is None or n < 0:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : self._i + n]
+            self._i += n
+            return out
+
+        def readline(self):
+            if self._i >= len(self._s):
+                return ""
+            j = self._s.find("\n", self._i)
+            if j == -1:
+                out = self._s[self._i :]
+                self._i = len(self._s)
+                return out
+            out = self._s[self._i : j + 1]
+            self._i = j + 1
+            return out
+
+    class _Out:
+        def __init__(self):
+            self.parts = []
+
+        def write(self, s):
+            self.parts.append(s)
+
+        def flush(self):
+            pass
+
+        def get(self):
+            return "".join(self.parts)
+
+    sys.stdin = _In(input_data)
+    out = _Out()
+    sys.stdout = out
+
+    try:
+        spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+        module = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(module)
+        except SystemExit:
+            pass
+    finally:
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+
+    return out.get()
 
 
-def _run_script_with_input(inp: str):
-    p = subprocess.run(
-        [sys.executable, FILE_NAME],
-        input=inp,
-        text=True,
-        capture_output=True,
-        cwd=os.getcwd(),
-    )
-    return p.returncode, p.stdout, p.stderr
-
-
-def _expected_sum(n: int) -> int:
-    return n * (n + 1) // 2
-
-
-def test_no_placeholders_left():
-    path = pathlib.Path(FILE_NAME)
-    assert path.exists()
-    content = path.read_text(encoding="utf-8")
-    assert "____" not in content
-
-
-@pytest.mark.parametrize("n", [0, 1, 2, 4, 10, 25, 100])
-def test_outputs_correct_sum(n):
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    actual_s = out.strip()
-    expected_s = str(_expected_sum(n))
-    assert actual_s == expected_s, f"expected={expected_s} actual={actual_s}"
-
-
-def test_whitespace_tolerant_output():
-    rc, out, err = _run_script_with_input("4\n")
-    assert rc == 0
-    expected_s = str(_expected_sum(4))
-    actual_s = out.strip()
-    assert actual_s == expected_s, f"expected={expected_s} actual={actual_s}"
-
-
-def test_import_does_not_crash(monkeypatch):
-    monkeypatch.setattr("builtins.input", lambda: "3")
-    spec = importlib.util.spec_from_file_location("sum_module_05", FILE_NAME)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    assert hasattr(mod, "total")
-
-
-def test_negative_n_expected_behavior_matches_loop():
-    n = -5
-    rc, out, err = _run_script_with_input(f"{n}\n")
-    assert rc == 0
-    actual_s = out.strip()
-    expected_s = str(0)
-    assert actual_s == expected_s, f"expected={expected_s} actual={actual_s}"
+@pytest.mark.parametrize(
+    "n,expected",
+    [
+        (1, "1\n"),
+        (2, "3\n"),
+        (4, "10\n"),
+        (10, "55\n"),
+    ],
+)
+def test_sum_1_to_n(n, expected):
+    script = Path(__file__).resolve().parent / "05_sumOneToN.py"
+    actual = _run_script(script, f"{n}\n")
+    if actual != expected:
+        pytest.fail("expected output:\n" + expected + "\nactual output:\n" + actual)

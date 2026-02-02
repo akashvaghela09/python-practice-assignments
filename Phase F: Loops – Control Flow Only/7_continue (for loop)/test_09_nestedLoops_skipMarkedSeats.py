@@ -1,71 +1,26 @@
-import importlib
 import sys
-import types
-import pytest
+import importlib.util
+from pathlib import Path
 
+def _run_script(path: Path) -> str:
+    if not path.exists():
+        raise AssertionError(f"Missing assignment file: {path}")
 
-MODULE_NAME = "09_nestedLoops_skipMarkedSeats"
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
 
+    from io import StringIO
+    old_stdout = sys.stdout
+    sys.stdout = StringIO()
+    try:
+        spec.loader.exec_module(module)
+        return sys.stdout.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
-def run_module_and_capture_output(monkeypatch):
-    captured = []
-
-    def fake_print(*args, **kwargs):
-        sep = kwargs.get("sep", " ")
-        end = kwargs.get("end", "\n")
-        captured.append(sep.join(str(a) for a in args) + end)
-
-    monkeypatch.setattr("builtins.print", fake_print)
-
-    if MODULE_NAME in sys.modules:
-        del sys.modules[MODULE_NAME]
-
-    importlib.import_module(MODULE_NAME)
-    out = "".join(captured)
-    return out
-
-
-def test_output_matches_expected_lines(monkeypatch):
-    out = run_module_and_capture_output(monkeypatch)
-
-    rows = ["A", "B", "C"]
-    cols = [1, 2, 3, 4]
-    blocked = {"A3", "C2"}
-    expected_lines = [f"{r}{c}" for r in rows for c in cols if f"{r}{c}" not in blocked]
-    expected = "\n".join(expected_lines) + ("\n" if expected_lines else "")
-
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_does_not_print_blocked_seats(monkeypatch):
-    out = run_module_and_capture_output(monkeypatch)
-    lines = [ln for ln in out.splitlines() if ln.strip() != ""]
-    blocked = {"A3", "C2"}
-    actual_blocked = [s for s in blocked if s in lines]
-    assert actual_blocked == [], f"expected={[]} actual={actual_blocked}"
-
-
-def test_prints_all_unblocked_unique_and_correct_count(monkeypatch):
-    out = run_module_and_capture_output(monkeypatch)
-    lines = out.splitlines()
-
-    rows = ["A", "B", "C"]
-    cols = [1, 2, 3, 4]
-    blocked = {"A3", "C2"}
-    expected_lines = [f"{r}{c}" for r in rows for c in cols if f"{r}{c}" not in blocked]
-
-    assert len(lines) == len(expected_lines), f"expected={len(expected_lines)!r} actual={len(lines)!r}"
-    assert lines == expected_lines, f"expected={expected_lines!r} actual={lines!r}"
-    assert len(set(lines)) == len(lines), f"expected={len(lines)!r} actual={len(set(lines))!r}"
-
-
-def test_prints_each_seat_on_its_own_line(monkeypatch):
-    out = run_module_and_capture_output(monkeypatch)
-    rows = ["A", "B", "C"]
-    cols = [1, 2, 3, 4]
-    blocked = {"A3", "C2"}
-    expected_lines = [f"{r}{c}" for r in rows for c in cols if f"{r}{c}" not in blocked]
-
-    expected_newlines = len(expected_lines)
-    actual_newlines = out.count("\n")
-    assert actual_newlines == expected_newlines, f"expected={expected_newlines!r} actual={actual_newlines!r}"
+def test_output_exact():
+    assignment_path = Path(__file__).resolve().parent / "09_nestedLoops_skipMarkedSeats.py"
+    actual = _run_script(assignment_path)
+    expected = "A1\nA2\nA4\nB1\nB2\nB3\nB4\nC1\nC3\nC4\n"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")
