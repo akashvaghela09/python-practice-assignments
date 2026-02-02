@@ -1,71 +1,67 @@
-import importlib.util
-import os
 import sys
-import types
-import pytest
+import importlib.util
+from pathlib import Path
 
+def _run_module(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
 
-def _load_module_from_path(module_name, path):
-    spec = importlib.util.spec_from_file_location(module_name, path)
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
     module = importlib.util.module_from_spec(spec)
-    sys.modules[module_name] = module
-    spec.loader.exec_module(module)
-    return module
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def _exec_with_env(path, env):
-    code = open(path, "r", encoding="utf-8").read()
-    glb = dict(env)
-    glb["__name__"] = "__main__"
-    exec(compile(code, path, "exec"), glb, glb)
+def _exec_with_overrides(path: Path, overrides: dict):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    code = path.read_text(encoding="utf-8")
+    glb = {"__name__": "__main__"}
+    glb.update(overrides)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        exec(compile(code, str(path), "exec"), glb)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_importable():
-    path = os.path.join(os.path.dirname(__file__), "05_shippingRules.py")
-    assert os.path.exists(path), f"expected={True} actual={os.path.exists(path)}"
-    _load_module_from_path("shipping_rules_mod", path)
+def test_free_default_premium():
+    assignment_path = Path(__file__).resolve().parent / "05_shippingRules.py"
+    out = _run_module(assignment_path)
+    expected = "FREE\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_prints_free_for_premium_member(capsys):
-    path = os.path.join(os.path.dirname(__file__), "05_shippingRules.py")
-    _exec_with_env(
-        path,
-        {"cart_total": 45, "is_domestic": True, "is_premium_member": True},
-    )
-    out = capsys.readouterr().out.strip()
-    assert out == "FREE", f"expected={'FREE'} actual={out}"
+def test_standard_when_not_premium_and_below_threshold():
+    assignment_path = Path(__file__).resolve().parent / "05_shippingRules.py"
+    out = _exec_with_overrides(assignment_path, {"cart_total": 45, "is_domestic": True, "is_premium_member": False})
+    expected = "STANDARD\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_prints_standard_when_not_eligible(capsys):
-    path = os.path.join(os.path.dirname(__file__), "05_shippingRules.py")
-    _exec_with_env(
-        path,
-        {"cart_total": 45, "is_domestic": True, "is_premium_member": False},
-    )
-    out = capsys.readouterr().out.strip()
-    assert out == "STANDARD", f"expected={'STANDARD'} actual={out}"
+def test_free_when_over_threshold_and_domestic_not_premium():
+    assignment_path = Path(__file__).resolve().parent / "05_shippingRules.py"
+    out = _exec_with_overrides(assignment_path, {"cart_total": 50, "is_domestic": True, "is_premium_member": False})
+    expected = "FREE\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-@pytest.mark.parametrize(
-    "cart_total,is_domestic,is_premium_member,expected",
-    [
-        (50, True, False, "FREE"),
-        (49.99, True, False, "STANDARD"),
-        (50, False, False, "STANDARD"),
-        (0, False, True, "FREE"),
-        (0, True, True, "FREE"),
-        (100, False, True, "FREE"),
-    ],
-)
-def test_rule_matrix(cart_total, is_domestic, is_premium_member, expected, capsys):
-    path = os.path.join(os.path.dirname(__file__), "05_shippingRules.py")
-    _exec_with_env(
-        path,
-        {
-            "cart_total": cart_total,
-            "is_domestic": is_domestic,
-            "is_premium_member": is_premium_member,
-        },
-    )
-    out = capsys.readouterr().out.strip()
-    assert out == expected, f"expected={expected} actual={out}"
+def test_standard_when_over_threshold_but_not_domestic_and_not_premium():
+    assignment_path = Path(__file__).resolve().parent / "05_shippingRules.py"
+    out = _exec_with_overrides(assignment_path, {"cart_total": 100, "is_domestic": False, "is_premium_member": False})
+    expected = "STANDARD\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"

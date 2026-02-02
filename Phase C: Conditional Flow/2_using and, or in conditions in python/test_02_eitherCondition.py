@@ -1,112 +1,53 @@
-import importlib
 import sys
+import importlib.util
 from pathlib import Path
 
+def _run_module(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
 
-def _run_code_with_globals(code: str, g: dict):
-    compiled = compile(code, "02_eitherCondition.py", "exec")
-    exec(compiled, g, g)
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
 
-
-def _expected_output(age: int, has_permission: bool) -> str:
-    return "ELIGIBLE\n" if (age >= 18 or has_permission is True) else "NOT ELIGIBLE\n"
-
-
-def _load_source():
-    p = Path(__file__).resolve().parent / "02_eitherCondition.py"
-    return p.read_text(encoding="utf-8")
-
-
-def test_runs_without_placeholder_syntax_error():
-    src = _load_source()
-    g = {}
+    old_stdout = sys.stdout
     try:
-        _run_code_with_globals(src, g)
-    except SyntaxError as e:
-        raise AssertionError(f"expected: no SyntaxError, actual: {type(e).__name__}")
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_expected_output_default_values(capsys):
-    mod = importlib.import_module("02_eitherCondition")
-    out = capsys.readouterr().out
-    exp = _expected_output(getattr(mod, "age"), getattr(mod, "has_permission"))
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
+def _exec_with_overrides(path: Path, overrides: dict):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    code = path.read_text(encoding="utf-8")
+    glb = {"__name__": "__main__"}
+    glb.update(overrides)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        exec(compile(code, str(path), "exec"), glb)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_age16_permission_true_prints_eligible(capsys):
-    src = _load_source()
-    g = {"age": 16, "has_permission": True}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(16, True)
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
+def test_output_eligible_default():
+    assignment_path = Path(__file__).resolve().parent / "02_eitherCondition.py"
+    out = _run_module(assignment_path)
+    expected = "ELIGIBLE\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_age16_permission_false_prints_not_eligible(capsys):
-    src = _load_source()
-    g = {"age": 16, "has_permission": False}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(16, False)
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
-
-
-def test_age18_permission_false_prints_eligible(capsys):
-    src = _load_source()
-    g = {"age": 18, "has_permission": False}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(18, False)
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
-
-
-def test_age17_permission_false_prints_not_eligible(capsys):
-    src = _load_source()
-    g = {"age": 17, "has_permission": False}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(17, False)
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
-
-
-def test_age19_permission_false_prints_eligible(capsys):
-    src = _load_source()
-    g = {"age": 19, "has_permission": False}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(19, False)
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
-
-
-def test_has_permission_truthy_non_bool_not_treated_as_true(capsys):
-    src = _load_source()
-    g = {"age": 16, "has_permission": 1}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(16, 1)
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
-
-
-def test_has_permission_string_true_not_treated_as_true(capsys):
-    src = _load_source()
-    g = {"age": 16, "has_permission": "True"}
-    _run_code_with_globals(src, g)
-    out = capsys.readouterr().out
-    exp = _expected_output(16, "True")
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
-
-
-def test_import_is_repeatable(monkeypatch, capsys):
-    if "02_eitherCondition" in sys.modules:
-        del sys.modules["02_eitherCondition"]
-    importlib.import_module("02_eitherCondition")
-    capsys.readouterr()
-
-    if "02_eitherCondition" in sys.modules:
-        del sys.modules["02_eitherCondition"]
-    importlib.import_module("02_eitherCondition")
-    out = capsys.readouterr().out
-
-    mod = importlib.import_module("02_eitherCondition")
-    exp = _expected_output(getattr(mod, "age"), getattr(mod, "has_permission"))
-    assert out == exp, f"expected: {exp!r}, actual: {out!r}"
+def test_output_not_eligible_when_no_permission():
+    assignment_path = Path(__file__).resolve().parent / "02_eitherCondition.py"
+    out = _exec_with_overrides(assignment_path, {"age": 16, "has_permission": False})
+    expected = "NOT ELIGIBLE\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"

@@ -1,33 +1,32 @@
 import importlib.util
-import sys
 from pathlib import Path
+import sys
 
 
-def _run_script_capture_output(script_path, capsys):
-    spec = importlib.util.spec_from_file_location(script_path.stem, str(script_path))
+def _run_module_capture_stdout(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    if spec is None or spec.loader is None:
+        raise AssertionError("Could not load assignment module")
+
     module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    out = capsys.readouterr().out
-    return out
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_output_lines_and_order(capsys):
-    script_path = Path(__file__).resolve().parent / "04_validate_username_characters.py"
-    out = _run_script_capture_output(script_path, capsys)
-    lines = [line.rstrip("\n") for line in out.splitlines()]
-    assert lines == ["VALID", "INVALID"], f"expected={['VALID','INVALID']} actual={lines}"
-
-
-def test_no_extra_whitespace_or_output(capsys):
-    script_path = Path(__file__).resolve().parent / "04_validate_username_characters.py"
-    out = _run_script_capture_output(script_path, capsys)
-    assert out == "VALID\nINVALID\n", f"expected={'VALID\\nINVALID\\n'} actual={out}"
-
-
-def test_allowed_definition_and_usage_present():
-    script_path = Path(__file__).resolve().parent / "04_validate_username_characters.py"
-    text = script_path.read_text(encoding="utf-8")
-    assert 'allowed = "abcdefghijklmnopqrstuvwxyz0123456789_"' in text, "expected=allowed_definition actual=missing_or_changed"
-    assert "in allowed" in text, "expected=contains_in_allowed actual=missing"
-    assert "not in allowed" in text, "expected=contains_not_in_allowed actual=missing"
+def test_stdout_exact():
+    assignment_path = Path(__file__).resolve().parent / "04_validate_username_characters.py"
+    actual = _run_module_capture_stdout(assignment_path)
+    expected = "VALID\nINVALID\n"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")

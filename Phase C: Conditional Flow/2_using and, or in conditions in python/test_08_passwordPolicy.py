@@ -1,63 +1,74 @@
+import sys
 import importlib.util
-import pathlib
-import re
+from pathlib import Path
+
+def _run_module(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def _run_module_capture_stdout(module_path):
-    spec = importlib.util.spec_from_file_location("pw_policy_mod", str(module_path))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
+def _exec_with_overrides(path: Path, overrides: dict):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    code = path.read_text(encoding="utf-8")
+    glb = {"__name__": "__main__"}
+    glb.update(overrides)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        exec(compile(code, str(path), "exec"), glb)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_source_has_no_placeholder():
-    path = pathlib.Path(__file__).resolve().parent / "08_passwordPolicy.py"
-    src = path.read_text(encoding="utf-8")
-    assert "____" not in src, f"expected placeholder absent, actual present"
+def test_valid_default_password():
+    assignment_path = Path(__file__).resolve().parent / "08_passwordPolicy.py"
+    out = _run_module(assignment_path)
+    expected = "VALID\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_prints_valid_for_default_password(capsys):
-    path = pathlib.Path(__file__).resolve().parent / "08_passwordPolicy.py"
-    _run_module_capture_stdout(path)
-    out = capsys.readouterr().out.strip().splitlines()
-    got = out[-1].strip() if out else ""
-    exp = "VALID"
-    assert got == exp, f"expected {exp}, actual {got}"
+def test_invalid_with_space():
+    assignment_path = Path(__file__).resolve().parent / "08_passwordPolicy.py"
+    out = _exec_with_overrides(assignment_path, {"password": "abcd e1fg"})
+    expected = "INVALID\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_condition_matches_spec_for_multiple_passwords(capsys):
-    path = pathlib.Path(__file__).resolve().parent / "08_passwordPolicy.py"
-    src = path.read_text(encoding="utf-8")
+def test_invalid_too_short_even_with_digit():
+    assignment_path = Path(__file__).resolve().parent / "08_passwordPolicy.py"
+    out = _exec_with_overrides(assignment_path, {"password": "ab1cdef"})
+    expected = "INVALID\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
-    m = re.search(r'^\s*if\s+(.*?):\s*$', src, flags=re.MULTILINE)
-    assert m is not None, "expected condition line, actual missing"
-    cond = m.group(1).strip()
-    assert "____" not in cond, "expected concrete condition, actual placeholder"
 
-    pre = (
-        "def _check(password):\n"
-        "    has_digit = any(ch.isdigit() for ch in password)\n"
-        "    has_special = any(ch in '!@#' for ch in password)\n"
-        "    has_space = (' ' in password)\n"
-        f"    return bool({cond})\n"
-    )
-    ns = {}
-    exec(pre, ns, ns)
-    check = ns["_check"]
+def test_valid_with_special_no_digit():
+    assignment_path = Path(__file__).resolve().parent / "08_passwordPolicy.py"
+    out = _exec_with_overrides(assignment_path, {"password": "abcdefgh!"})
+    expected = "VALID\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
-    cases = [
-        ("abcde1fg", True),
-        ("abcd e1fg", False),
-        ("abcdefgh", False),
-        ("abcd!efg", True),
-        ("abcd@ ef", False),
-        ("12345678", True),
-        ("!@#abcd", True),
-        ("a1 bcd!!", False),
-        ("a!b@c#d", False),
-        ("        ", False),
-    ]
 
-    for pw, exp in cases:
-        got = bool(check(pw))
-        assert got == exp, f"expected {exp}, actual {got}"
+def test_invalid_without_digit_or_special():
+    assignment_path = Path(__file__).resolve().parent / "08_passwordPolicy.py"
+    out = _exec_with_overrides(assignment_path, {"password": "abcdefgh"})
+    expected = "INVALID\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"

@@ -1,25 +1,32 @@
-import importlib
-import contextlib
-import io
+import importlib.util
+from pathlib import Path
 import sys
 
 
-def run_module_capture(name: str):
-    if name in sys.modules:
-        del sys.modules[name]
-    buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
-        importlib.import_module(name)
-    return buf.getvalue()
+def _run_module_capture_stdout(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    if spec is None or spec.loader is None:
+        raise AssertionError("Could not load assignment module")
+
+    module = importlib.util.module_from_spec(spec)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_prints_first_forbidden_character_exactly():
-    out = run_module_capture("05_find_first_forbidden_character")
-    assert out == "forbidden: '#'\n", f"expected={repr(\"forbidden: '#'\")}, actual={repr(out)}"
-
-
-def test_prints_single_line_only():
-    out = run_module_capture("05_find_first_forbidden_character")
-    lines = out.splitlines(True)
-    assert len(lines) == 1, f"expected={1}, actual={len(lines)}"
-    assert lines[0].endswith("\n"), f"expected={repr(True)}, actual={repr(lines[0].endswith(chr(10)))}"
+def test_stdout_exact():
+    assignment_path = Path(__file__).resolve().parent / "05_find_first_forbidden_character.py"
+    actual = _run_module_capture_stdout(assignment_path)
+    expected = "forbidden: '#'\n"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")

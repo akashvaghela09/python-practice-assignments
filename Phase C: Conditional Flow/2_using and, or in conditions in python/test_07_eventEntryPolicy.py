@@ -1,95 +1,86 @@
+import sys
 import importlib.util
-import pathlib
-import re
+from pathlib import Path
+
+def _run_module(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    module = importlib.util.module_from_spec(spec)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def _load_module():
-    path = pathlib.Path(__file__).resolve().parent / "07_eventEntryPolicy.py"
-    spec = importlib.util.spec_from_file_location("event_entry_policy_mod", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
+def _exec_with_overrides(path: Path, overrides: dict):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    code = path.read_text(encoding="utf-8")
+    glb = {"__name__": "__main__"}
+    glb.update(overrides)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        exec(compile(code, str(path), "exec"), glb)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def _extract_values(stdout_text):
-    m = re.search(
-        r"expected\s*vs\s*actual\s*:\s*(?P<expected>ENTER|DENY)\s*vs\s*(?P<actual>ENTER|DENY)",
-        stdout_text,
-        flags=re.IGNORECASE,
+def test_enter_vip_guest_list_no_ticket_default():
+    assignment_path = Path(__file__).resolve().parent / "07_eventEntryPolicy.py"
+    out = _run_module(assignment_path)
+    expected = "ENTER\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
+
+
+def test_deny_underage_without_accompanied_even_with_ticket():
+    assignment_path = Path(__file__).resolve().parent / "07_eventEntryPolicy.py"
+    out = _exec_with_overrides(
+        assignment_path,
+        {"has_ticket": True, "is_vip": False, "on_guest_list": False, "age": 16, "accompanied": False},
     )
-    if not m:
-        return None, None
-    return m.group("expected").upper(), m.group("actual").upper()
+    expected = "DENY\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_prints_exactly_enter_or_deny_only(capsys):
-    _load_module()
-    out = capsys.readouterr().out
-    tokens = re.findall(r"\S+", out)
-    assert len(tokens) == 1, "expected vs actual: 1 token vs %s tokens" % (len(tokens))
-    assert tokens[0] in ("ENTER", "DENY"), "expected vs actual: ENTER/DENY vs %s" % (tokens[0],)
+def test_enter_regular_adult_with_ticket():
+    assignment_path = Path(__file__).resolve().parent / "07_eventEntryPolicy.py"
+    out = _exec_with_overrides(
+        assignment_path,
+        {"has_ticket": True, "is_vip": False, "on_guest_list": False, "age": 25, "accompanied": False},
+    )
+    expected = "ENTER\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_default_scenario_matches_policy(capsys):
-    mod = _load_module()
-    out = capsys.readouterr().out.strip()
-    has_ticket = getattr(mod, "has_ticket")
-    is_vip = getattr(mod, "is_vip")
-    on_guest_list = getattr(mod, "on_guest_list")
-    age = getattr(mod, "age")
-    accompanied = getattr(mod, "accompanied")
-
-    regular_entry = bool(has_ticket) and (age >= 18 or bool(accompanied))
-    vip_entry = bool(is_vip) and bool(on_guest_list)
-    expected = "ENTER" if (regular_entry or vip_entry) else "DENY"
-
-    assert out in ("ENTER", "DENY"), "expected vs actual: ENTER/DENY vs %s" % (out,)
-    assert out == expected, "expected vs actual: %s vs %s" % (expected, out)
+def test_enter_underage_with_ticket_and_accompanied():
+    assignment_path = Path(__file__).resolve().parent / "07_eventEntryPolicy.py"
+    out = _exec_with_overrides(
+        assignment_path,
+        {"has_ticket": True, "is_vip": False, "on_guest_list": False, "age": 17, "accompanied": True},
+    )
+    expected = "ENTER\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_alternate_scenario_from_prompt_policy_logic_only(capsys):
-    mod = _load_module()
-    capsys.readouterr()
-
-    has_ticket = True
-    is_vip = False
-    on_guest_list = False
-    age = 16
-    accompanied = False
-
-    regular_entry = bool(has_ticket) and (age >= 18 or bool(accompanied))
-    vip_entry = bool(is_vip) and bool(on_guest_list)
-    expected = "ENTER" if (regular_entry or vip_entry) else "DENY"
-
-    actual = "ENTER" if (regular_entry or vip_entry) else "DENY"
-
-    assert actual == expected, "expected vs actual: %s vs %s" % (expected, actual)
-
-
-def test_policy_truth_table_minimal_cases(capsys):
-    _load_module()
-    capsys.readouterr()
-
-    cases = [
-        # (has_ticket, is_vip, on_guest_list, age, accompanied)
-        (False, True, True, 10, False),
-        (False, True, False, 30, False),
-        (True, False, False, 17, True),
-        (True, False, False, 17, False),
-        (True, False, False, 18, False),
-        (False, False, False, 25, False),
-    ]
-    for has_ticket, is_vip, on_guest_list, age, accompanied in cases:
-        regular_entry = bool(has_ticket) and (age >= 18 or bool(accompanied))
-        vip_entry = bool(is_vip) and bool(on_guest_list)
-        expected = "ENTER" if (regular_entry or vip_entry) else "DENY"
-        actual = "ENTER" if (regular_entry or vip_entry) else "DENY"
-        assert actual == expected, "expected vs actual: %s vs %s" % (expected, actual)
-
-
-def test_has_required_variables_defined():
-    mod = _load_module()
-    for name in ("has_ticket", "is_vip", "on_guest_list", "age", "accompanied"):
-        assert hasattr(mod, name), "expected vs actual: attribute present vs missing"
-
-    assert isinstance(getattr(mod, "age"), int), "expected vs actual: int vs %s" % (type(getattr(mod, "age")).__name__,)
+def test_deny_vip_not_on_guest_list_without_ticket():
+    assignment_path = Path(__file__).resolve().parent / "07_eventEntryPolicy.py"
+    out = _exec_with_overrides(
+        assignment_path,
+        {"has_ticket": False, "is_vip": True, "on_guest_list": False, "age": 30, "accompanied": False},
+    )
+    expected = "DENY\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"

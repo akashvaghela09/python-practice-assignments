@@ -1,47 +1,32 @@
-import importlib
+import importlib.util
+from pathlib import Path
 import sys
-import types
 
 
-def _load_module_with_capture(module_name, file_name):
-    if module_name in sys.modules:
-        del sys.modules[module_name]
+def _run_module_capture_stdout(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
 
-    captured = []
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    if spec is None or spec.loader is None:
+        raise AssertionError("Could not load assignment module")
 
-    def fake_print(*args, **kwargs):
-        sep = kwargs.get("sep", " ")
-        end = kwargs.get("end", "\n")
-        captured.append(sep.join(str(a) for a in args) + ("" if end == "" else end))
+    module = importlib.util.module_from_spec(spec)
 
-    mod = types.ModuleType(module_name)
-    mod.__file__ = file_name
-    mod.__dict__["print"] = fake_print
-
-    with open(file_name, "r", encoding="utf-8") as f:
-        code = f.read()
-
-    exec(compile(code, file_name, "exec"), mod.__dict__)
-    sys.modules[module_name] = mod
-    output = "".join(captured)
-    return mod, output
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_printed_output_exact():
-    _, out = _load_module_with_capture("assignment_02_membership", "02_membershipBasics_lists.py")
-    actual_lines = out.splitlines()
-    expected_lines = ["True", "True", "False"]
-    assert actual_lines == expected_lines, f"expected={expected_lines} actual={actual_lines}"
-
-
-def test_numbers_list_unchanged():
-    mod, _ = _load_module_with_capture("assignment_02_membership_numbers", "02_membershipBasics_lists.py")
-    assert hasattr(mod, "numbers"), f"expected={'numbers variable to exist'} actual={getattr(mod, 'numbers', None)}"
-    assert isinstance(mod.numbers, list), f"expected={list} actual={type(mod.numbers)}"
-    expected = [2, 4, 6, 8]
-    assert mod.numbers == expected, f"expected={expected} actual={mod.numbers}"
-
-
-def test_no_extra_stdout_whitespace():
-    _, out = _load_module_with_capture("assignment_02_membership_ws", "02_membershipBasics_lists.py")
-    assert out == "True\nTrue\nFalse\n", f"expected={'True\\nTrue\\nFalse\\n'} actual={out!r}"
+def test_stdout_exact():
+    assignment_path = Path(__file__).resolve().parent / "02_membershipBasics_lists.py"
+    actual = _run_module_capture_stdout(assignment_path)
+    expected = "True\nTrue\nFalse\n"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")

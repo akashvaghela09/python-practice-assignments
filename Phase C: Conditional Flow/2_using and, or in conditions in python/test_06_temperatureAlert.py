@@ -1,84 +1,67 @@
-import importlib.util
-import pathlib
 import sys
+import importlib.util
+from pathlib import Path
 
+def _run_module(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
 
-def _load_module(module_name, file_path):
-    spec = importlib.util.spec_from_file_location(module_name, str(file_path))
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
     module = importlib.util.module_from_spec(spec)
-    sys.modules[module_name] = module
-    spec.loader.exec_module(module)
-    return module
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)  # type: ignore
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_module_executes_without_syntax_error(capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "06_temperatureAlert.py"
-    _load_module("temperatureAlert_06_exec", file_path)
-    out = capsys.readouterr().out.strip()
-    assert out in {"DANGER", "OK"}, f"expected one of {{'DANGER','OK'}}, got {out!r}"
+def _exec_with_overrides(path: Path, overrides: dict):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    code = path.read_text(encoding="utf-8")
+    glb = {"__name__": "__main__"}
+    glb.update(overrides)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        exec(compile(code, str(path), "exec"), glb)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_alert_logic_danger_for_36_75(monkeypatch, capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "06_temperatureAlert.py"
-    src = file_path.read_text(encoding="utf-8")
-
-    src = src.replace("temperature = 36", "temperature = 36")
-    src = src.replace("humidity = 75", "humidity = 75")
-    monkeypatch.setattr(file_path.__class__, "read_text", lambda self, encoding=None: src)
-
-    _load_module("temperatureAlert_06_case1", file_path)
-    out = capsys.readouterr().out.strip()
-    expected = "DANGER"
-    assert out == expected, f"expected {expected!r}, got {out!r}"
+def test_danger_default():
+    assignment_path = Path(__file__).resolve().parent / "06_temperatureAlert.py"
+    out = _run_module(assignment_path)
+    expected = "DANGER\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_alert_logic_ok_for_34_80(monkeypatch, capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "06_temperatureAlert.py"
-    original = file_path.read_text(encoding="utf-8")
-
-    src = original.replace("temperature = 36", "temperature = 34").replace("humidity = 75", "humidity = 80")
-    monkeypatch.setattr(file_path.__class__, "read_text", lambda self, encoding=None: src)
-
-    _load_module("temperatureAlert_06_case2", file_path)
-    out = capsys.readouterr().out.strip()
-    expected = "OK"
-    assert out == expected, f"expected {expected!r}, got {out!r}"
+def test_ok_for_34_and_80():
+    assignment_path = Path(__file__).resolve().parent / "06_temperatureAlert.py"
+    out = _exec_with_overrides(assignment_path, {"temperature": 34, "humidity": 80})
+    expected = "OK\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_precedence_case_35_70_is_danger(monkeypatch, capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "06_temperatureAlert.py"
-    original = file_path.read_text(encoding="utf-8")
-
-    src = original.replace("temperature = 36", "temperature = 35").replace("humidity = 75", "humidity = 70")
-    monkeypatch.setattr(file_path.__class__, "read_text", lambda self, encoding=None: src)
-
-    _load_module("temperatureAlert_06_case3", file_path)
-    out = capsys.readouterr().out.strip()
-    expected = "DANGER"
-    assert out == expected, f"expected {expected!r}, got {out!r}"
+def test_ok_for_35_and_69():
+    assignment_path = Path(__file__).resolve().parent / "06_temperatureAlert.py"
+    out = _exec_with_overrides(assignment_path, {"temperature": 35, "humidity": 69})
+    expected = "OK\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"
 
 
-def test_precedence_case_39_10_is_ok(monkeypatch, capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "06_temperatureAlert.py"
-    original = file_path.read_text(encoding="utf-8")
-
-    src = original.replace("temperature = 36", "temperature = 39").replace("humidity = 75", "humidity = 10")
-    monkeypatch.setattr(file_path.__class__, "read_text", lambda self, encoding=None: src)
-
-    _load_module("temperatureAlert_06_case4", file_path)
-    out = capsys.readouterr().out.strip()
-    expected = "OK"
-    assert out == expected, f"expected {expected!r}, got {out!r}"
-
-
-def test_temperature_40_is_danger_regardless_of_humidity(monkeypatch, capsys):
-    file_path = pathlib.Path(__file__).resolve().parent / "06_temperatureAlert.py"
-    original = file_path.read_text(encoding="utf-8")
-
-    src = original.replace("temperature = 36", "temperature = 40").replace("humidity = 75", "humidity = 0")
-    monkeypatch.setattr(file_path.__class__, "read_text", lambda self, encoding=None: src)
-
-    _load_module("temperatureAlert_06_case5", file_path)
-    out = capsys.readouterr().out.strip()
-    expected = "DANGER"
-    assert out == expected, f"expected {expected!r}, got {out!r}"
+def test_danger_for_40_even_low_humidity():
+    assignment_path = Path(__file__).resolve().parent / "06_temperatureAlert.py"
+    out = _exec_with_overrides(assignment_path, {"temperature": 40, "humidity": 10})
+    expected = "DANGER\n"
+    assert out == expected, f"expected output:\n{expected}\nactual output:\n{out}"

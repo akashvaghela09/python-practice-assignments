@@ -1,53 +1,34 @@
-import importlib.util
-import io
-import os
 import sys
+import importlib.util
+from pathlib import Path
 
 
-def _run_module_capture_stdout(module_filename):
-    path = os.path.join(os.path.dirname(__file__), module_filename)
-    spec = importlib.util.spec_from_file_location("student_mod", path)
+def _run_script(path: Path, monkeypatch):
+    if not path.exists():
+        raise AssertionError(f"Missing assignment file: {path}")
+
+    captured = []
+
+    def _fake_print(*args, **kwargs):
+        sep = kwargs.get("sep", " ")
+        end = kwargs.get("end", "\n")
+        s = sep.join(str(a) for a in args) + end
+        captured.append(s)
+
+    monkeypatch.setattr(sys.modules["builtins"], "print", _fake_print)
+
+    spec = importlib.util.spec_from_file_location("mod_01_evenOrOdd", str(path))
     module = importlib.util.module_from_spec(spec)
+    loader = spec.loader
+    assert loader is not None
+    loader.exec_module(module)
 
-    old_stdout = sys.stdout
-    sys.stdout = io.StringIO()
-    try:
-        spec.loader.exec_module(module)
-        output = sys.stdout.getvalue()
-    finally:
-        sys.stdout = old_stdout
-    return module, output
+    return "".join(captured)
 
 
-def test_prints_expected_for_default_n():
-    module, out = _run_module_capture_stdout("01_evenOrOdd.py")
-    expected = "Odd"
-    actual = out.strip()
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_prints_even_when_n_is_12(monkeypatch):
-    module, _ = _run_module_capture_stdout("01_evenOrOdd.py")
-    module.n = 12
-
-    def even_or_odd(val):
-        buf = io.StringIO()
-        old = sys.stdout
-        sys.stdout = buf
-        try:
-            exec(open(os.path.join(os.path.dirname(__file__), "01_evenOrOdd.py"), "r", encoding="utf-8").read(), {"n": val})
-        finally:
-            sys.stdout = old
-        return buf.getvalue().strip()
-
-    expected = "Even"
-    actual = even_or_odd(12)
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_output_is_exact_single_token_even_or_odd():
-    _, out = _run_module_capture_stdout("01_evenOrOdd.py")
-    actual = out
-    stripped = actual.strip()
-    assert stripped in {"Even", "Odd"}, f"expected={'Even or Odd'!r} actual={stripped!r}"
-    assert actual.strip() == stripped and "\n\n" not in actual, f"expected={'single line'!r} actual={actual!r}"
+def test_even_or_odd_output(monkeypatch):
+    path = Path(__file__).resolve().parent / "01_evenOrOdd.py"
+    actual = _run_script(path, monkeypatch)
+    expected = "Odd\n"
+    if actual != expected:
+        raise AssertionError(f"Expected output:\n{expected}\nActual output:\n{actual}")

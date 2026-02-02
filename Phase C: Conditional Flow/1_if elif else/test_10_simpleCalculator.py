@@ -1,28 +1,34 @@
+import sys
 import importlib.util
-import pathlib
+from pathlib import Path
 
 
-def load_module():
-    path = pathlib.Path(__file__).resolve().parent / "10_simpleCalculator.py"
-    spec = importlib.util.spec_from_file_location("simpleCalculator10", str(path))
+def _run_script(path: Path, monkeypatch):
+    if not path.exists():
+        raise AssertionError(f"Missing assignment file: {path}")
+
+    captured = []
+
+    def _fake_print(*args, **kwargs):
+        sep = kwargs.get("sep", " ")
+        end = kwargs.get("end", "\n")
+        s = sep.join(str(a) for a in args) + end
+        captured.append(s)
+
+    monkeypatch.setattr(sys.modules["builtins"], "print", _fake_print)
+
+    spec = importlib.util.spec_from_file_location("mod_10_simpleCalculator", str(path))
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    loader = spec.loader
+    assert loader is not None
+    loader.exec_module(module)
+
+    return "".join(captured)
 
 
-def test_divide_by_zero_message(capsys):
-    load_module()
-    out = capsys.readouterr().out.strip()
-    assert out == "Cannot divide by zero", f"expected={'Cannot divide by zero'} actual={out!r}"
-
-
-def test_message_not_empty(capsys):
-    load_module()
-    out = capsys.readouterr().out.strip()
-    assert out != "", f"expected={'non-empty output'} actual={out!r}"
-
-
-def test_no_result_prefix_on_error(capsys):
-    load_module()
-    out = capsys.readouterr().out.strip()
-    assert not out.startswith("Result:"), f"expected={'not starting with Result:'} actual={out!r}"
+def test_calculator_div_by_zero(monkeypatch):
+    path = Path(__file__).resolve().parent / "10_simpleCalculator.py"
+    actual = _run_script(path, monkeypatch)
+    expected = "Cannot divide by zero\n"
+    if actual != expected:
+        raise AssertionError(f"Expected output:\n{expected}\nActual output:\n{actual}")

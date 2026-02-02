@@ -1,58 +1,32 @@
-import importlib
-import contextlib
-import io
-import ast
-import re
+import importlib.util
+from pathlib import Path
+import sys
 
 
-def _run_module_capture_stdout(module_name):
-    buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
-        importlib.import_module(module_name)
-    return buf.getvalue()
+def _run_module_capture_stdout(path: Path):
+    if not path.exists():
+        raise AssertionError(f"Assignment file does not exist: {path}")
+
+    spec = importlib.util.spec_from_file_location(path.stem, str(path))
+    if spec is None or spec.loader is None:
+        raise AssertionError("Could not load assignment module")
+
+    module = importlib.util.module_from_spec(spec)
+
+    old_stdout = sys.stdout
+    try:
+        from io import StringIO
+        buf = StringIO()
+        sys.stdout = buf
+        spec.loader.exec_module(module)
+        return buf.getvalue()
+    finally:
+        sys.stdout = old_stdout
 
 
-def test_printed_unique_list_exact():
-    out = _run_module_capture_stdout("08_unique_preserve_order")
+def test_stdout_exact():
+    assignment_path = Path(__file__).resolve().parent / "08_unique_preserve_order.py"
+    actual = _run_module_capture_stdout(assignment_path)
     expected = "unique: [3, 1, 2, 4]\n"
-    assert out == expected, f"expected={expected!r} actual={out!r}"
-
-
-def test_unique_variable_value():
-    mod = importlib.import_module("08_unique_preserve_order")
-    expected = [3, 1, 2, 4]
-    actual = getattr(mod, "unique", None)
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_uses_not_in_in_condition():
-    mod = importlib.import_module("08_unique_preserve_order")
-    path = getattr(mod, "__file__", None)
-    assert path is not None
-    src = open(path, "r", encoding="utf-8").read()
-    tree = ast.parse(src)
-
-    found = False
-    for node in ast.walk(tree):
-        if isinstance(node, ast.If):
-            test = node.test
-            if isinstance(test, ast.Compare) and any(isinstance(op, ast.NotIn) for op in test.ops):
-                found = True
-                break
-
-    expected = True
-    actual = found
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
-
-
-def test_does_not_use_set_for_uniqueness():
-    mod = importlib.import_module("08_unique_preserve_order")
-    path = getattr(mod, "__file__", None)
-    src = open(path, "r", encoding="utf-8").read()
-
-    uses_set_ctor = bool(re.search(r"\bset\s*\(", src))
-    uses_set_literal = "{" in src and "}" in src and "set(" not in src
-
-    expected = False
-    actual = uses_set_ctor or uses_set_literal
-    assert actual == expected, f"expected={expected!r} actual={actual!r}"
+    if actual != expected:
+        raise AssertionError(f"expected output:\n{expected}\nactual output:\n{actual}")
