@@ -5,9 +5,9 @@
 # True
 
 # TODO: Assign v1 to 0, v2 to an empty string, v3 to a non-empty list.
-v1 = 
-v2 = 
-v3 = 
+v1 = 0
+v2 = ""
+v3 = [1]
 
 print(bool(v1))
 print(bool(v2))

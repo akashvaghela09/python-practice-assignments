@@ -13,8 +13,17 @@
 # - Otherwise return "error:expected number"
 
 def classify_number(value):
+    if isinstance(value,bool):
+        return "ok:bool"
+    elif isinstance(value,float):
+        return "ok:float"
+    elif isinstance(value,int):
+        return "ok:int"
+    else:
+        return "error:expected number"
+    
     # TODO: Implement using type checks.
-    return 
+    
 
 print(classify_number(5))
 print(classify_number(2.5))

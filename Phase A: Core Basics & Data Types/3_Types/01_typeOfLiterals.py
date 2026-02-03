@@ -7,10 +7,10 @@
 
 # TODO: Create variables a, b, c, d assigned to an int, float, str, and bool literal.
 
-a = 
-b = 
-c = 
-d = 
+a = 76
+b = 76.00
+c = "76"
+d = True
 
 print(type(a))
 print(type(b))

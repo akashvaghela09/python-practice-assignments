@@ -7,8 +7,8 @@ s1 = "17"
 s2 = "17.5"
 
 # TODO: Convert s1 to an int in n1 and s2 to a float in n2.
-n1 = 
-n2 = 
+n1 = int(s1)
+n2 = float(s2)
 
 print(n1)
 print(n2)

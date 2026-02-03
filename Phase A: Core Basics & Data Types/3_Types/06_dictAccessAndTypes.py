@@ -11,13 +11,12 @@ person = {
 }
 
 # TODO: Print the name.
-print(
-)
+print(person["name"])
 
 # TODO: Print the age.
-print(
+print(person["age"]
 )
 
 # TODO: Print the type of the age value.
-print(
+print(type(36)
 )
