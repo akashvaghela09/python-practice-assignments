@@ -6,9 +6,9 @@
 
 z = 3 + 4j
 
-real_part = __________
-imag_part = __________
-magnitude = __________  # use abs
+real_part = z.real
+imag_part = z.imag
+magnitude = abs(z) # use abs
 
 print(real_part)
 print(imag_part)

@@ -5,8 +5,8 @@
 
 x = 3.14159
 
-rounded = __________  # use round
-formatted = __________ # use f-string formatting to 2 decimal places
+rounded =  round(x,2)# use round
+formatted = f"{x:.2f}"# use f-string formatting to 2 decimal places
 
 print(rounded)
 print(formatted)

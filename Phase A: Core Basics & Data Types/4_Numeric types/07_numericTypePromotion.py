@@ -6,5 +6,5 @@
 result1 = 5 + 2.0
 result2 = 5 + 2j
 
-print(__________)
-print(__________)
+print(type(result1))
+print(type(result2))

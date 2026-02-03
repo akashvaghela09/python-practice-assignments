@@ -8,6 +8,6 @@ million = 1_000_000
 hex_ff = 0xFF
 binary_ten = 0b1010
 
-print(__________)
-print(__________)
-print(__________)
+print(million)
+print(hex_ff)
+print(binary_ten)

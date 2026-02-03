@@ -7,10 +7,10 @@
 s_int = "42"
 s_float = "7.5"
 
-a = __________
-b = __________
+a = int(s_int)
+b = float(s_float)
 
-total = __________
+total = a + b
 
 print(a)
 print(b)

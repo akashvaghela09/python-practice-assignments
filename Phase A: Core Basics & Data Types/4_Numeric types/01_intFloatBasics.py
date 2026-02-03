@@ -6,5 +6,5 @@
 age = 21
 pi = 3.14
 
-print(__________)
-print(__________)
+print(type(age))
+print(type(pi))

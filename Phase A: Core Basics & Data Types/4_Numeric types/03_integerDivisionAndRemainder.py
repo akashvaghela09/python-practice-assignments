@@ -6,8 +6,8 @@
 numerator = 17
 denominator = 5
 
-quotient = __________
-remainder = __________
+quotient = 17//5
+remainder = 17%5
 
 print(quotient)
 print(remainder)
