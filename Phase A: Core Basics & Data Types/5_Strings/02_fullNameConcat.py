@@ -5,5 +5,5 @@
 first = "Ada"
 last = "Lovelace"
 
-full = None  # TODO: build full name using first and last
+full = first+" "+last # TODO: build full name using first and last
 print(full)

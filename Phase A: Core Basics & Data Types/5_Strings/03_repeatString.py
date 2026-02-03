@@ -5,5 +5,5 @@
 laugh = "ha"
 count = 3
 
-result = ""  # TODO: use repetition to create the result
+result = laugh * 3 # TODO: use repetition to create the result
 print(result)

@@ -2,6 +2,6 @@
 # Expected output:
 # Hello, world!
 
-message = ""
+message = "Hello, world!"
 
 print(message)

@@ -4,5 +4,5 @@
 
 raw = "   Python   "
 
-clean = raw  # TODO: strip whitespace
+clean = raw.strip() # TODO: strip whitespace
 print("[" + clean + "]")

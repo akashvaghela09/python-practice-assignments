@@ -5,7 +5,7 @@
 
 text = "Python 101"
 
-upper = ""  # TODO
-lower = ""  # TODO
+upper = text.upper() # TODO
+lower = text.lower()  # TODO
 print(upper)
 print(lower)

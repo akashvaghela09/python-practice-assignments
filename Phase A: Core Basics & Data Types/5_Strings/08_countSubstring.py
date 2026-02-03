@@ -4,5 +4,5 @@
 
 text = "banana"
 
-count = 0  # TODO
+count = text.count("na") # TODO
 print(count)

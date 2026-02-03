@@ -4,5 +4,5 @@
 
 filename = "test_strings.py"
 
-is_valid = None  # TODO
+is_valid = filename.startswith("test_")and filename.endswith(".py")  # TODO
 print(is_valid)

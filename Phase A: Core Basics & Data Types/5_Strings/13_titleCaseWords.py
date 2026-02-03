@@ -4,5 +4,5 @@
 
 sentence = "the quick brown fox"
 
-titled = ""  # TODO
+titled = sentence.title()  # TODO
 print(titled)

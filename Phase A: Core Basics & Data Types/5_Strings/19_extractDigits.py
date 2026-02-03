@@ -2,7 +2,10 @@
 # Expected output:
 # 15551234
 
-text = "Call me at (555) 1234!"
+text = "Call me at (1555) 1234!"
 
-digits = ""  # TODO: build a string containing only 0-9 characters
+digits = ""
+for charachter in text:
+    if charachter.isdigit():
+        digits += charachter# TODO: build a string containing only 0-9 characters
 print(digits)

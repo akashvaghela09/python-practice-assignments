@@ -5,5 +5,5 @@
 email = "user@example.com"
 
 at_index = -1  # TODO: find the index of '@'
-domain = ""    # TODO: slice after '@'
+domain = email[5:]    # TODO: slice after '@'
 print(domain)

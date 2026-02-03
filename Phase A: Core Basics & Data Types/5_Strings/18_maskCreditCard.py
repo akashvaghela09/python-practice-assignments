@@ -5,5 +5,5 @@
 
 card = "1234567812341234"
 
-masked = ""  # TODO
+masked = "*" * (len(card) - 4) + card[-4:]  # TODO
 print(masked)

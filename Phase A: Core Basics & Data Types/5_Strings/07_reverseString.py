@@ -4,5 +4,5 @@
 
 word = "python"
 
-rev = ""  # TODO: reverse using slicing or another approach
+rev = word[::-1 ]  # TODO: reverse using slicing or another approach
 print(rev)

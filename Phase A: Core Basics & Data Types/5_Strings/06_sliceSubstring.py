@@ -4,5 +4,5 @@
 
 text = "hello world"
 
-sub = ""  # TODO: slice text to get "world"
+sub = text[6:]  # TODO: slice text to get "world"
 print(sub)

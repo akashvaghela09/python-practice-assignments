@@ -5,5 +5,5 @@
 name = "Ada"
 new_messages = 5
 
-message = ""  # TODO
+message = (f"User {name} has {new_messages} new messages.")  # TODO
 print(message)

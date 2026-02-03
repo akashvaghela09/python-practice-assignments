@@ -4,6 +4,6 @@
 
 word = "python"
 
-first_char = ""  # TODO
-last_char = ""   # TODO
+first_char = word[0]  # TODO
+last_char = word[-1]  # TODO
 print(first_char, last_char)

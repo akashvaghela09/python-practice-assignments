@@ -4,5 +4,5 @@
 
 line = "Ada,Lovelace,36"
 
-parts = []  # TODO: split into a list
+parts = line.split(",") # TODO: split into a list
 print(" | ".join(parts))

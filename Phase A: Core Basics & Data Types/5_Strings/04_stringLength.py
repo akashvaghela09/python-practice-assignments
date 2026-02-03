@@ -4,5 +4,5 @@
 
 text = "hello world"
 
-length = 0  # TODO: compute length
+length = len(text)  # TODO: compute length
 print(length)

@@ -4,5 +4,5 @@
 
 parts = ["api", "v1", "users"]
 
-path = ""  # TODO
+path = ("/".join(parts)) # TODO
 print(path)

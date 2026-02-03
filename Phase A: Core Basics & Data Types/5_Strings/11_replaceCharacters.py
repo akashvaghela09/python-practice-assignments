@@ -4,5 +4,5 @@
 
 date = "2026-02-02"
 
-fixed = ""  # TODO
+fixed = date.replace("-","/") # TODO
 print(fixed)

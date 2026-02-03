@@ -8,5 +8,5 @@
 
 sentence = "   PYTHON   is   FUN   "
 
-normalized = ""  # TODO
+normalized = " ".join(sentence.strip().lower().split()) # TODO
 print(normalized)
